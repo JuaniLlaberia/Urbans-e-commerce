@@ -11,6 +11,10 @@ import Products from './pages/dashboard/Products';
 import StoreInfo from './pages/dashboard/StoreInfo';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
+import Styles from './styles/Styles';
+// import { lazy, Suspense } from 'react';
+
+// const Products = lazy(() => import('./pages/dashboard/Products'));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,7 +28,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools />
+      <Styles />
       <BrowserRouter>
+        {/* <Suspense fallback={<div>Loading...</div>}> */}
         <Routes>
           <Route path='login' element={<Login />} />
           <Route path='*' element={<NotFound />} />
@@ -38,6 +44,7 @@ function App() {
             <Route path='my-store' element={<StoreInfo />} />
           </Route>
         </Routes>
+        {/* </Suspense> */}
       </BrowserRouter>
       <Toaster
         position='top-center'
