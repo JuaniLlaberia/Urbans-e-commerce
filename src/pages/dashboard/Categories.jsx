@@ -1,7 +1,7 @@
 import Title from '../../components/Title';
-import AddCategory from './AddCategory';
 import CategoriesTable from '../../features/Categories/CategoriesTable';
 import Row from '../../components/Row';
+import AddCategory from '../../features/Categories/AddCategory';
 
 const Categories = () => {
   return (

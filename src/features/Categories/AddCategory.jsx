@@ -1,6 +1,6 @@
 import Modal from '../../components/Modal';
 import Button from '../../components/Button';
-import NewCategoryForm from '../../features/Categories/NewCategoryForm';
+import NewCategoryForm from './NewCategoryForm';
 
 const AddCategory = () => {
   return (

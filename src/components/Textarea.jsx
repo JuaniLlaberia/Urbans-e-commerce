@@ -1,12 +1,14 @@
 import { styled } from 'styled-components';
 
-const Input = styled.input`
+const Textarea = styled.textarea`
   border: none;
   border-radius: var(--raidius-md);
   padding: 0.5rem 0.4rem;
   box-shadow: var(--shadow-light);
-  /* margin-bottom: 5px; */
+  margin-bottom: 5px;
   /* max-width: 500px; */
+  resize: none;
+  height: 75px;
 
   background-color: var(--color-white-1);
   color: var(--color-white-6);
@@ -17,4 +19,4 @@ const Input = styled.input`
   }
 `;
 
-export default Input;
+export default Textarea;
