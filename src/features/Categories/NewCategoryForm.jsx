@@ -52,8 +52,10 @@ const NewCategoryForm = ({ onCloseModal }) => {
         type='vertical'
         label='Category name'
         error={errors?.name?.message}
+        id='name'
       >
         <Input
+          id='name'
           type='text'
           disabled={isCreating}
           {...register('name', {
@@ -65,8 +67,10 @@ const NewCategoryForm = ({ onCloseModal }) => {
         type='vertical'
         label='Category type'
         error={errors?.type?.message}
+        id='type'
       >
         <Select
+          id='type'
           {...register('type', {
             required: 'This field is required',
           })}
@@ -76,8 +80,14 @@ const NewCategoryForm = ({ onCloseModal }) => {
         </Select>
       </InputContainer>
       {isSub === 'Sub category' && (
-        <InputContainer type='vertical' label='Category family' error=''>
+        <InputContainer
+          type='vertical'
+          label='Category family'
+          error={errors?.family?.message}
+          id='family'
+        >
           <Select
+            id='family'
             {...register('family', {
               required: 'This field is required',
             })}
