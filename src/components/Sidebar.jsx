@@ -94,7 +94,7 @@ const ButtonContainer = styled.div`
   left: 191.5px;
   padding-top: 5px;
 
-  @media (min-width: 700px) {
+  @media (min-width: 701px) {
     display: none;
   }
 `;
