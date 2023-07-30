@@ -19,13 +19,13 @@ const NavButtonsMenu = () => {
 
   return (
     <StyledMenu>
-      <ButtonIcon onClick={() => navigate('/dashboard')}>
+      <ButtonIcon size='regular' onClick={() => navigate('/dashboard')}>
         <HiOutlineBuildingStorefront />
       </ButtonIcon>
-      <ButtonIcon onClick={() => console.log('Changing theme')}>
+      <ButtonIcon size='regular' onClick={() => console.log('Changing theme')}>
         <HiOutlineMoon />
       </ButtonIcon>
-      <ButtonIcon onClick={() => console.log('Loggin out')}>
+      <ButtonIcon size='regular' onClick={() => console.log('Loggin out')}>
         <HiOutlineArrowRightOnRectangle />
       </ButtonIcon>
     </StyledMenu>

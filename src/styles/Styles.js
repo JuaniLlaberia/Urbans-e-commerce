@@ -13,9 +13,14 @@ const Styles = createGlobalStyle`
             --color-white-6: #27272a;
             --color-white-3-light: #e5e7eb3b;
 
+            //Shadows
+            --shadow-light: 0 3px 7px #bbb8b8c0;
+            --shadow-strong: 0 3px 7px #7e7c7cc0;
+
             //Decoration colors
             --color-border-1: #e4e2e2;
             --icons-color: #6366f1;
+            --icons-color-hover: #5a5ce4;
         };
 
         --raidius-sm: 3px;

@@ -9,6 +9,11 @@ const Main = styled.main`
   overflow-y: scroll;
   overflow-x: hidden;
   height: 100vh;
+
+  @media (max-width: 700px) {
+    width: 100vw;
+    padding: 3rem 0.75rem;
+  }
 `;
 
 const StyledLayout = styled.div`

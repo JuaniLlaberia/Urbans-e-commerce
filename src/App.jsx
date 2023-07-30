@@ -47,7 +47,7 @@ function App() {
         {/* </Suspense> */}
       </BrowserRouter>
       <Toaster
-        position='top-center'
+        position='bottom-right'
         gutter={12}
         containerStyle={{ margin: '8px' }}
         toastOptions={{
