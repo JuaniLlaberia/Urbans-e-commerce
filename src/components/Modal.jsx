@@ -7,7 +7,7 @@ const StyledWindow = styled.div`
   position: fixed;
   background-color: var(--color-white-3);
   border-radius: var(--raidius-md);
-  padding: 1rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   box-shadow: var(--shadow-strong);
   top: 50%;
   left: 50%;

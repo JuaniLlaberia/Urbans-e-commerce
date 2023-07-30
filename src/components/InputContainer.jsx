@@ -18,13 +18,31 @@ const StyledContainer = styled.div`
         font-size: 0.8rem;
       }
     `}
-  ${props => props.type === 'horizontal' && css``}
+  ${props =>
+    props.type === 'horizontal' &&
+    css`
+      width: 50vw;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1.24rem;
+
+      & label {
+        font-size: 1rem;
+        color: var(--color-white-5);
+      }
+      & p {
+        color: #fa3333;
+        font-size: 0.8rem;
+        width: 20vw;
+      }
+    `}
 `;
 
-const InputContainer = ({ label, error, children, type }) => {
+const InputContainer = ({ label, error, children, type, id }) => {
   return (
     <StyledContainer type={type}>
-      <label>{label}</label>
+      <label htmlFor={id}>{label}</label>
       {children}
       {error && <p>{error}</p>}
     </StyledContainer>

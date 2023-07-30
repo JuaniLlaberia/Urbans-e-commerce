@@ -23,8 +23,14 @@ const Title = styled.h1`
     props.as === 'h4' &&
     css`
       font-weight: 600;
-      font-size: 2.5rem;
+      font-size: 1.5rem;
       text-align: center;
+    `}
+  ${props =>
+    props.as === 'p' &&
+    css`
+      font-weight: 400;
+      font-size: 0.85rem;
     `}
   line-height: 1.4;
 `;

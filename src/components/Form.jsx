@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import { css, styled } from 'styled-components';
 
 const Form = styled.form`
   padding: 1rem 1.25rem;
@@ -9,6 +9,17 @@ const Form = styled.form`
   width: 100%;
 
   min-width: 40vw;
+
+  ${props =>
+    props.type === 'modal' &&
+    css`
+      border: var(--border-sm);
+      border-radius: var(--raidius-md);
+      margin-top: 15px;
+      margin-bottom: 25px;
+      /* box-shadow: var(--shadow-light); */
+      width: 30vw;
+    `}
 `;
 
 export default Form;
