@@ -18,14 +18,14 @@ const Tag = styled.p`
     props.type === 'Main' &&
     css`
       & span {
-        background-color: #ffce2b9d;
+        background-color: #ffe1809d;
       }
     `}
   ${props =>
     props.type === 'Sub' &&
     css`
       & span {
-        background-color: #2b72ff9d;
+        background-color: #75a3ff9d;
       }
     `};
 `;
