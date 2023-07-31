@@ -10,7 +10,7 @@ const Main = styled.main`
   overflow-x: hidden;
   height: 100vh;
 
-  @media (max-width: 700px) {
+  @media (max-width: 800px) {
     width: 100vw;
     padding: 3rem 0.75rem;
   }
