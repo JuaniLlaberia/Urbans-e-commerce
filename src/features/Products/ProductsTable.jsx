@@ -2,6 +2,7 @@ import Table from '../../components/Table';
 import Spinner from '../../components/Spinner';
 import { useGetProducts } from './useGetProducts';
 import ProductRow from './ProductRow';
+import Pagination from '../../components/Pagination';
 
 const ProductsTable = () => {
   const { products, isLoading } = useGetProducts();
@@ -9,19 +10,22 @@ const ProductsTable = () => {
   if (isLoading) return <Spinner />;
 
   return (
-    <Table columns='2fr 1fr 1fr 1fr 1fr'>
+    <Table columns='1.3fr .9fr .9fr 1.3fr .5fr  0.4fr'>
       <Table.Header>
-        {/* <div></div> */}
-        <div>Name</div>
+        <div>SKU</div>
         <div>Price</div>
-        <div>Discount</div>
-        <div>Main</div>
-        <div>Sub</div>
+        <div>Color</div>
+        <div>Category</div>
+        <div>Qty</div>
+        <div></div>
       </Table.Header>
       <Table.Body
         data={products}
         render={product => <ProductRow key={product.id} product={product} />}
       />
+      <Table.Footer>
+        <Pagination />
+      </Table.Footer>
     </Table>
   );
 };

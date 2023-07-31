@@ -19,8 +19,6 @@ export const createProduct = async newProduct => {
   //Create product with the image path and uload product
   const product = { ...newProduct, img: imgPath };
 
-  console.log(product);
-
   const { data, error } = await supabase.from('products').insert([product]);
 
   if (error) throw new Error('Could not create new product. Api failed');
@@ -39,4 +37,31 @@ export const createProduct = async newProduct => {
   }
 
   return data;
+};
+
+export const deleteProduct = async (id, imgToRemove) => {
+  //1. Remove all variant  from the inventory
+  const { error: errorInventory } = await supabase
+    .from('inventory')
+    .delete()
+    .eq('productId', id);
+
+  if (errorInventory) throw new Error('Could not remove the inventory');
+
+  //2. Remove the product itself
+  const { error: errorProduct } = await supabase
+    .from('products')
+    .delete()
+    .eq('id', id);
+
+  if (errorProduct) throw new Error('Could not remove the product');
+
+  //3. Remove image from storage
+  const { error } = await supabase.storage
+    .from('products-img')
+    .remove([imgToRemove]);
+
+  if (error) throw new Error('Could not remove the image');
+
+  return null;
 };

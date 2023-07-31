@@ -33,18 +33,24 @@ const NewProductForm = ({ onCloseModal }) => {
   const onSubmit = data => {
     if (data.sub === '') return;
 
-    createProduct({
-      name: data.name,
-      price: Number(data.price),
-      discount: Number(data.discount),
-      description: data.description,
-      mainColor: '',
-      mainCategory: data.main,
-      subCategory: data.sub,
-      img: data.image,
-    });
-
-    onCloseModal();
+    createProduct(
+      {
+        name: data.name,
+        price: Number(data.price),
+        discount: Number(data.discount),
+        description: data.description,
+        mainColor: '',
+        mainCategory: data.main,
+        subCategory: data.sub,
+        img: data.image,
+        size: data.size,
+      },
+      {
+        onSuccess: () => {
+          onCloseModal();
+        },
+      }
+    );
   };
 
   return (

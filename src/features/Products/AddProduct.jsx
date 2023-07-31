@@ -1,17 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
-import Modal from '../../components/Modal';
-import NewProductForm from './NewProductForm';
 
 const AddProduct = () => {
+  const navigate = useNavigate();
   return (
-    <Modal>
-      <Modal.Open>
-        <Button type='regular'>New product</Button>
-      </Modal.Open>
-      <Modal.Window>
-        <NewProductForm />
-      </Modal.Window>
-    </Modal>
+    <Button type='regular' onClick={() => navigate('/products/new')}>
+      New product
+    </Button>
   );
 };
 
