@@ -26,7 +26,7 @@ const CommonRow = styled.div`
 `;
 
 const StyledHeader = styled(CommonRow)`
-  padding: 0.7rem 2rem;
+  padding: 0.7rem 2.2rem;
   background-color: var(--color-white-2);
   border-bottom: var(--border-sm);
   text-transform: uppercase;
@@ -35,6 +35,7 @@ const StyledHeader = styled(CommonRow)`
   color: var(--color-white-5);
   font-size: 0.85rem;
   @media (max-width: 450px) {
+    font-size: 0.6rem;
     padding: 0.7rem 1rem;
   }
 `;
@@ -49,19 +50,20 @@ const StyledRow = styled(CommonRow)`
 
   @media (max-width: 450px) {
     padding: 0.7rem 1rem;
+    font-size: 0.6rem;
   }
 `;
 
 const StyledBody = styled.section`
   margin: 0.4rem 0;
-  /* min-height: 250px; */
 `;
 
 const Footer = styled.footer`
   display: flex;
   justify-content: center;
-  padding: 1.2rem;
-
+  padding: 0.5rem 1.2rem;
+  background-color: var(--color-white-2);
+  border-top: var(--border-sm);
   /* This will hide the footer when it contains no child elements. Possible thanks to the parent selector :has 🎉 */
   &:not(:has(*)) {
     display: none;

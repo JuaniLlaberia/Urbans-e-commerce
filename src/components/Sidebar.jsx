@@ -26,7 +26,7 @@ const StyledSidebar = styled.aside`
 
   transition: all 0.4s ease-in-out;
 
-  @media (max-width: 700px) {
+  @media (max-width: 800px) {
     transform: translateX(-190px);
     position: fixed;
     height: 100vh;

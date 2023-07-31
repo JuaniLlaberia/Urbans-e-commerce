@@ -10,6 +10,10 @@ const RowText = styled.p`
     css`
       font-weight: 500;
     `}
+
+  @media (max-width: 500px) {
+    font-size: 0.6rem;
+  }
 `;
 
 export default RowText;
