@@ -16,6 +16,13 @@ const CommonRow = styled.div`
   column-gap: 1.8rem;
   align-items: center;
   transition: none;
+
+  @media (max-width: 800px) {
+    column-gap: 1rem;
+  }
+  @media (max-width: 4500px) {
+    column-gap: 0.75rem;
+  }
 `;
 
 const StyledHeader = styled(CommonRow)`
@@ -27,19 +34,27 @@ const StyledHeader = styled(CommonRow)`
   font-weight: 600;
   color: var(--color-white-5);
   font-size: 0.85rem;
+  @media (max-width: 450px) {
+    padding: 0.7rem 1rem;
+  }
 `;
 
 const StyledRow = styled(CommonRow)`
-  padding: 0.9rem 2.4rem;
+  padding: 0.7rem 2rem;
   background-color: var(--color-white-1);
 
   &:not(:last-child) {
     border-bottom: var(--border-sm);
   }
+
+  @media (max-width: 450px) {
+    padding: 0.7rem 1rem;
+  }
 `;
 
 const StyledBody = styled.section`
   margin: 0.4rem 0;
+  /* min-height: 250px; */
 `;
 
 const Footer = styled.footer`

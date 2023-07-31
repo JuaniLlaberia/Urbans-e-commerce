@@ -50,7 +50,7 @@ const Button = styled.button`
     css`
       padding: 0.5rem 1.25rem;
       border: 1px solid var(--color-white-5);
-      background-color: transparent;
+      background-color: var(--color-white-2);
       color: var(--color-white-5);
 
       &:hover {
