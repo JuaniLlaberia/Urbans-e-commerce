@@ -15,7 +15,8 @@ const Buttons = styled.div`
 `;
 
 const Expired = styled.span`
-  background-color: #f74c4c;
+  background-color: #f16262;
+  font-weight: 500;
   color: white;
   padding: 0.2rem;
   border-radius: var(--raidius-lg);

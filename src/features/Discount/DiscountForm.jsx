@@ -5,20 +5,10 @@ import Row from '../../components/Row';
 import Button from '../../components/Button';
 import SpinnerBtn from '../../components/SpinnerBtn';
 import Title from '../../components/Title';
-import { styled } from 'styled-components';
+import DobleInput from '../../components/DobleInput';
 import { useForm } from 'react-hook-form';
 import { useCreateDiscount } from './useCreateDiscount';
 import { useEditDiscount } from './useEditDiscount';
-
-const DobleInput = styled.div`
-  display: flex;
-  gap: 0.4rem;
-
-  @media (max-width: 500px) {
-    flex-direction: column;
-    width: 100%;
-  }
-`;
 
 const DiscountForm = ({ onCloseModal, discountToEdit = {} }) => {
   //Checking if the form is being use for editing or creating a discount
