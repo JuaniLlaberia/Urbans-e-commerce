@@ -6,7 +6,7 @@ const AddCategory = () => {
   return (
     <Modal>
       <Modal.Open>
-        <Button type='regular'>Add category</Button>
+        <Button type='regular'>New category</Button>
       </Modal.Open>
       <Modal.Window>
         <NewCategoryForm />
