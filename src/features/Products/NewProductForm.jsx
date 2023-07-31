@@ -49,7 +49,7 @@ const NewProductForm = ({ onCloseModal }) => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Title as='h4'>Create product</Title>
+      <Title as='h3'>Create product</Title>
       <InputContainer
         label='Name'
         error={errors?.name?.message}
