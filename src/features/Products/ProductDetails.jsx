@@ -1,85 +1,52 @@
-import { useGetProduct } from './useGetProduct';
 import Spinner from '../../components/Spinner';
 import Title from '../../components/Title';
-import Button from '../../components/Button';
-import Row from '../../components/Row';
-import { styled } from 'styled-components';
-import Link from '../../components/Link';
-import { HiArrowLeft, HiOutlineExclamationTriangle } from 'react-icons/hi2';
-
-const StyledProductDetailHeader = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 25px;
-`;
-const Box = styled.div`
-  padding: 1rem 1.25rem;
-  border: var(--border-sm);
-  border-radius: var(--raidius-md);
-  margin: 10px 30px;
-
-  max-width: 700px;
-`;
-const EmptyDetail = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-
-  & p {
-    font-size: 1.25rem;
-    color: var(--color-white-6);
-  }
-
-  & svg {
-    color: var(--icons-color);
-    font-size: 1.5rem;
-  }
-`;
+import { useNavigate, useParams } from 'react-router-dom';
+import { useGetVariants } from './useGetVariants';
+import Table from '../../components/Table';
+import ProductRow from './ProductRow';
+import Pagination from '../../components/Pagination';
+// import Form from '../../components/Form';
+// import Input from '../../components/Input';
+// import ButtonIcon from '../../components/ButtonIcon';
+// import { useState } from 'react';
 
 const ProductDetails = () => {
-  const { product, isLoading } = useGetProduct();
+  // const navigate = useNavigate();
+  const { productName } = useParams();
+  // const [query, setQuery] = useState(productName);
+  const { variants, isLoading } = useGetVariants();
 
   if (isLoading) return <Spinner />;
-  if (!product)
-    return (
-      <EmptyDetail>
-        <HiOutlineExclamationTriangle />
-        <p>No results for this product id</p>
-      </EmptyDetail>
-    );
-
-  const {
-    name,
-    SKU,
-    mainCategory,
-    subCategory,
-    quantity,
-    price,
-    size,
-    description,
-    img,
-  } = product;
-
-  console.log(product);
 
   return (
     <>
-      <StyledProductDetailHeader>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '.4rem' }}>
-          <Title as='h4'>{name}</Title>
-          <span style={{ color: 'gray', fontSize: '1rem' }}>({SKU})</span>
-        </div>
-        <Link to='/products'>
-          <HiArrowLeft />
-          Go back
-        </Link>
-      </StyledProductDetailHeader>
-      <Box></Box>
-      <Row>
-        <Button type='regular'>Edit</Button>
-      </Row>
+      <div>
+        <Title as='h3'>All '{productName}' items</Title>
+        {/* <Form>
+          <Input value={query} onChange={e => setQuery(e.target.value)} />
+          <ButtonIcon onClick={() => navigate(`/products/variants/${query}`)}>
+            Search
+          </ButtonIcon>
+        </Form> */}
+      </div>
+      <br />
+      <Table columns='1.3fr .9fr .9fr 1.3fr .5fr  0.4fr'>
+        <Table.Header>
+          <div>SKU</div>
+          <div>Price</div>
+          <div>Color</div>
+          <div>Category</div>
+          <div>Qty</div>
+          <div></div>
+        </Table.Header>
+        <Table.Body
+          data={variants}
+          render={variant => <ProductRow key={variant.id} product={variant} />}
+        />
+        <Table.Footer>
+          <Pagination />
+        </Table.Footer>
+      </Table>
     </>
   );
 };

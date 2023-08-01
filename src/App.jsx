@@ -43,7 +43,7 @@ function App() {
             <Route path='orders' element={<Orders />} />
             <Route path='products' element={<Products />} />
             <Route
-              path='products/details/:productId'
+              path='products/variants/:productName'
               element={<ProductDetails />}
             />
             <Route path='my-store' element={<StoreInfo />} />

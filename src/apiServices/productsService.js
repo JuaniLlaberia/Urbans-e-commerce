@@ -23,6 +23,18 @@ export const getProduct = async id => {
   return data;
 };
 
+export const getVariantsByName = async productName => {
+  const { data, error } = await supabase
+    .from('products')
+    .select('*, mainCategory(name), subCategory(name)')
+    .eq('name', productName);
+  // .order('created_at', 'asc');
+
+  if (error) throw new Error('Could not get the products from the API');
+
+  return data;
+};
+
 export const createProduct = async newProduct => {
   //Create image path
   const imgName = `${Math.random()}-${newProduct.img.name}`.replace('/', '');
@@ -104,15 +116,7 @@ export const editProduct = async (id, editedProduct, oldImg) => {
 };
 
 export const deleteProduct = async (id, imgToRemove) => {
-  //1. Remove all variant  from the inventory
-  const { error: errorInventory } = await supabase
-    .from('inventory')
-    .delete()
-    .eq('productId', id);
-
-  if (errorInventory) throw new Error('Could not remove the inventory');
-
-  //2. Remove the product itself
+  //1. Remove the product itself
   const { error: errorProduct } = await supabase
     .from('products')
     .delete()
@@ -120,7 +124,7 @@ export const deleteProduct = async (id, imgToRemove) => {
 
   if (errorProduct) throw new Error('Could not remove the product');
 
-  //3. Remove image from storage
+  //2. Remove image from storage
   const { error } = await supabase.storage
     .from('products-img')
     .remove([imgToRemove]);
