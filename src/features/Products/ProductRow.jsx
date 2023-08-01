@@ -2,10 +2,16 @@ import Table from '../../components/Table';
 import Modal from '../../components/Modal';
 import ButtonIcon from '../../components/ButtonIcon';
 import { formatCurrency } from '../../utils/formatCurrency';
-import { HiOutlineTrash } from 'react-icons/hi2';
+import {
+  HiOutlineClipboard,
+  HiOutlinePencil,
+  HiOutlineTrash,
+} from 'react-icons/hi2';
 import { useDeleteProduct } from './useDeleteProduct';
 import { RemoveText } from '../../components/RemoveText';
 import RowText from '../../components/RowText';
+import NewProductForm from './NewProductForm';
+import { useNavigate } from 'react-router-dom';
 
 const ProductRow = ({ product }) => {
   const {
@@ -20,6 +26,7 @@ const ProductRow = ({ product }) => {
   } = product;
 
   const { deleteProduct, isLoading } = useDeleteProduct();
+  const navigate = useNavigate();
 
   return (
     <Modal>
@@ -31,14 +38,27 @@ const ProductRow = ({ product }) => {
           {mainCategory.name}/{subCategory.name}
         </RowText>
         <RowText>{quantity}</RowText>
-        <Modal.Open>
-          <ButtonIcon size='sm'>
-            <HiOutlineTrash />
+        <div>
+          <ButtonIcon
+            size='sm'
+            onClick={() => navigate(`/products/details/${id}`)}
+          >
+            <HiOutlineClipboard />
           </ButtonIcon>
-        </Modal.Open>
+          <Modal.Open opens='deleteModal'>
+            <ButtonIcon size='sm'>
+              <HiOutlineTrash />
+            </ButtonIcon>
+          </Modal.Open>
+          <Modal.Open opens='editModal'>
+            <ButtonIcon size='sm'>
+              <HiOutlinePencil />
+            </ButtonIcon>
+          </Modal.Open>
+        </div>
       </Table.Row>
 
-      <Modal.Window>
+      <Modal.Window windowName='deleteModal'>
         <RemoveText
           onConfirm={() =>
             deleteProduct({ id, imgToRemove: img.split('/').at(-1) })
@@ -46,6 +66,9 @@ const ProductRow = ({ product }) => {
           resource={`${SKU} (No order can exist with this product to perform this operation)`}
           isDeleting={isLoading}
         />
+      </Modal.Window>
+      <Modal.Window windowName='editModal'>
+        <NewProductForm productToEdit={product} />
       </Modal.Window>
     </Modal>
   );
