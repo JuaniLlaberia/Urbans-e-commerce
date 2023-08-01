@@ -1,15 +1,12 @@
 import { css, styled } from 'styled-components';
-import { HiOutlineTrash } from 'react-icons/hi2';
+import { HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi2';
 import Table from '../../components/Table';
 import Modal from '../../components/Modal';
 import { RemoveText } from '../../components/RemoveText';
-import ButtonIcon from '../../components/ButtonIcon';
+import DropDownMenu from '../../components/DropDownMenu';
+import RowText from '../../components/RowText';
 import { useDeleteCategory } from './useDeleteCategory';
 
-const Category = styled.p`
-  font-size: 1rem;
-  color: var(--color-white-6);
-`;
 const Tag = styled.p`
   & span {
     padding: 0.1rem 1rem;
@@ -47,17 +44,26 @@ const CategoriesRow = ({ category }) => {
   return (
     <Modal>
       <Table.Row>
-        <Category>{name}</Category>
+        <RowText>{name}</RowText>
         <Tag type={type}>
           <span>{type}</span>
         </Tag>
-        <p>{!family ? <span>&mdash;</span> : family}</p>
-
-        <Modal.Open opens='deleteModal'>
-          <ButtonIcon size='sm'>
-            <HiOutlineTrash />
-          </ButtonIcon>
-        </Modal.Open>
+        <RowText>{!family ? <span>&mdash;</span> : family}</RowText>
+        <DropDownMenu>
+          <DropDownMenu.Opener id={id} />
+          <DropDownMenu.Menu id={id}>
+            <Modal.Open opens='deleteModal'>
+              <DropDownMenu.Item>
+                <HiOutlineTrash />
+              </DropDownMenu.Item>
+            </Modal.Open>
+            <Modal.Open opens='editModal'>
+              <DropDownMenu.Item>
+                <HiOutlinePencil />
+              </DropDownMenu.Item>
+            </Modal.Open>
+          </DropDownMenu.Menu>
+        </DropDownMenu>
       </Table.Row>
       <Modal.Window windowName='deleteModal'>
         <RemoveText
@@ -65,6 +71,9 @@ const CategoriesRow = ({ category }) => {
           resource={name}
           isDeleting={isDeleting}
         />
+      </Modal.Window>
+      <Modal.Window windowName='editModal'>
+        <p>Edit modal</p>
       </Modal.Window>
     </Modal>
   );

@@ -7,11 +7,11 @@ import { useDeleteDiscount } from './useDeleteDiscount';
 import Modal from '../../components/Modal';
 import { RemoveText } from '../../components/RemoveText';
 import DiscountForm from './DiscountForm';
+import DropDownMenu from '../../components/DropDownMenu';
 
 const Buttons = styled.div`
   display: flex;
   justify-content: flex-end;
-  gap: 0.4rem;
 `;
 
 const Expired = styled.span`
@@ -35,18 +35,21 @@ const DiscountRow = ({ discount }) => {
         <RowText type='main'>{code}</RowText>
         <RowText>{amount} %</RowText>
         <RowText>{!hasExpired ? expires : <Expired>Expired</Expired>}</RowText>
-        <Buttons>
-          <Modal.Open opens='editModal'>
-            <ButtonIcon size='sm' disabled={isDeleting}>
-              <HiOutlinePencil />
-            </ButtonIcon>
-          </Modal.Open>
-          <Modal.Open opens='removeModal'>
-            <ButtonIcon size='sm' disabled={isDeleting}>
-              <HiOutlineTrash />
-            </ButtonIcon>
-          </Modal.Open>
-        </Buttons>
+        <DropDownMenu>
+          <DropDownMenu.Opener id={id} />
+          <DropDownMenu.Menu id={id}>
+            <Modal.Open opens='editModal'>
+              <DropDownMenu.Item>
+                <HiOutlinePencil />
+              </DropDownMenu.Item>
+            </Modal.Open>
+            <Modal.Open opens='removeModal'>
+              <DropDownMenu.Item>
+                <HiOutlineTrash />
+              </DropDownMenu.Item>
+            </Modal.Open>
+          </DropDownMenu.Menu>
+        </DropDownMenu>
       </Table.Row>
       <Modal.Window windowName='removeModal'>
         <RemoveText

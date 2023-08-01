@@ -5,6 +5,7 @@ import { formatCurrency } from '../../utils/formatCurrency';
 import {
   HiOutlineClipboard,
   HiOutlinePencil,
+  HiOutlineShoppingCart,
   HiOutlineTrash,
 } from 'react-icons/hi2';
 import { useDeleteProduct } from './useDeleteProduct';
@@ -12,6 +13,7 @@ import { RemoveText } from '../../components/RemoveText';
 import RowText from '../../components/RowText';
 import NewProductForm from './NewProductForm';
 import { useNavigate } from 'react-router-dom';
+import DropDownMenu from '../../components/DropDownMenu';
 
 const ProductRow = ({ product }) => {
   const {
@@ -23,6 +25,7 @@ const ProductRow = ({ product }) => {
     img,
     mainColor,
     quantity,
+    name,
   } = product;
 
   const { deleteProduct, isLoading } = useDeleteProduct();
@@ -38,24 +41,30 @@ const ProductRow = ({ product }) => {
           {mainCategory.name}/{subCategory.name}
         </RowText>
         <RowText>{quantity}</RowText>
-        <div>
-          <ButtonIcon
-            size='sm'
-            onClick={() => navigate(`/products/details/${id}`)}
-          >
-            <HiOutlineClipboard />
-          </ButtonIcon>
-          <Modal.Open opens='deleteModal'>
-            <ButtonIcon size='sm'>
-              <HiOutlineTrash />
-            </ButtonIcon>
-          </Modal.Open>
-          <Modal.Open opens='editModal'>
-            <ButtonIcon size='sm'>
-              <HiOutlinePencil />
-            </ButtonIcon>
-          </Modal.Open>
-        </div>
+        <DropDownMenu>
+          <DropDownMenu.Opener id={id} />
+          <DropDownMenu.Menu id={id}>
+            {/* This will take us to the product page in the website, so we can see it */}
+            <DropDownMenu.Item onClick={() => navigate(`/products`)}>
+              <HiOutlineShoppingCart />
+            </DropDownMenu.Item>
+            <DropDownMenu.Item
+              onClick={() => navigate(`/products/variants/${name}`)}
+            >
+              <HiOutlineClipboard />
+            </DropDownMenu.Item>
+            <Modal.Open opens='editModal'>
+              <DropDownMenu.Item>
+                <HiOutlinePencil />
+              </DropDownMenu.Item>
+            </Modal.Open>
+            <Modal.Open opens='deleteModal'>
+              <DropDownMenu.Item>
+                <HiOutlineTrash />
+              </DropDownMenu.Item>
+            </Modal.Open>
+          </DropDownMenu.Menu>
+        </DropDownMenu>
       </Table.Row>
 
       <Modal.Window windowName='deleteModal'>
