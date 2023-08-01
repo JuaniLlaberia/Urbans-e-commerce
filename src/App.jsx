@@ -12,7 +12,7 @@ import StoreInfo from './pages/dashboard/StoreInfo';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Styles from './styles/Styles';
-import NewProductPage from './features/Products/NewProductPage';
+import ProductDetails from './features/Products/ProductDetails';
 // import { lazy, Suspense } from 'react';
 
 // const Products = lazy(() => import('./pages/dashboard/Products'));
@@ -42,7 +42,10 @@ function App() {
             <Route path='discounts' element={<Discounts />} />
             <Route path='orders' element={<Orders />} />
             <Route path='products' element={<Products />} />
-            <Route path='products/new' element={<NewProductPage />} />
+            <Route
+              path='products/details/:productId'
+              element={<ProductDetails />}
+            />
             <Route path='my-store' element={<StoreInfo />} />
           </Route>
         </Routes>
