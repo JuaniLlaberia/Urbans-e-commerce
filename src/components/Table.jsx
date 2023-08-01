@@ -48,6 +48,10 @@ const StyledRow = styled(CommonRow)`
     border-bottom: var(--border-sm);
   }
 
+  /* &:only-child {
+    border-bottom: var(--border-sm);
+  } */
+
   @media (max-width: 450px) {
     padding: 0.7rem 1rem;
     font-size: 0.6rem;
@@ -56,6 +60,7 @@ const StyledRow = styled(CommonRow)`
 
 const StyledBody = styled.section`
   margin: 0.4rem 0;
+  /* min-height: 250px; */
 `;
 
 const Footer = styled.footer`
