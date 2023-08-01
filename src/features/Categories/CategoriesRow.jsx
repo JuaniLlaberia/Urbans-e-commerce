@@ -1,6 +1,8 @@
 import { css, styled } from 'styled-components';
 import { HiOutlineTrash } from 'react-icons/hi2';
 import Table from '../../components/Table';
+import Modal from '../../components/Modal';
+import { RemoveText } from '../../components/RemoveText';
 import ButtonIcon from '../../components/ButtonIcon';
 import { useDeleteCategory } from './useDeleteCategory';
 
@@ -12,20 +14,28 @@ const Tag = styled.p`
   & span {
     padding: 0.1rem 1rem;
     border-radius: var(--raidius-lg);
+    width: 3.5vw;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
   }
 
   ${props =>
     props.type === 'Main' &&
     css`
       & span {
-        background-color: #ffe1809d;
+        background-color: #ffeaa3a2;
+        color: #ffbb00;
       }
     `}
   ${props =>
     props.type === 'Sub' &&
     css`
       & span {
-        background-color: #75a3ff9d;
+        background-color: #92b4fa89;
+        color: #4a86ffca;
       }
     `};
 `;
@@ -35,21 +45,28 @@ const CategoriesRow = ({ category }) => {
   const { name, type, family, id } = category;
 
   return (
-    <Table.Row>
-      <Category>{name}</Category>
-      <Tag type={type}>
-        <span>{type}</span>
-      </Tag>
-      <p>{!family ? <span>&mdash;</span> : family}</p>
-      {/* ADD POP UP OR CONFIRMATION */}
-      <ButtonIcon
-        size='sm'
-        onClick={() => deleteCategory(id)}
-        disabled={isDeleting}
-      >
-        <HiOutlineTrash />
-      </ButtonIcon>
-    </Table.Row>
+    <Modal>
+      <Table.Row>
+        <Category>{name}</Category>
+        <Tag type={type}>
+          <span>{type}</span>
+        </Tag>
+        <p>{!family ? <span>&mdash;</span> : family}</p>
+
+        <Modal.Open opens='deleteModal'>
+          <ButtonIcon size='sm'>
+            <HiOutlineTrash />
+          </ButtonIcon>
+        </Modal.Open>
+      </Table.Row>
+      <Modal.Window windowName='deleteModal'>
+        <RemoveText
+          onConfirm={() => deleteCategory(id)}
+          resource={name}
+          isDeleting={isDeleting}
+        />
+      </Modal.Window>
+    </Modal>
   );
 };
 
