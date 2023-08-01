@@ -35,6 +35,8 @@ const StyledSidebar = styled.aside`
       transform: translateX(0);
     }
   }
+
+  z-index: 1;
 `;
 
 const NavList = styled.ul`
@@ -99,61 +101,77 @@ const ButtonContainer = styled.div`
   }
 `;
 
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #ffffff26;
+  backdrop-filter: blur(2px);
+  transition: all 0.5s;
+`;
+
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const closeOnClick = () => setIsOpen(false);
+
   return (
-    <StyledSidebar className={isOpen ? 'open' : ''}>
-      {/* <h1>Logo</h1> */}
-      <NavList>
-        <Separator>HOME</Separator>
-        <li>
-          <SidebarItem to='/dashboard'>
-            <HiOutlineHome />
-            <span>Dashboard</span>
-          </SidebarItem>
-        </li>
-        <Separator>STORE</Separator>
-        <li>
-          <SidebarItem to='/products'>
-            <HiOutlineShoppingBag />
-            <span>Products</span>
-          </SidebarItem>
-        </li>
-        <li>
-          <SidebarItem to='/categories'>
-            <HiOutlineHashtag />
-            <span>Categories</span>
-          </SidebarItem>
-        </li>
-        <li>
-          <SidebarItem to='/discounts'>
-            <HiOutlineTag />
-            <span>Discounts</span>
-          </SidebarItem>
-        </li>
-        <Separator>SALES</Separator>
-        <li>
-          <SidebarItem to='/orders'>
-            <HiOutlineClipboardDocumentList />
-            <span>Orders</span>
-          </SidebarItem>
-        </li>
-        <li>
-          <SidebarItem to='/orders'>
-            <HiOutlineExclamationCircle />
-            <span>Tickets</span>
-          </SidebarItem>
-        </li>
-      </NavList>
-      <NavButtonsMenu />
-      <ButtonContainer>
-        <AnimatedOpenBtn
-          isOpen={isOpen}
-          onClick={() => setIsOpen(prev => !prev)}
-        />
-      </ButtonContainer>
-    </StyledSidebar>
+    <>
+      <StyledSidebar className={isOpen ? 'open' : ''}>
+        {/* <h1>Logo</h1> */}
+        <NavList>
+          <Separator>HOME</Separator>
+          <li onClick={closeOnClick}>
+            <SidebarItem to='/dashboard'>
+              <HiOutlineHome />
+              <span>Dashboard</span>
+            </SidebarItem>
+          </li>
+          <Separator>STORE</Separator>
+          <li onClick={closeOnClick}>
+            <SidebarItem to='/products'>
+              <HiOutlineShoppingBag />
+              <span>Products</span>
+            </SidebarItem>
+          </li>
+          <li onClick={closeOnClick}>
+            <SidebarItem to='/categories'>
+              <HiOutlineHashtag />
+              <span>Categories</span>
+            </SidebarItem>
+          </li>
+          <li onClick={closeOnClick}>
+            <SidebarItem to='/discounts'>
+              <HiOutlineTag />
+              <span>Discounts</span>
+            </SidebarItem>
+          </li>
+          <Separator>SALES</Separator>
+          <li onClick={closeOnClick}>
+            <SidebarItem to='/orders'>
+              <HiOutlineClipboardDocumentList />
+              <span>Orders</span>
+            </SidebarItem>
+          </li>
+          <li onClick={closeOnClick}>
+            <SidebarItem to='/orders'>
+              <HiOutlineExclamationCircle />
+              <span>Tickets</span>
+            </SidebarItem>
+          </li>
+        </NavList>
+        <NavButtonsMenu />
+        <ButtonContainer>
+          <AnimatedOpenBtn
+            isOpen={isOpen}
+            onClick={() => setIsOpen(prev => !prev)}
+          />
+        </ButtonContainer>
+      </StyledSidebar>
+      {isOpen && <Overlay onClick={closeOnClick} />}
+    </>
   );
 };
 
