@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 
 const DobleInput = styled.div`
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   width: 100%;
   margin-bottom: 5px;
   margin-top: 5px;

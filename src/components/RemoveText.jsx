@@ -18,7 +18,12 @@ const StyledMsg = styled.p`
   }
 `;
 
-export const RemoveText = ({ onConfirm, resource, isDeleting }) => {
+export const RemoveText = ({
+  onConfirm,
+  resource,
+  isDeleting,
+  onCloseModal,
+}) => {
   return (
     <StyledRemoveBox>
       <StyledMsg>
@@ -26,6 +31,9 @@ export const RemoveText = ({ onConfirm, resource, isDeleting }) => {
         irreversible)
       </StyledMsg>
       <Row>
+        <Button type='outline' onClick={onCloseModal}>
+          Cancel
+        </Button>
         <Button type='alert' onClick={onConfirm} disabled={isDeleting}>
           {isDeleting ? <SpinnerBtn /> : 'Confirm'}
         </Button>

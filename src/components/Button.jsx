@@ -6,6 +6,7 @@ const Button = styled.button`
   font-weight: 600;
   border-radius: var(--raidius-sm);
   border: none;
+  /* box-shadow: var(--shadow-light); */
 
   transition: all 0.15s ease-in;
   cursor: pointer;
@@ -49,12 +50,12 @@ const Button = styled.button`
     props.type === 'outline' &&
     css`
       padding: 0.5rem 1.25rem;
-      border: 1px solid var(--color-white-5);
+      border: 1px solid var(--color-white-4);
       background-color: var(--color-white-2);
       color: var(--color-white-5);
 
       &:hover {
-        background-color: var(--color-white-2);
+        background-color: var(--color-white-1);
       }
     `}
 `;
