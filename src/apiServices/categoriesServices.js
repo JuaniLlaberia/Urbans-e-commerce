@@ -1,14 +1,28 @@
+import { pageSize } from '../utils/constants';
 import supabase from './supabase';
 
-export const getCategories = async () => {
-  const { data, error } = await supabase
-    .from('categories')
-    .select('*')
-    .order('type', 'asc');
+export const getCategories = async ({ page, filter }) => {
+  let query = supabase.from('categories').select('*', { count: 'exact' });
 
-  if (error) throw new Error('Could not get categories from the API');
+  if (filter && filter !== 'All') {
+    console.log('filtering');
+    query.eq('type', filter);
+  }
 
-  return data;
+  if (page) {
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
+    query.range(from, to);
+  }
+
+  const { data, count, error } = await query.order('type', 'asc');
+
+  if (error) {
+    console.log(error);
+    throw new Error('Could not get categories from the API');
+  }
+
+  return { data, count };
 };
 
 export const getMainCategories = async () => {

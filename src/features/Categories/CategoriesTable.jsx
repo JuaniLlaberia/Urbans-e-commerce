@@ -5,7 +5,7 @@ import CategoriesRow from './CategoriesRow';
 import { useGetCategories } from './useGetCategories';
 
 const CategoriesTable = () => {
-  const { categories, isLoading } = useGetCategories();
+  const { categories, isLoading, count } = useGetCategories();
 
   if (isLoading) return <Spinner />;
 
@@ -24,7 +24,7 @@ const CategoriesTable = () => {
         )}
       />
       <Table.Footer>
-        <Pagination />
+        <Pagination count={count} />
       </Table.Footer>
     </Table>
   );

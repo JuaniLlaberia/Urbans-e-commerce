@@ -1,11 +1,11 @@
-import Table from '../../components/Table';
-import Spinner from '../../components/Spinner';
-import { useGetProducts } from './useGetProducts';
-import ProductRow from './ProductRow';
 import Pagination from '../../components/Pagination';
+import Spinner from '../../components/Spinner';
+import Table from '../../components/Table';
+import ProductRow from './ProductRow';
+import { useGetVariants } from './useGetVariants';
 
-const ProductsTable = () => {
-  const { products, isLoading, count } = useGetProducts();
+const ProductDetailsTable = () => {
+  const { variants, isLoading, count } = useGetVariants();
 
   if (isLoading) return <Spinner />;
 
@@ -13,15 +13,17 @@ const ProductsTable = () => {
     <Table columns='1.3fr .9fr .9fr 1.3fr .5fr  0.4fr'>
       <Table.Header>
         <div>SKU</div>
-        <div>Price</div>
+        <div>Size</div>
         <div>Color</div>
         <div>Category</div>
         <div>Qty</div>
         <div></div>
       </Table.Header>
       <Table.Body
-        data={products}
-        render={product => <ProductRow key={product.id} product={product} />}
+        data={variants}
+        render={variant => (
+          <ProductRow key={variant.id} product={variant} variant={true} />
+        )}
       />
       <Table.Footer>
         <Pagination count={count} />
@@ -30,4 +32,4 @@ const ProductsTable = () => {
   );
 };
 
-export default ProductsTable;
+export default ProductDetailsTable;

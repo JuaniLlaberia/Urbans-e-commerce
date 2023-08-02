@@ -1,6 +1,5 @@
 import Table from '../../components/Table';
 import Modal from '../../components/Modal';
-import ButtonIcon from '../../components/ButtonIcon';
 import { formatCurrency } from '../../utils/formatCurrency';
 import {
   HiOutlineClipboard,
@@ -15,7 +14,7 @@ import NewProductForm from './NewProductForm';
 import { useNavigate } from 'react-router-dom';
 import DropDownMenu from '../../components/DropDownMenu';
 
-const ProductRow = ({ product }) => {
+const ProductRow = ({ product, variant }) => {
   const {
     price,
     SKU,
@@ -26,6 +25,7 @@ const ProductRow = ({ product }) => {
     mainColor,
     quantity,
     name,
+    size,
   } = product;
 
   const { deleteProduct, isLoading } = useDeleteProduct();
@@ -35,7 +35,7 @@ const ProductRow = ({ product }) => {
     <Modal>
       <Table.Row>
         <RowText>{SKU}</RowText>
-        <RowText>{formatCurrency(price)}</RowText>
+        <RowText>{variant ? size : formatCurrency(price)}</RowText>
         <RowText>{mainColor}</RowText>
         <RowText>
           {mainCategory.name}/{subCategory.name}
@@ -48,11 +48,13 @@ const ProductRow = ({ product }) => {
             <DropDownMenu.Item onClick={() => navigate(`/products`)}>
               <HiOutlineShoppingCart />
             </DropDownMenu.Item>
-            <DropDownMenu.Item
-              onClick={() => navigate(`/products/variants/${name}`)}
-            >
-              <HiOutlineClipboard />
-            </DropDownMenu.Item>
+            {variant ? null : (
+              <DropDownMenu.Item
+                onClick={() => navigate(`/products/variants/${name}`)}
+              >
+                <HiOutlineClipboard />
+              </DropDownMenu.Item>
+            )}
             <Modal.Open opens='editModal'>
               <DropDownMenu.Item>
                 <HiOutlinePencil />

@@ -36,7 +36,7 @@ const StyledSidebar = styled.aside`
     }
   }
 
-  z-index: 1;
+  z-index: 2;
 `;
 
 const NavList = styled.ul`
@@ -110,6 +110,7 @@ const Overlay = styled.div`
   background-color: #ffffff26;
   backdrop-filter: blur(2px);
   transition: all 0.5s;
+  z-index: 1;
 `;
 
 const Sidebar = () => {
