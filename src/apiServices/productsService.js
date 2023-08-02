@@ -1,14 +1,34 @@
+import { pageSize } from '../utils/constants';
 import supabase from './supabase';
 
-export const getProducts = async () => {
-  const { data, error } = await supabase
+export const getProducts = async ({ page, sku, order }) => {
+  let query = supabase
     .from('products')
-    .select('*, mainCategory(name, id), subCategory(name, id)')
-    .order('created_at', 'desc');
+    .select('*, mainCategory(name, id), subCategory(name, id)', {
+      count: 'exact',
+    });
+
+  if (sku) {
+    query.textSearch('SKU', sku);
+  }
+
+  if (page) {
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
+    query.range(from, to);
+  }
+
+  if (order) {
+    query.order(order.order, {
+      ascending: order.direction === 'asc',
+    });
+  }
+
+  const { data, error, count } = await query;
 
   if (error) throw new Error('Could not get products from the API');
 
-  return data;
+  return { data, count };
 };
 
 export const getProduct = async id => {
@@ -23,16 +43,29 @@ export const getProduct = async id => {
   return data;
 };
 
-export const getVariantsByName = async productName => {
-  const { data, error } = await supabase
+export const getVariantsByName = async ({ productName, page, order }) => {
+  let query = supabase
     .from('products')
-    .select('*, mainCategory(name), subCategory(name)')
+    .select('*, mainCategory(name), subCategory(name)', { count: 'exact' })
     .eq('name', productName);
-  // .order('created_at', 'asc');
+
+  if (page) {
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
+    query.range(from, to);
+  }
+
+  if (order) {
+    query.order(order.order, {
+      ascending: order.direction === 'asc',
+    });
+  }
+
+  const { data, count, error } = await query;
 
   if (error) throw new Error('Could not get the products from the API');
 
-  return data;
+  return { data, count };
 };
 
 export const createProduct = async newProduct => {
