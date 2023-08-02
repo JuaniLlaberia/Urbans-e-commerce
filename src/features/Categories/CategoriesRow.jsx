@@ -1,5 +1,5 @@
 import { css, styled } from 'styled-components';
-import { HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi2';
+import { HiOutlineTrash } from 'react-icons/hi2';
 import Table from '../../components/Table';
 import Modal from '../../components/Modal';
 import { RemoveText } from '../../components/RemoveText';
@@ -57,11 +57,6 @@ const CategoriesRow = ({ category }) => {
                 <HiOutlineTrash />
               </DropDownMenu.Item>
             </Modal.Open>
-            <Modal.Open opens='editModal'>
-              <DropDownMenu.Item>
-                <HiOutlinePencil />
-              </DropDownMenu.Item>
-            </Modal.Open>
           </DropDownMenu.Menu>
         </DropDownMenu>
       </Table.Row>
@@ -71,9 +66,6 @@ const CategoriesRow = ({ category }) => {
           resource={name}
           isDeleting={isDeleting}
         />
-      </Modal.Window>
-      <Modal.Window windowName='editModal'>
-        <p>Edit modal</p>
       </Modal.Window>
     </Modal>
   );
