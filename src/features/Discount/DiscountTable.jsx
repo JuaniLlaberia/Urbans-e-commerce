@@ -2,7 +2,6 @@ import Table from '../../components/Table';
 import Spinner from '../../components/Spinner';
 import { useGetDiscounts } from './useGetDiscounts';
 import DiscountRow from './DiscountRow';
-import Pagination from '../../components/Pagination';
 
 const DiscountTable = () => {
   const { discounts, isLoading } = useGetDiscounts();
@@ -23,9 +22,7 @@ const DiscountTable = () => {
           <DiscountRow key={discount.id} discount={discount} />
         )}
       />
-      <Table.Footer>
-        <Pagination />
-      </Table.Footer>
+      <Table.Footer></Table.Footer>
     </Table>
   );
 };
