@@ -1,5 +1,7 @@
 import { styled } from 'styled-components';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
+import { useSearchParams } from 'react-router-dom';
+import { pageSize } from '../utils/constants';
 
 const StyledPagination = styled.div`
   width: 100%;
@@ -59,22 +61,49 @@ const PaginationButton = styled.button`
     color: var(--color-white-5);
   }
 
+  &:disabled {
+    cursor: not-allowed;
+  }
+
   @media (max-width: 500px) {
     font-size: 0.6rem;
   }
 `;
 
-const Pagination = () => {
+const Pagination = ({ count }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const crrPage = !searchParams.get('page')
+    ? 1
+    : Number(searchParams.get('page'));
+
+  const pageCount = Math.ceil(count / pageSize);
+
+  const goNext = () => {
+    const next = crrPage === pageCount ? crrPage : crrPage + 1;
+
+    searchParams.set('page', next);
+    setSearchParams(searchParams);
+  };
+
+  const goPrev = () => {
+    const prev = crrPage === 1 ? crrPage : crrPage - 1;
+
+    searchParams.set('page', prev);
+    setSearchParams(searchParams);
+  };
+
   return (
     <StyledPagination>
       <P>
-        Showing <span>1</span> to <span>5</span> of <span>20</span> results
+        Showing <span>{(crrPage - 1) * pageSize + 1}</span> to{' '}
+        <span>{crrPage === pageCount ? count : crrPage * pageSize}</span> of{' '}
+        <span>{count}</span> results
       </P>
       <Buttons>
-        <PaginationButton>
+        <PaginationButton onClick={goPrev} disabled={crrPage === 1}>
           <HiChevronLeft /> <span>Previous</span>
         </PaginationButton>
-        <PaginationButton>
+        <PaginationButton onClick={goNext} disabled={crrPage === pageCount}>
           <span>Next</span>
           <HiChevronRight />
         </PaginationButton>

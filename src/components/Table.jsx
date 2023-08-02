@@ -48,10 +48,6 @@ const StyledRow = styled(CommonRow)`
     border-bottom: var(--border-sm);
   }
 
-  /* &:only-child {
-    border-bottom: var(--border-sm);
-  } */
-
   @media (max-width: 450px) {
     padding: 0.7rem 1rem;
     font-size: 0.6rem;
@@ -69,10 +65,7 @@ const Footer = styled.footer`
   padding: 0.5rem 1.2rem;
   background-color: var(--color-white-2);
   border-top: var(--border-sm);
-  /* This will hide the footer when it contains no child elements. Possible thanks to the parent selector :has 🎉 */
-  &:not(:has(*)) {
-    display: none;
-  }
+  min-height: 30px;
 `;
 
 const Empty = styled.p`
@@ -113,7 +106,6 @@ const Row = ({ children }) => {
   );
 };
 
-//NEED to pass the data and the render
 const Body = ({ data, render }) => {
   if (!data.length) return <Empty>No data to show at the momment</Empty>;
   return <StyledBody>{data.map(render)}</StyledBody>;

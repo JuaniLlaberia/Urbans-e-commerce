@@ -6,6 +6,10 @@ const Row = styled.div`
   gap: 0.4rem;
   width: 100%;
   margin-top: 0.75rem;
+
+  @media (max-width: 450px) {
+    justify-content: space-between;
+  }
 `;
 
 export default Row;
