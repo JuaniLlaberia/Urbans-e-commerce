@@ -15,6 +15,11 @@ const Input = styled.input`
     outline-color: var(--icons-color);
     outline-offset: 2px;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--color-white-3);
+  }
 `;
 
 export default Input;

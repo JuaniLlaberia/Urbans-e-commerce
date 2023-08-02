@@ -1,5 +1,6 @@
 import Spinner from '../../components/Spinner';
 import Table from '../../components/Table';
+import Pagination from '../../components/Pagination';
 import CategoriesRow from './CategoriesRow';
 import { useGetCategories } from './useGetCategories';
 
@@ -22,6 +23,9 @@ const CategoriesTable = () => {
           <CategoriesRow key={category.id} category={category} />
         )}
       />
+      <Table.Footer>
+        <Pagination />
+      </Table.Footer>
     </Table>
   );
 };

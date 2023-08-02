@@ -1,24 +1,85 @@
-import { styled } from 'styled-components';
 import Table from '../../components/Table';
-import Title from '../../components/Title';
+import Modal from '../../components/Modal';
+import ButtonIcon from '../../components/ButtonIcon';
 import { formatCurrency } from '../../utils/formatCurrency';
+import {
+  HiOutlineClipboard,
+  HiOutlinePencil,
+  HiOutlineShoppingCart,
+  HiOutlineTrash,
+} from 'react-icons/hi2';
+import { useDeleteProduct } from './useDeleteProduct';
+import { RemoveText } from '../../components/RemoveText';
+import RowText from '../../components/RowText';
+import NewProductForm from './NewProductForm';
+import { useNavigate } from 'react-router-dom';
+import DropDownMenu from '../../components/DropDownMenu';
 
 const ProductRow = ({ product }) => {
-  const { name, price, discount, img, mainCategory, subCategory } = product;
+  const {
+    price,
+    SKU,
+    mainCategory,
+    subCategory,
+    id,
+    img,
+    mainColor,
+    quantity,
+    name,
+  } = product;
+
+  const { deleteProduct, isLoading } = useDeleteProduct();
+  const navigate = useNavigate();
 
   return (
-    <Table.Row>
-      {/* {img ? <Img src={img} /> : <span>&mdash;</span>} */}
-      <Title as='p'>{name}</Title>
-      <Title as='p'>{formatCurrency(price)}</Title>
-      {discount === 0 ? (
-        <span>&mdash;</span>
-      ) : (
-        <Title as='p'>{formatCurrency(discount)}</Title>
-      )}
-      <Title as='p'>{mainCategory.name}</Title>
-      <Title as='p'>{subCategory.name}</Title>
-    </Table.Row>
+    <Modal>
+      <Table.Row>
+        <RowText>{SKU}</RowText>
+        <RowText>{formatCurrency(price)}</RowText>
+        <RowText>{mainColor}</RowText>
+        <RowText>
+          {mainCategory.name}/{subCategory.name}
+        </RowText>
+        <RowText>{quantity}</RowText>
+        <DropDownMenu>
+          <DropDownMenu.Opener id={id} />
+          <DropDownMenu.Menu id={id}>
+            {/* This will take us to the product page in the website, so we can see it */}
+            <DropDownMenu.Item onClick={() => navigate(`/products`)}>
+              <HiOutlineShoppingCart />
+            </DropDownMenu.Item>
+            <DropDownMenu.Item
+              onClick={() => navigate(`/products/variants/${name}`)}
+            >
+              <HiOutlineClipboard />
+            </DropDownMenu.Item>
+            <Modal.Open opens='editModal'>
+              <DropDownMenu.Item>
+                <HiOutlinePencil />
+              </DropDownMenu.Item>
+            </Modal.Open>
+            <Modal.Open opens='deleteModal'>
+              <DropDownMenu.Item>
+                <HiOutlineTrash />
+              </DropDownMenu.Item>
+            </Modal.Open>
+          </DropDownMenu.Menu>
+        </DropDownMenu>
+      </Table.Row>
+
+      <Modal.Window windowName='deleteModal'>
+        <RemoveText
+          onConfirm={() =>
+            deleteProduct({ id, imgToRemove: img.split('/').at(-1) })
+          }
+          resource={`${SKU} (No order can exist with this product to perform this operation)`}
+          isDeleting={isLoading}
+        />
+      </Modal.Window>
+      <Modal.Window windowName='editModal'>
+        <NewProductForm productToEdit={product} />
+      </Modal.Window>
+    </Modal>
   );
 };
 

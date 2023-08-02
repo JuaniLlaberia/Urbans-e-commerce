@@ -12,90 +12,249 @@ import { useForm } from 'react-hook-form';
 import { useGetCategories } from '../Categories/useGetCategories';
 import { useCreateProduct } from './useCreateProduct';
 import Textarea from '../../components/Textarea';
+import { colors, sizes } from '../../utils/constants';
+import { ImgInputStyle } from '../../components/ImgInputStyle';
+import DobleInput from '../../components/DobleInput';
+import { useEditProduct } from './useEditProduct';
 
-const NewProductForm = ({ onCloseModal }) => {
+const NewProductForm = ({ onCloseModal, productToEdit = {} }) => {
+  const { id: editId, ...editData } = productToEdit;
+  const isEditing = Boolean(editId);
+
   const { categories, isLoading } = useGetCategories();
   //Main categories
   const mainCats = categories?.filter(category => category.type === 'Main');
-  //Sub categories
-  const subCats = categories?.filter(category => category.type === 'Sub');
 
   const { createProduct, isCreating } = useCreateProduct();
+  const { editProduct, isUpdating } = useEditProduct();
+  const isWorking = isUpdating || isCreating;
 
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+    watch,
+  } = useForm({
+    defaultValues: isEditing
+      ? {
+          ...editData,
+          mainCategory: editData?.mainCategory.id,
+          subCategory: editData?.subCategory.id,
+        }
+      : {},
+  });
+
+  //Getting the current main category
+  const mainCatWatcher = watch('mainCategory') || mainCats?.at(0)?.name;
+  const currentMainCat = mainCats?.filter(
+    cat => cat.id === Number(mainCatWatcher)
+  );
+
+  //Sub categories => Only the ones that belong to the selected main category
+  const subCats = categories?.filter(
+    category =>
+      category.type === 'Sub' && category.family === currentMainCat[0]?.name
+  );
 
   if (isLoading) return <Spinner />;
 
   const onSubmit = data => {
-    if (data.sub === '') return;
+    const img = typeof data.img === 'string' ? data.img : data.img[0];
 
-    createProduct({
-      name: data.name,
-      price: Number(data.price),
-      discount: Number(data.discount),
-      description: data.description,
-      mainColor: '',
-      mainCategory: data.main,
-      subCategory: data.sub,
-      img: data.image,
-    });
+    //Old imgage to remove
+    const oldImg =
+      typeof img !== 'string' ? editData?.img?.split('/').at(-1) : null;
 
-    onCloseModal();
+    if (isEditing) {
+      editProduct(
+        {
+          id: editId,
+          editedProduct: {
+            ...data,
+            img,
+          },
+          oldImg,
+        },
+        {
+          onSuccess: () => {
+            onCloseModal();
+          },
+        }
+      );
+    } else {
+      createProduct(
+        {
+          ...data,
+          img,
+        },
+        {
+          onSuccess: () => {
+            onCloseModal();
+          },
+        }
+      );
+    }
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Title as='h4'>Create product</Title>
-      <InputContainer
-        label='Name'
-        error={errors?.name?.message}
-        id='name'
-        type='vertical'
-      >
-        <Input
-          disabled={isCreating}
-          type='text'
-          {...register('name', {
-            required: 'This field is required',
-          })}
-        />
-      </InputContainer>
-      <InputContainer
-        label='Price'
-        error={errors?.price?.message}
-        id='price'
-        type='vertical'
-      >
-        <Input
-          disabled={isCreating}
-          type='number'
-          {...register('price', {
-            required: 'This field is required',
-            min: {
-              message: 'The price cannot be 0',
-              value: 1,
-            },
-          })}
-        />
-      </InputContainer>
-      <InputContainer
-        label='Discount'
-        error={errors?.discount?.message}
-        id='discount'
-        type='vertical'
-      >
-        <Input
-          disabled={isCreating}
-          type='number'
-          {...register('discount', {
-            required: 'This field is required',
-          })}
-        />
-      </InputContainer>
+      <Title as='h3'>
+        {isEditing ? `Edit ${editData.SKU}` : 'Create'} product
+      </Title>
+      <DobleInput>
+        <InputContainer
+          label='Name'
+          error={errors?.name?.message}
+          id='name'
+          type='vertical'
+        >
+          <Input
+            disabled={isWorking}
+            id='name'
+            type='text'
+            {...register('name', {
+              required: 'This field is required',
+            })}
+          />
+        </InputContainer>
+        <InputContainer
+          label='SKU'
+          error={errors?.SKU?.message}
+          id='sku'
+          type='vertical'
+        >
+          <Input
+            id='sku'
+            disabled={isWorking}
+            type='text'
+            {...register('SKU', {
+              required: 'This field is required',
+            })}
+          />
+        </InputContainer>
+      </DobleInput>
+      <DobleInput>
+        <InputContainer
+          label='Price'
+          error={errors?.price?.message}
+          id='price'
+          type='vertical'
+        >
+          <Input
+            id='price'
+            disabled={isWorking}
+            type='number'
+            {...register('price', {
+              required: 'This field is required',
+              min: {
+                message: 'The price cannot be 0',
+                value: 1,
+              },
+            })}
+          />
+        </InputContainer>
+        <InputContainer
+          label='Quantity'
+          error={errors?.quantity?.message}
+          id='quantity'
+          type='vertical'
+        >
+          <Input
+            id='quantity'
+            disabled={isWorking}
+            type='number'
+            {...register('quantity', {
+              required: 'This field is required',
+            })}
+          />
+        </InputContainer>
+      </DobleInput>
+      <DobleInput>
+        <InputContainer
+          label='Main Category'
+          error={errors?.mainCategory?.message}
+          id='main'
+          type='vertical'
+        >
+          <Select
+            disabled={isWorking}
+            {...register('mainCategory', {
+              required: 'This field is required',
+            })}
+          >
+            <Option value=''>Select Main Category</Option>
+            {mainCats?.map(category => (
+              <Option key={category.id} value={category.id}>
+                {category.name}
+              </Option>
+            ))}
+          </Select>
+        </InputContainer>
+        <InputContainer
+          label='Sub Category'
+          error={errors?.subCategory?.message}
+          id='sub'
+          type='vertical'
+        >
+          <Select
+            disabled={isWorking}
+            {...register('subCategory', {
+              required: 'This field is required',
+            })}
+          >
+            <Option value=''>Select Sub Category</Option>
+            {subCats?.map(category => (
+              <Option key={category.id} value={category.id}>
+                {category.name}
+              </Option>
+            ))}
+          </Select>
+        </InputContainer>
+      </DobleInput>
+      <DobleInput>
+        <InputContainer
+          label='Size'
+          error={errors?.size?.message}
+          id='size'
+          type='vertical'
+        >
+          <Select
+            id='size'
+            disabled={isWorking}
+            {...register('size', {
+              required: 'This field is required',
+            })}
+          >
+            <Option value=''>Select a size</Option>
+            {sizes?.map(size => (
+              <Option key={size} value={size}>
+                {size}
+              </Option>
+            ))}
+          </Select>
+        </InputContainer>
+        <InputContainer
+          label='Main color'
+          error={errors?.mainColor?.message}
+          id='color'
+          type='vertical'
+        >
+          <Select
+            id='color'
+            disabled={isWorking}
+            {...register('mainColor', {
+              required: 'This field is required',
+            })}
+          >
+            <Option value=''>Select a color</Option>
+            {colors?.map(color => (
+              <Option key={color} value={color}>
+                {color}
+              </Option>
+            ))}
+          </Select>
+        </InputContainer>
+      </DobleInput>
       <InputContainer
         label='Description'
         error={errors?.description?.message}
@@ -103,78 +262,40 @@ const NewProductForm = ({ onCloseModal }) => {
         type='vertical'
       >
         <Textarea
-          disabled={isCreating}
+          disabled={isWorking}
           {...register('description', {
             required: 'This field is required',
           })}
         />
       </InputContainer>
       <InputContainer
-        label='Main Category'
-        error={errors?.main?.message}
-        id='main'
-        type='vertical'
-      >
-        <Select
-          disabled={isCreating}
-          {...register('main', {
-            required: 'This field is required',
-          })}
-        >
-          {mainCats?.map(category => (
-            <Option key={category.id} value={category.id}>
-              {category.name}
-            </Option>
-          ))}
-        </Select>
-      </InputContainer>
-      <InputContainer
-        label='Sub Category'
-        error={errors?.sub?.message}
-        id='sub'
-        type='vertical'
-      >
-        <Select
-          disabled={isCreating}
-          //   name='sub'
-          //   ref={register}
-          {...register('sub', {
-            required: 'This field is required',
-          })}
-        >
-          <Option value=''>Select Sub Category</Option>
-          {subCats?.map(category => (
-            <Option key={category.id} value={category.id}>
-              {category.name}
-            </Option>
-          ))}
-        </Select>
-      </InputContainer>
-      <InputContainer
-        label='Image'
-        error={errors?.image?.message}
+        label={<ImgInputStyle />}
+        error={errors?.img?.message}
         id='image'
         type='vertical'
       >
         <Input
-          disabled={isCreating}
+          id='image'
+          disabled={isWorking}
           type='file'
           style={{
-            background: 'transparent',
-            boxShadow: 'none',
-            color: 'var(--color-white-6)',
+            display: 'none',
           }}
-          {...register('image', {
-            required: 'This field is required',
+          {...register('img', {
+            required: isEditing ? false : 'This field is required',
           })}
         />
       </InputContainer>
       <Row>
-        <Button type='outline' disabled={isCreating} onClick={onCloseModal}>
+        <Button type='outline' disabled={isWorking} onClick={onCloseModal}>
           Cancel
         </Button>
-        <Button type='regular' disabled={isCreating}>
-          {isCreating ? <SpinnerBtn /> : 'Add product'}
+        <Button type='regular' disabled={isWorking}>
+          {isWorking ? (
+            <SpinnerBtn />
+          ) : (
+            `${isEditing ? 'Edit product' : 'Add product'}`
+          )}
         </Button>
       </Row>
     </Form>

@@ -1,18 +1,16 @@
 import Modal from '../../components/Modal';
 import Button from '../../components/Button';
-import NewCategoryForm from './NewCategoryForm';
+import DiscountForm from './DiscountForm';
 
-const AddCategory = () => {
+export const AddDiscount = () => {
   return (
     <Modal>
       <Modal.Open>
-        <Button type='regular'>New category</Button>
+        <Button type='regular'>New discount</Button>
       </Modal.Open>
       <Modal.Window>
-        <NewCategoryForm />
+        <DiscountForm />
       </Modal.Window>
     </Modal>
   );
 };
-
-export default AddCategory;

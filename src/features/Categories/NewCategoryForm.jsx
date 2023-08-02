@@ -10,6 +10,7 @@ import SpinnerBtn from '../../components/SpinnerBtn';
 import Select from '../../components/Select';
 import Option from '../../components/Option';
 import Row from '../../components/Row';
+import Title from '../../components/Title';
 
 const NewCategoryForm = ({ onCloseModal }) => {
   const { createCategory, isCreating } = useCreateCategory();
@@ -48,6 +49,7 @@ const NewCategoryForm = ({ onCloseModal }) => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
+      <Title as='h3'>Create category</Title>
       <InputContainer
         type='vertical'
         label='Category name'

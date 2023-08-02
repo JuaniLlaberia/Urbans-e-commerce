@@ -1,7 +1,7 @@
 import { cloneElement, createContext, useContext, useState } from 'react';
-import { HiOutlineXMark, HiXMark } from 'react-icons/hi2';
+import { HiXMark } from 'react-icons/hi2';
 import { createPortal } from 'react-dom';
-import { css, styled } from 'styled-components';
+import { styled } from 'styled-components';
 
 const StyledWindow = styled.div`
   position: fixed;
@@ -13,6 +13,12 @@ const StyledWindow = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   transition: all 0.5s;
+  max-height: 80vh;
+
+  @media (max-width: 500px) {
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
 
   & .close-btn {
     background-color: transparent;
@@ -24,6 +30,8 @@ const StyledWindow = styled.div`
     color: var(--color-white-5);
     cursor: pointer;
   }
+
+  z-index: 3;
 `;
 
 const Overlay = styled.div`
@@ -35,15 +43,17 @@ const Overlay = styled.div`
   background-color: #ffffff34;
   backdrop-filter: blur(4px);
   transition: all 0.5s;
+  cursor: pointer;
+  z-index: 2;
 `;
 
 const ModalContext = createContext();
 
 const Modal = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState('');
 
-  const close = () => setIsOpen(false);
-  const open = () => setIsOpen(true);
+  const close = () => setIsOpen('');
+  const open = windowName => setIsOpen(windowName);
 
   return (
     <ModalContext.Provider value={{ isOpen, close, open }}>
@@ -52,25 +62,25 @@ const Modal = ({ children }) => {
   );
 };
 
-const Open = ({ children }) => {
+const Open = ({ children, opens }) => {
   const { open } = useContext(ModalContext);
-  return cloneElement(children, { onClick: open });
+  return cloneElement(children, { onClick: () => open(opens) });
 };
 
-const Window = ({ children }) => {
+const Window = ({ children, windowName }) => {
   const { isOpen, close } = useContext(ModalContext);
 
-  if (!isOpen) return null;
-
+  if (isOpen !== windowName) return null;
   return createPortal(
-    <Overlay>
+    <>
       <StyledWindow>
         <button className='close-btn' onClick={close}>
           <HiXMark />
         </button>
         <div>{cloneElement(children, { onCloseModal: close })}</div>
       </StyledWindow>
-    </Overlay>,
+      <Overlay onClick={close} />
+    </>,
     document.body
   );
 };
