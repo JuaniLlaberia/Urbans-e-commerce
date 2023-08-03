@@ -8,6 +8,7 @@ const Discounts = () => {
     <>
       <Title as='h2'>Discounts</Title>
       <Row>
+        <div></div>
         <AddDiscount />
       </Row>
       <DiscountTable />
