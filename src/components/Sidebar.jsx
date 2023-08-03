@@ -107,7 +107,7 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: #ffffff26;
+  background-color: var(--color-overlay);
   backdrop-filter: blur(2px);
   transition: all 0.5s;
   z-index: 1;
@@ -115,7 +115,6 @@ const Overlay = styled.div`
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const closeOnClick = () => setIsOpen(false);
 
   return (

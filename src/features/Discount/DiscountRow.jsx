@@ -9,13 +9,8 @@ import { RemoveText } from '../../components/RemoveText';
 import DiscountForm from './DiscountForm';
 import DropDownMenu from '../../components/DropDownMenu';
 
-const Buttons = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
 const Expired = styled.span`
-  background-color: #fd8b8bc1;
+  background-color: #fd8b8b49;
   font-weight: 500;
   color: #ff1313;
   padding: 0.2rem;

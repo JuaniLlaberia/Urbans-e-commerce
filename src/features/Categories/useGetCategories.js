@@ -6,14 +6,15 @@ import { pageSize } from '../../utils/constants';
 export const useGetCategories = (full = false) => {
   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
-  const page =
-    !searchParams.get('page') && full
-      ? ''
-      : searchParams.get('page')
-      ? Number(searchParams.get('page'))
-      : 1;
+  const page = full
+    ? ''
+    : searchParams.get('page')
+    ? Number(searchParams.get('page'))
+    : 1;
 
-  const filter = searchParams.get('filter') || 'all';
+  console.log(page);
+
+  const filter = searchParams.get('filter') || 'All';
 
   const {
     data: { data: categories, count } = {},

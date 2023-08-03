@@ -6,7 +6,7 @@ const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  color: var(--color-white-6);
+  color: var(--icons-color);
 
   &:hover {
     text-decoration: underline;

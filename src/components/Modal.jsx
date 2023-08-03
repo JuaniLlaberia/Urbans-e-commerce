@@ -5,7 +5,7 @@ import { styled } from 'styled-components';
 
 const StyledWindow = styled.div`
   position: fixed;
-  background-color: var(--color-white-3);
+  background-color: var(--color-white-1);
   border-radius: var(--raidius-md);
   padding: 0.5rem 1.5rem;
   box-shadow: var(--shadow-strong);
@@ -40,7 +40,7 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: #ffffff34;
+  background-color: var(--color-overlay);
   backdrop-filter: blur(4px);
   transition: all 0.5s;
   cursor: pointer;

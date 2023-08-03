@@ -11,9 +11,9 @@ const Categories = () => {
     <>
       <Top>
         <Title as='h2'>Categories</Title>
-        <Filter options={filtersCategories} />
       </Top>
       <Row>
+        <Filter options={filtersCategories} />
         <AddCategory />
       </Row>
       <CategoriesTable />

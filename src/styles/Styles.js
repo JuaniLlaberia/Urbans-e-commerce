@@ -21,6 +21,30 @@ const Styles = createGlobalStyle`
             --color-border-1: #e4e2e2;
             --icons-color: #6366f1;
             --icons-color-hover: #5a5ce4;
+
+            --color-overlay: #ffffff34;
+        };
+        &,&.dark-mode {
+            //Main colors
+            //Background
+            --color-white-1: #2d2f44;
+            --color-white-2: #202130;
+            --color-white-3: #404258;
+            --color-white-4: #6B728E;
+            --color-white-5: #dadde9;
+            --color-white-6: #f6f7fa;
+            --color-white-3-light: #3c43581e;
+
+            //Shadows
+            --shadow-light: 0 3px 7px #222020c0;
+            --shadow-strong: 0 3px 7px #111111c0;
+
+            //Decoration colors
+            --color-border-1: #7775753d;
+            --icons-color: #6366f1;
+            --icons-color-hover: #5a5ce4;
+
+            --color-overlay: #53515134;
         };
 
         --raidius-sm: 3px;

@@ -26,7 +26,10 @@ export const getProducts = async ({ page, sku, order }) => {
 
   const { data, error, count } = await query;
 
-  if (error) throw new Error('Could not get products from the API');
+  if (error) {
+    console.log(error);
+    throw new Error('Could not get products from the API');
+  }
 
   return { data, count };
 };

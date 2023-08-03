@@ -23,7 +23,7 @@ const Tag = styled.p`
     props.type === 'Main' &&
     css`
       & span {
-        background-color: #ffeaa3a2;
+        background-color: #ffeaa344;
         color: #ffbb00;
       }
     `}
@@ -31,7 +31,7 @@ const Tag = styled.p`
     props.type === 'Sub' &&
     css`
       & span {
-        background-color: #92b4fa89;
+        background-color: #92b5fa32;
         color: #4a86ffca;
       }
     `};

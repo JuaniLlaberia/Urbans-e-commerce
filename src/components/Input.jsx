@@ -20,6 +20,12 @@ const Input = styled.input`
     cursor: not-allowed;
     background-color: var(--color-white-3);
   }
+
+  @media (max-width: 450px) {
+    &:only-child {
+      width: 100%;
+    }
+  }
 `;
 
 export default Input;
