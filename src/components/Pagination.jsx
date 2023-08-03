@@ -8,12 +8,12 @@ const StyledPagination = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* background-color: red; */
 `;
 
 const P = styled.p`
   font-size: 0.8rem;
   margin-left: 0.8rem;
+  color: var(--color-white-5);
 
   & span {
     font-weight: 600;
@@ -26,6 +26,7 @@ const P = styled.p`
 const Buttons = styled.div`
   display: flex;
   gap: 0.6rem;
+  color: var(--color-white-5);
   @media (max-width: 500px) {
     gap: 0.2rem;
   }
@@ -33,7 +34,7 @@ const Buttons = styled.div`
 
 const PaginationButton = styled.button`
   background-color: transparent;
-  color: var(--color-white-7);
+  color: var(--color-white-5);
   border: none;
   border-radius: var(--raidius-sm);
   font-weight: 500;

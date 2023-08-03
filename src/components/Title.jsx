@@ -1,6 +1,8 @@
 import { styled, css } from 'styled-components';
 
 const Title = styled.h1`
+  color: var(--color-white-6);
+
   ${props =>
     props.as === 'h1' &&
     css`

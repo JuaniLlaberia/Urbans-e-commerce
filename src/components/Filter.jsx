@@ -9,8 +9,15 @@ const StyledFilter = styled.div`
   align-items: center;
   gap: 0.4rem;
   border-radius: var(--raidius-sm);
+  justify-content: center;
 
   padding: 0.2rem 0.6rem;
+
+  @media (max-width: 450px) {
+    &:only-child {
+      width: 100%;
+    }
+  }
 `;
 
 const FilterButton = styled.button`
