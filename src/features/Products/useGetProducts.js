@@ -28,14 +28,16 @@ export const useGetProducts = () => {
   if (page < pageCount) {
     queryClient.prefetchQuery({
       queryKey: ['products', page + 1, sku, order, direction],
-      queryFn: () => getProducts({ page: page + 1, sku, order, direction }),
+      queryFn: () =>
+        getProducts({ page: page + 1, sku, order: { order, direction } }),
     });
   }
 
   if (page > 1) {
     queryClient.prefetchQuery({
       queryKey: ['products', page - 1, sku, order, direction],
-      queryFn: () => getProducts({ page: page - 1, sku, order, direction }),
+      queryFn: () =>
+        getProducts({ page: page - 1, sku, order: { order, direction } }),
     });
   }
 
