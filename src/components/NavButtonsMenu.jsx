@@ -2,10 +2,12 @@ import {
   HiOutlineArrowRightOnRectangle,
   HiOutlineBuildingStorefront,
   HiOutlineMoon,
+  HiOutlineSun,
 } from 'react-icons/hi2';
 import ButtonIcon from './ButtonIcon';
 import { styled } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useThemeContext } from '../context/ThemeContext';
 
 const StyledMenu = styled.div`
   display: flex;
@@ -15,6 +17,7 @@ const StyledMenu = styled.div`
 `;
 
 const NavButtonsMenu = () => {
+  const { toggleTheme, theme } = useThemeContext();
   const navigate = useNavigate();
 
   return (
@@ -22,8 +25,8 @@ const NavButtonsMenu = () => {
       <ButtonIcon size='regular' onClick={() => navigate('/dashboard')}>
         <HiOutlineBuildingStorefront />
       </ButtonIcon>
-      <ButtonIcon size='regular' onClick={() => console.log('Changing theme')}>
-        <HiOutlineMoon />
+      <ButtonIcon size='regular' onClick={toggleTheme}>
+        {theme === 'dark' ? <HiOutlineSun /> : <HiOutlineMoon />}
       </ButtonIcon>
       <ButtonIcon size='regular' onClick={() => console.log('Loggin out')}>
         <HiOutlineArrowRightOnRectangle />
