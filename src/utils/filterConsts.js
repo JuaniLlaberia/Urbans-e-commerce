@@ -12,3 +12,22 @@ export const filtersCategories = [
     label: 'Subs',
   },
 ];
+
+export const filtersOrders = [
+  {
+    value: '',
+    label: 'All',
+  },
+  {
+    value: 'Pending',
+    label: 'Pending',
+  },
+  {
+    value: 'Shipped',
+    label: 'Shipped',
+  },
+  {
+    value: 'Delivered',
+    label: 'Delivered',
+  },
+];

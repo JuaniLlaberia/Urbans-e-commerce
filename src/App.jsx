@@ -13,6 +13,7 @@ import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Styles from './styles/Styles';
 import ProductDetails from './features/Products/ProductDetails';
+import OrderDetails from './features/Orders/OrderDetails';
 // import { lazy, Suspense } from 'react';
 
 // const Products = lazy(() => import('./pages/dashboard/Products'));
@@ -41,6 +42,7 @@ function App() {
             <Route path='categories' element={<Categories />} />
             <Route path='discounts' element={<Discounts />} />
             <Route path='orders' element={<Orders />} />
+            <Route path='order/details/:orderId' element={<OrderDetails />} />
             <Route path='products' element={<Products />} />
             <Route
               path='products/variants/:productName'
