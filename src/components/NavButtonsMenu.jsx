@@ -22,7 +22,7 @@ const NavButtonsMenu = () => {
 
   return (
     <StyledMenu>
-      <ButtonIcon size='regular' onClick={() => navigate('/dashboard')}>
+      <ButtonIcon size='regular' onClick={() => navigate('/my-store')}>
         <HiOutlineBuildingStorefront />
       </ButtonIcon>
       <ButtonIcon size='regular' onClick={toggleTheme}>
