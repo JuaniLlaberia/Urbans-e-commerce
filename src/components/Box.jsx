@@ -3,6 +3,7 @@ import { css, styled } from 'styled-components';
 const StyledBox = styled.div`
   background-color: var(--color-white-2);
   border-radius: var(--raidius-md);
+  box-shadow: var(--shadow-light);
 `;
 
 const BoxBody = styled.div`

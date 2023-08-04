@@ -7,6 +7,8 @@ import {
   HiOutlineHome,
   HiOutlineShoppingBag,
   HiOutlineTag,
+  HiOutlineUser,
+  HiOutlineUsers,
 } from 'react-icons/hi2';
 import NavButtonsMenu from './NavButtonsMenu';
 import AnimatedOpenBtn from './AnimatedOpenBtn';
@@ -156,9 +158,22 @@ const Sidebar = () => {
             </SidebarItem>
           </li>
           <li onClick={closeOnClick}>
-            <SidebarItem to='/orders'>
+            <SidebarItem to='/customers'>
+              <HiOutlineUsers />
+              <span>Customers</span>
+            </SidebarItem>
+          </li>
+          <li onClick={closeOnClick}>
+            <SidebarItem to='/tickets'>
               <HiOutlineExclamationCircle />
               <span>Tickets</span>
+            </SidebarItem>
+          </li>
+          <Separator>EMPLOYEES</Separator>
+          <li onClick={closeOnClick}>
+            <SidebarItem to='/tickets'>
+              <HiOutlineUser />
+              <span>New Admin</span>
             </SidebarItem>
           </li>
         </NavList>
