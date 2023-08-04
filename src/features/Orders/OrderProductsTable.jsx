@@ -1,8 +1,18 @@
-import Table from '../../components/Table';
 import Spinner from '../../components/Spinner';
 import { useGetOrderProducts } from './useGetOrderProducts';
-import OrderProductsRow from './OrderProductsRow';
 import Title from '../../components/Title';
+import ProductItem from './ProductItem';
+import { styled } from 'styled-components';
+
+const StyledList = styled.ul`
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  list-style: none;
+`;
 
 const OrderProductsTable = ({ id }) => {
   const { orderProducts, isLoading } = useGetOrderProducts(id);
@@ -12,14 +22,11 @@ const OrderProductsTable = ({ id }) => {
   return (
     <>
       <Title as='h3'>Order products</Title>
-      <Table columns='1.2fr 1fr .3fr .3fr .6fr'>
-        <Table.Body
-          data={orderProducts}
-          render={product => (
-            <OrderProductsRow key={product.id} product={product} />
-          )}
-        />
-      </Table>
+      <StyledList>
+        {orderProducts.map(product => (
+          <ProductItem key={product.id} product={product} />
+        ))}
+      </StyledList>
     </>
   );
 };

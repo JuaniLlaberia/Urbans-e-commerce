@@ -70,3 +70,18 @@ export const deleteOrder = async id => {
 
   return { items, data };
 };
+
+export const shipOrder = async (id, data) => {
+  const { data: shippedOrder, error } = await supabase
+    .from('orders')
+    .update({ ...data, status: 'Shipped' })
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    console.log(error);
+    throw new Error('Failed to update order');
+  }
+
+  return shippedOrder;
+};
