@@ -6,8 +6,10 @@ import Option from '../../components/Option';
 import Row from '../../components/Row';
 import Button from '../../components/Button';
 import SpinnerBtn from '../../components/SpinnerBtn';
+import Spinner from '../../components/Spinner';
 import { useForm } from 'react-hook-form';
 import { useShipOrder } from './useShipOrder';
+import { useGetCourriers } from '../Settings/useGetCourriers';
 
 const ShipOrderForm = ({ onCloseModal, id }) => {
   const {
@@ -16,16 +18,27 @@ const ShipOrderForm = ({ onCloseModal, id }) => {
     formState: { errors },
   } = useForm();
 
+  const { courriers, isLoading } = useGetCourriers();
+
   const { shipOrder, isShipping } = useShipOrder();
 
   const onSubmit = data => {
+    const [companyName, url] = data.courrier.split('-|-');
+
+    const courrier = {
+      courrier: companyName,
+      trackingNum: url + data.trackingNum,
+    };
+
     shipOrder(
-      { id, data },
+      { id, courrier },
       {
         onSuccess: () => onCloseModal(),
       }
     );
   };
+
+  if (isLoading) return <Spinner />;
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -43,9 +56,14 @@ const ShipOrderForm = ({ onCloseModal, id }) => {
           })}
         >
           <Option value=''>Choose a company</Option>
-          <Option>Adreani</Option>
-          <Option>UPS</Option>
-          <Option>OCA</Option>
+          {courriers.map(courrier => (
+            <Option
+              key={courrier.id}
+              value={`${courrier.companyName}-|-${courrier.trackingUrl}`}
+            >
+              {courrier.companyName}
+            </Option>
+          ))}
         </Select>
       </InputContainer>
       <InputContainer

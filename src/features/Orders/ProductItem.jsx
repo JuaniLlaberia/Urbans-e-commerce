@@ -37,8 +37,6 @@ const Img = styled.img`
 const ProductItem = ({ product }) => {
   const { product: productInfo, quantity } = product;
 
-  console.log(productInfo);
-
   return (
     <StyledItem>
       <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
