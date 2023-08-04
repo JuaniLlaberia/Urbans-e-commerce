@@ -74,7 +74,7 @@ export const deleteOrder = async id => {
 export const shipOrder = async (id, data) => {
   const { data: shippedOrder, error } = await supabase
     .from('orders')
-    .update({ ...data, status: 'Shipped' })
+    .update({ ...data, status: 'Shipped', isPaid: true })
     .eq('id', id)
     .single();
 
