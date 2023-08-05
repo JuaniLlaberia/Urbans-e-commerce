@@ -16,6 +16,8 @@ import ProductDetails from './features/Products/ProductDetails';
 import OrderDetails from './features/Orders/OrderDetails';
 import Tickets from './pages/dashboard/Tickets';
 import Settings from './pages/dashboard/Settings';
+import Home from './pages/store/Home';
+import ProtectedRoute from './features/Authentication/ProtectedRoute';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,10 +34,17 @@ function App() {
       <Styles />
       <BrowserRouter>
         <Routes>
+          <Route path='/' element={<Home />} />
           <Route path='login' element={<Login />} />
           <Route path='*' element={<NotFound />} />
-          <Route element={<AppLayout />}>
-            <Route index element={<Navigate replace to='/admin/dashboard' />} />
+          <Route
+            element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            }
+          >
+            {/* <Route index element={<Navigate replace to='/admin/dashboard' />} /> */}
             <Route path='/admin/dashboard' element={<Dashboard />} />
             <Route path='/admin/categories' element={<Categories />} />
             <Route path='/admin/discounts' element={<Discounts />} />
