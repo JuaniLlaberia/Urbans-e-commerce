@@ -13,6 +13,25 @@ export const filtersCategories = [
   },
 ];
 
+export const filtersTickets = [
+  {
+    value: 'All',
+    label: 'All',
+  },
+  {
+    value: 'New',
+    label: 'New',
+  },
+  {
+    value: 'Open',
+    label: 'Open',
+  },
+  {
+    value: 'Closed',
+    label: 'Closed',
+  },
+];
+
 export const filtersOrders = [
   {
     value: '',
