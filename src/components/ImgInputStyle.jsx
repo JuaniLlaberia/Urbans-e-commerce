@@ -2,7 +2,6 @@ import { HiOutlinePhoto } from 'react-icons/hi2';
 import { styled } from 'styled-components';
 
 const StyledBox = styled.div`
-  /* border: var(--border-md); */
   border: 2px solid var(--color-white-4);
   border-style: dashed;
   display: flex;

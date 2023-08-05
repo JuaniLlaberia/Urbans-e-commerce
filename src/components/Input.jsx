@@ -5,7 +5,6 @@ const Input = styled.input`
   border-radius: var(--raidius-md);
   padding: 0.5rem 0.4rem;
   box-shadow: var(--shadow-light);
-  /* margin-bottom: 5px; */
   ${props =>
     props.size === 'limit' &&
     css`

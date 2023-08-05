@@ -6,7 +6,7 @@ const AddProduct = () => {
   return (
     <Modal>
       <Modal.Open opens='newProduct'>
-        <Button type='regular'>New product</Button>
+        <Button variation='regular'>New product</Button>
       </Modal.Open>
       <Modal.Window windowName='newProduct'>
         <NewProductForm />

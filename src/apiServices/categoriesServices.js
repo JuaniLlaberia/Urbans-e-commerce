@@ -5,7 +5,6 @@ export const getCategories = async ({ page, filter }) => {
   let query = supabase.from('categories').select('*', { count: 'exact' });
 
   if (filter && filter !== 'All') {
-    console.log('filtering');
     query.eq('type', filter);
   }
 

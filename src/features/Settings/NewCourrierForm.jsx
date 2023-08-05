@@ -59,7 +59,7 @@ const NewCourrierForm = ({ courriers, onCloseModal }) => {
         />
       </InputContainer>
       <Row>
-        <Button type='regular' disabled={isCreating}>
+        <Button variation='regular' disabled={isCreating}>
           {isCreating ? <SpinnerBtn /> : 'Add'}
         </Button>
       </Row>

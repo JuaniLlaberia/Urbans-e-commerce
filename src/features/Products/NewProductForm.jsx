@@ -287,10 +287,10 @@ const NewProductForm = ({ onCloseModal, productToEdit = {} }) => {
         />
       </InputContainer>
       <Row>
-        <Button type='outline' disabled={isWorking} onClick={onCloseModal}>
+        <Button variation='outline' disabled={isWorking} onClick={onCloseModal}>
           Cancel
         </Button>
-        <Button type='regular' disabled={isWorking}>
+        <Button variation='regular' disabled={isWorking}>
           {isWorking ? (
             <SpinnerBtn />
           ) : (

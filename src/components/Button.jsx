@@ -16,13 +16,13 @@ const Button = styled.button`
   }
 
   ${props =>
-    props.type === 'regular' &&
+    props.variation === 'regular' &&
     css`
       padding: 0.5rem 1.25rem;
       min-width: 8rem;
     `}
   ${props =>
-    props.type === 'small' &&
+    props.variation === 'small' &&
     css`
       padding: 0.4rem 0.9rem;
       font-size: 0.75rem;
@@ -30,14 +30,14 @@ const Button = styled.button`
       min-width: 4rem;
     `}
   ${props =>
-    props.type === 'big' &&
+    props.variation === 'big' &&
     css`
       padding: 0.8rem 2rem;
       font-size: 1rem;
       min-width: 10rem;
     `}
   ${props =>
-    props.type === 'alert' &&
+    props.variation === 'alert' &&
     css`
       padding: 0.5rem 1.25rem;
       background-color: #ee3d3d;
@@ -47,7 +47,7 @@ const Button = styled.button`
       }
     `}
   ${props =>
-    props.type === 'outline' &&
+    props.variation === 'outline' &&
     css`
       padding: 0.5rem 1.25rem;
       border: 1px solid var(--color-white-4);

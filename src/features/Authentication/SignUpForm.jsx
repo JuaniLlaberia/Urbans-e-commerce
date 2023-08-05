@@ -14,8 +14,6 @@ const StyledContainer = styled.div`
   border-radius: var(--raidius-md);
   padding: 0.4rem 0.8rem;
   box-shadow: var(--shadow-light);
-
-  max-width: 575px;
 `;
 
 const SignUpForm = () => {
@@ -49,7 +47,6 @@ const SignUpForm = () => {
             disabled={isLoading}
             id='email'
             type='email'
-            size='limit'
             {...register('email', {
               required: 'This field is required',
             })}
@@ -65,7 +62,6 @@ const SignUpForm = () => {
             disabled={isLoading}
             id='password'
             type='password'
-            size='limit'
             {...register('password', {
               required: 'This field is required',
             })}
@@ -81,7 +77,6 @@ const SignUpForm = () => {
             disabled={isLoading}
             id='confPassword'
             type='password'
-            size='limit'
             {...register('confPassword', {
               required: 'This field is required',
               validate: value =>
@@ -90,7 +85,10 @@ const SignUpForm = () => {
           />
         </InputContainer>
         <Row>
-          <Button type='regular' width='full' disabled={isLoading}>
+          <Button variation='outline' type='reset'>
+            Cancel
+          </Button>
+          <Button variation='regular' width='full' disabled={isLoading}>
             {isLoading ? <SpinnerBtn /> : 'Create account'}
           </Button>
         </Row>

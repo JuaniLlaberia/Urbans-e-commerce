@@ -9,7 +9,7 @@ const SearchbarOrder = () => {
   useEffect(() => {
     searchParams.set('orderNum', query);
     setSearchParams(searchParams);
-  }, [query]);
+  }, [query, searchParams, setSearchParams]);
 
   return (
     <>

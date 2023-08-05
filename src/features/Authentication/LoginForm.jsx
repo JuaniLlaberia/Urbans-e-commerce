@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Form from '../../components/Form';
 import InputContainer from '../../components/InputContainer';
 import Input from '../../components/Input';
-import Title from '../../components/Title';
 import Row from '../../components/Row';
 import SpinnerBtn from '../../components/SpinnerBtn';
 import Button from '../../components/Button';
@@ -30,7 +29,6 @@ const LoginForm = () => {
   };
   return (
     <Form onSubmit={handleSubmit}>
-      <Title as='h3'>Sign In</Title>
       <InputContainer type='vertical' label='Email address' id='loginEmail'>
         <Input
           disabled={isLogging}
@@ -50,7 +48,7 @@ const LoginForm = () => {
         />
       </InputContainer>
       <Row>
-        <Button width='full' type='regular' disabled={isLogging}>
+        <Button width='full' variation='regular' disabled={isLogging}>
           {isLogging ? <SpinnerBtn /> : 'Login'}
         </Button>
       </Row>

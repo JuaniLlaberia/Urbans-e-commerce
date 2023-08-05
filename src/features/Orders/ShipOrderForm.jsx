@@ -82,10 +82,10 @@ const ShipOrderForm = ({ onCloseModal, id }) => {
         />
       </InputContainer>
       <Row>
-        <Button type='alert' onClick={onCloseModal} disabled={isShipping}>
+        <Button variation='alert' onClick={onCloseModal} disabled={isShipping}>
           Cancel
         </Button>
-        <Button type='regular' disabled={isShipping}>
+        <Button variation='regular' disabled={isShipping}>
           {isShipping ? <SpinnerBtn /> : 'Confirm'}
         </Button>
       </Row>

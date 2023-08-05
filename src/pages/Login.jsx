@@ -3,12 +3,14 @@ import { HiArrowLeft } from 'react-icons/hi2';
 
 import Link from '../components/Link';
 import LoginForm from '../features/Authentication/LoginForm';
+import Title from '../components/Title';
 
 const StyledLogin = styled.main`
   height: 100vh;
   background-color: var(--color-white-1);
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
 `;
 
@@ -23,6 +25,7 @@ const Login = () => {
   return (
     <StyledLogin>
       <StyledContainer>
+        <Title as='h4'>Sign In</Title>
         <LoginForm />
       </StyledContainer>
       <Link to='/' style={{ position: 'absolute', top: '2.5%', left: '2.5%' }}>
