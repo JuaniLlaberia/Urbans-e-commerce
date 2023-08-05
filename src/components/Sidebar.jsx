@@ -165,7 +165,7 @@ const Sidebar = () => {
           </li>
           <Separator>EMPLOYEES</Separator>
           <li onClick={closeOnClick}>
-            <SidebarItem to='admin/tickets'>
+            <SidebarItem to='admin/new-user'>
               <HiOutlineUser />
               <span>New Admin</span>
             </SidebarItem>
