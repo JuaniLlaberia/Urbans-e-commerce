@@ -8,7 +8,7 @@ export const useGetOrder = id => {
     error,
   } = useQuery({
     queryFn: () => getOrder(id),
-    queryKey: ['order-details'],
+    queryKey: ['order-details', id],
   });
 
   return { order, isLoading, error };

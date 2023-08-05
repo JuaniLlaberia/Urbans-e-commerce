@@ -7,6 +7,7 @@ const StyledItem = styled.li`
   background-color: var(--color-white-2);
   border-radius: var(--raidius-md);
   padding: 0.7rem 1.25rem;
+  box-shadow: var(--shadow-light);
 
   display: flex;
   align-items: center;

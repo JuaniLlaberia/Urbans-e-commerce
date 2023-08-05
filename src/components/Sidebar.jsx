@@ -126,52 +126,46 @@ const Sidebar = () => {
         <NavList>
           <Separator>HOME</Separator>
           <li onClick={closeOnClick}>
-            <SidebarItem to='/dashboard'>
+            <SidebarItem to='admin/dashboard'>
               <HiOutlineHome />
               <span>Dashboard</span>
             </SidebarItem>
           </li>
           <Separator>STORE</Separator>
           <li onClick={closeOnClick}>
-            <SidebarItem to='/products'>
+            <SidebarItem to='admin/products'>
               <HiOutlineShoppingBag />
               <span>Products</span>
             </SidebarItem>
           </li>
           <li onClick={closeOnClick}>
-            <SidebarItem to='/categories'>
+            <SidebarItem to='admin/categories'>
               <HiOutlineHashtag />
               <span>Categories</span>
             </SidebarItem>
           </li>
           <li onClick={closeOnClick}>
-            <SidebarItem to='/discounts'>
+            <SidebarItem to='admin/discounts'>
               <HiOutlineTag />
               <span>Discounts</span>
             </SidebarItem>
           </li>
           <Separator>SALES</Separator>
           <li onClick={closeOnClick}>
-            <SidebarItem to='/orders'>
+            <SidebarItem to='admin/orders'>
               <HiOutlineClipboardDocumentList />
               <span>Orders</span>
             </SidebarItem>
           </li>
           <li onClick={closeOnClick}>
-            <SidebarItem to='/customers'>
-              <HiOutlineUsers />
-              <span>Customers</span>
-            </SidebarItem>
-          </li>
-          <li onClick={closeOnClick}>
-            <SidebarItem to='/tickets'>
+            <SidebarItem to='admin/tickets'>
               <HiOutlineExclamationCircle />
               <span>Tickets</span>
             </SidebarItem>
           </li>
           <Separator>EMPLOYEES</Separator>
           <li onClick={closeOnClick}>
-            <SidebarItem to='/tickets'>
+            <SidebarItem to='admin/tickets'>
               <HiOutlineUser />
               <span>New Admin</span>
             </SidebarItem>

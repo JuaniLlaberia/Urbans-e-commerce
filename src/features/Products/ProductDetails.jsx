@@ -15,7 +15,7 @@ const ProductDetails = () => {
     <>
       <Top>
         <Title as='h3'>All '{productName}' items</Title>
-        <Link to='/products'>
+        <Link to='/admin/products'>
           <HiArrowLeft />
           Go back
         </Link>

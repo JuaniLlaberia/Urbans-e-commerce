@@ -37,7 +37,7 @@ const DetailsBtns = ({ id, status }) => {
 
   return (
     <Row>
-      <Button type='outline' onClick={() => navigate('/orders')}>
+      <Button type='outline' onClick={() => navigate('/admin/orders')}>
         Back
       </Button>
       {(status === 'Cancel' || status === 'Delivered') && (

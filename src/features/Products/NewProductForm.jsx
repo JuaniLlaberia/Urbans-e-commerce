@@ -22,7 +22,6 @@ const NewProductForm = ({ onCloseModal, productToEdit = {} }) => {
   const isEditing = Boolean(editId);
 
   const { categories, isLoading } = useGetCategories(true);
-  console.log(categories);
   //Main categories
   const mainCats = categories?.filter(category => category.type === 'Main');
 

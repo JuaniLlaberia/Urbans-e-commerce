@@ -44,14 +44,11 @@ const ProductRow = ({ product, variant }) => {
         <DropDownMenu>
           <DropDownMenu.Opener id={id} />
           <DropDownMenu.Menu id={id}>
-            {/* This will take us to the product page in the website, so we can see it */}
             <DropDownMenu.Item onClick={() => navigate(`/products`)}>
               <HiOutlineShoppingCart />
             </DropDownMenu.Item>
             {variant ? null : (
-              <DropDownMenu.Item
-                onClick={() => navigate(`/products/variants/${name}`)}
-              >
+              <DropDownMenu.Item onClick={() => navigate(`variants/${name}`)}>
                 <HiOutlineClipboard />
               </DropDownMenu.Item>
             )}
