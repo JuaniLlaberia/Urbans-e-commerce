@@ -93,7 +93,9 @@ export const OrderRow = ({ order }) => {
         <DropDownMenu>
           <DropDownMenu.Opener id={id} />
           <DropDownMenu.Menu id={id}>
-            <DropDownMenu.Item onClick={() => navigate(`/order/details/${id}`)}>
+            <DropDownMenu.Item
+              onClick={() => navigate(`/admin/order/details/${id}`)}
+            >
               <HiOutlineClipboard />
             </DropDownMenu.Item>
             <DropDownMenu.Item>

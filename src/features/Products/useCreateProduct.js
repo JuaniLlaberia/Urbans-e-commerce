@@ -20,5 +20,5 @@ export const useCreateProduct = () => {
     },
   });
 
-  return { createProduct, isCreating };
+  return { createProduct, isCreating, error };
 };

@@ -58,6 +58,14 @@ const Button = styled.button`
         background-color: var(--color-white-1);
       }
     `}
+
+    @media (max-width: 450px) {
+    ${props =>
+      props.width === 'full' &&
+      css`
+        width: 100%;
+      `}
+  }
 `;
 
 export default Button;

@@ -71,10 +71,10 @@ export const deleteOrder = async id => {
   return { items, data };
 };
 
-export const shipOrder = async (id, data) => {
+export const shipOrder = async (id, courrier) => {
   const { data: shippedOrder, error } = await supabase
     .from('orders')
-    .update({ ...data, status: 'Shipped', isPaid: true })
+    .update({ ...courrier, status: 'Shipped', isPaid: true })
     .eq('id', id)
     .single();
 

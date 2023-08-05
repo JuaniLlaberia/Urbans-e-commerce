@@ -10,7 +10,7 @@ export const useShipOrder = () => {
     isLoading: isShipping,
     error,
   } = useMutation({
-    mutationFn: ({ id, data }) => shipOrderApi(id, data),
+    mutationFn: ({ id, courrier }) => shipOrderApi(id, courrier),
     onSuccess: () => {
       toast.success('Order shipped');
       queryClient.invalidateQueries({ queryKey: ['order-details'] });

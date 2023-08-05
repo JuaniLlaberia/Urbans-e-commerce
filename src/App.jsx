@@ -8,7 +8,6 @@ import Categories from './pages/dashboard/Categories';
 import Discounts from './pages/dashboard/Discounts';
 import Orders from './pages/dashboard/Orders';
 import Products from './pages/dashboard/Products';
-import StoreInfo from './pages/dashboard/StoreInfo';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Styles from './styles/Styles';
@@ -16,9 +15,9 @@ import ProductDetails from './features/Products/ProductDetails';
 import OrderDetails from './features/Orders/OrderDetails';
 import Tickets from './pages/dashboard/Tickets';
 import Settings from './pages/dashboard/Settings';
-// import { lazy, Suspense } from 'react';
-
-// const Products = lazy(() => import('./pages/dashboard/Products'));
+import Home from './pages/store/Home';
+import ProtectedRoute from './features/Authentication/ProtectedRoute';
+import NewUser from './pages/dashboard/NewUser';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,28 +33,39 @@ function App() {
       <ReactQueryDevtools />
       <Styles />
       <BrowserRouter>
-        {/* <Suspense fallback={<div>Loading...</div>}> */}
         <Routes>
+          <Route path='/' element={<Home />} />
           <Route path='login' element={<Login />} />
           <Route path='*' element={<NotFound />} />
-          <Route element={<AppLayout />}>
-            <Route index element={<Navigate replace to='dashboard' />} />
-            <Route path='dashboard' element={<Dashboard />} />
-            <Route path='categories' element={<Categories />} />
-            <Route path='discounts' element={<Discounts />} />
-            <Route path='orders' element={<Orders />} />
-            <Route path='order/details/:orderId' element={<OrderDetails />} />
-            <Route path='tickets' element={<Tickets />} />
-            <Route path='my-store' element={<Settings />} />
-            <Route path='products' element={<Products />} />
+          <Route
+            element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route
-              path='products/variants/:productName'
+              path='/admin'
+              element={<Navigate replace to='/admin/dashboard' />}
+            />
+            <Route path='/admin/dashboard' element={<Dashboard />} />
+            <Route path='/admin/categories' element={<Categories />} />
+            <Route path='/admin/discounts' element={<Discounts />} />
+            <Route path='/admin/orders' element={<Orders />} />
+            <Route
+              path='admin/order/details/:orderId'
+              element={<OrderDetails />}
+            />
+            <Route path='/admin/new-user' element={<NewUser />} />
+            <Route path='/admin/tickets' element={<Tickets />} />
+            <Route path='/admin/my-store' element={<Settings />} />
+            <Route path='admin/products' element={<Products />} />
+            <Route
+              path='admin/products/variants/:productName'
               element={<ProductDetails />}
             />
-            <Route path='my-store' element={<StoreInfo />} />
           </Route>
         </Routes>
-        {/* </Suspense> */}
       </BrowserRouter>
       <Toaster
         position='bottom-right'

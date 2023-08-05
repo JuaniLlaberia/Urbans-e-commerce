@@ -41,3 +41,39 @@ export const updateFieldContact = async (newField, tableName) => {
 
   return data;
 };
+
+export const getCourriers = async () => {
+  const { data, error } = await supabase.from('courriers').select('*');
+  if (error) console.log(error);
+  return data;
+};
+
+export const createCourrier = async newCourrier => {
+  const { data, error } = await supabase
+    .from('courriers')
+    .insert(newCourrier)
+    .select()
+    .single();
+
+  if (error) {
+    console.log(error);
+    throw new Error('Failed to create new courrier');
+  }
+
+  return data;
+};
+
+export const removeCourrier = async id => {
+  const { data, error } = await supabase
+    .from('courriers')
+    .delete()
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    console.log(error);
+    throw new Error('Failed to remove courrier');
+  }
+
+  return data;
+};

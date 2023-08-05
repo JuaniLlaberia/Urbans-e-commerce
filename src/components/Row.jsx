@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import { css, styled } from 'styled-components';
 
 const Row = styled.div`
   display: flex;
@@ -10,6 +10,12 @@ const Row = styled.div`
   @media (max-width: 450px) {
     justify-content: space-between;
   }
+
+  ${props =>
+    props.space === 'separate' &&
+    css`
+      justify-content: space-between;
+    `}
 `;
 
 export default Row;

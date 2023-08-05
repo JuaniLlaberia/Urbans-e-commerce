@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import { css, styled } from 'styled-components';
 
 const Input = styled.input`
   border: none;
@@ -6,7 +6,11 @@ const Input = styled.input`
   padding: 0.5rem 0.4rem;
   box-shadow: var(--shadow-light);
   /* margin-bottom: 5px; */
-  /* max-width: 500px; */
+  ${props =>
+    props.size === 'limit' &&
+    css`
+      max-width: 500px;
+    `}
 
   background-color: var(--color-white-1);
   color: var(--color-white-6);

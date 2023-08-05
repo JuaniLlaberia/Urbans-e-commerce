@@ -15,9 +15,9 @@ import {
   HiOutlineUser,
 } from 'react-icons/hi2';
 import { formatCurrency } from '../../utils/formatCurrency';
-import { expressPrice } from '../../utils/constants';
 import StatusTag from './StatusTag';
 import DetailsBtns from './DetailsBtns';
+import { useGetShippingPrices } from '../Settings/useGetShippingPrices';
 
 const StyledDetails = styled.section`
   margin-bottom: 25px;
@@ -30,9 +30,10 @@ const Boxes = styled.section`
 `;
 
 const DetailsBox = ({ id, children }) => {
-  const { order, isLoading } = useGetOrder(id);
+  const { order, isLoading: isLoading1 } = useGetOrder(id);
+  const { shippingCosts, isLoading: isLoading2 } = useGetShippingPrices();
 
-  if (isLoading) return <Spinner />;
+  if (isLoading1 || isLoading2) return <Spinner />;
 
   const {
     shipmentAddress: address,
@@ -91,7 +92,14 @@ const DetailsBox = ({ id, children }) => {
             <Box.Body>
               <Box.Item space='between'>
                 <span>Products price</span>
-                <span>{formatCurrency(totalPrice - expressPrice)}</span>
+                <span>
+                  {formatCurrency(
+                    totalPrice -
+                      (shipmentType === 'Regular'
+                        ? shippingCosts.regularPrice
+                        : shippingCosts.expressPrice)
+                  )}
+                </span>
               </Box.Item>
               <Box.Item space='between'>
                 <span>
@@ -100,8 +108,8 @@ const DetailsBox = ({ id, children }) => {
                 </span>
                 <span>
                   {shipmentType === 'Regular'
-                    ? formatCurrency(0)
-                    : formatCurrency(expressPrice)}
+                    ? formatCurrency(shippingCosts.regularPrice)
+                    : formatCurrency(shippingCosts.expressPrice)}
                 </span>
               </Box.Item>
               <br />
