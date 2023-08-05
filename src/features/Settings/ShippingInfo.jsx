@@ -90,7 +90,7 @@ const SalesInfo = () => {
             <Title as='h3'>Courriers</Title>
             <Modal>
               <Modal.Open opens='newCourrier'>
-                <Button type='regular' display={isRemoving}>
+                <Button type='regular' disabled={isRemoving}>
                   Add
                 </Button>
               </Modal.Open>
@@ -99,6 +99,7 @@ const SalesInfo = () => {
               </Modal.Window>
             </Modal>
           </Row>
+          <br />
           <ItemsList>
             {courriers.map(courrier => (
               <Item key={courrier.id}>
