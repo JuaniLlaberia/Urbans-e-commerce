@@ -106,7 +106,7 @@ const SalesInfo = () => {
                 {courrier.companyName}{' '}
                 <HiXMark
                   onClick={() => removeCourrier(courrier.id)}
-                  display={isRemoving}
+                  disabled={isRemoving}
                 />
               </Item>
             ))}
