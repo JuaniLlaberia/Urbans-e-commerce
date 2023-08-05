@@ -1,5 +1,13 @@
 import supabase from './supabase';
 
+export const newAccount = async newUser => {
+  const { data, error } = await supabase.auth.signUp(newUser);
+
+  if (error) throw new Error('Could not create new account');
+
+  return data;
+};
+
 export const login = async ({ email, password }) => {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,

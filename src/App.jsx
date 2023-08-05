@@ -8,7 +8,6 @@ import Categories from './pages/dashboard/Categories';
 import Discounts from './pages/dashboard/Discounts';
 import Orders from './pages/dashboard/Orders';
 import Products from './pages/dashboard/Products';
-import StoreInfo from './pages/dashboard/StoreInfo';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Styles from './styles/Styles';
@@ -18,6 +17,7 @@ import Tickets from './pages/dashboard/Tickets';
 import Settings from './pages/dashboard/Settings';
 import Home from './pages/store/Home';
 import ProtectedRoute from './features/Authentication/ProtectedRoute';
+import NewUser from './pages/dashboard/NewUser';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -44,7 +44,10 @@ function App() {
               </ProtectedRoute>
             }
           >
-            {/* <Route index element={<Navigate replace to='/admin/dashboard' />} /> */}
+            <Route
+              path='/admin'
+              element={<Navigate replace to='/admin/dashboard' />}
+            />
             <Route path='/admin/dashboard' element={<Dashboard />} />
             <Route path='/admin/categories' element={<Categories />} />
             <Route path='/admin/discounts' element={<Discounts />} />
@@ -53,6 +56,7 @@ function App() {
               path='admin/order/details/:orderId'
               element={<OrderDetails />}
             />
+            <Route path='/admin/new-user' element={<NewUser />} />
             <Route path='/admin/tickets' element={<Tickets />} />
             <Route path='/admin/my-store' element={<Settings />} />
             <Route path='admin/products' element={<Products />} />
@@ -60,7 +64,6 @@ function App() {
               path='admin/products/variants/:productName'
               element={<ProductDetails />}
             />
-            <Route path='/admin/my-store' element={<StoreInfo />} />
           </Route>
         </Routes>
       </BrowserRouter>
