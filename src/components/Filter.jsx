@@ -46,23 +46,30 @@ const FilterButton = styled.button`
 
 const Filter = ({ options }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [isFilter, setIsFilter] = useState(options[0]?.value);
+  const filter = searchParams.get('filter') || options[0]?.value;
+  // const [isFilter, setIsFilter] = useState(options[0]?.value);
 
-  const setActive = value => setIsFilter(value);
+  // const setActive = value => setIsFilter(value);
 
-  useEffect(() => {
-    searchParams.set('filter', isFilter);
+  // useEffect(() => {
+  //   searchParams.set('filter', isFilter);
+  //   searchParams.set('page', 1);
+  //   setSearchParams(searchParams);
+  // }, [isFilter]);
+
+  const handleFilter = value => {
+    searchParams.set('filter', value);
     searchParams.set('page', 1);
     setSearchParams(searchParams);
-  }, [isFilter, searchParams, setSearchParams]);
+  };
 
   return (
     <StyledFilter>
       {options?.map(option => (
         <FilterButton
-          className={isFilter === option.value ? 'active' : ''}
+          className={filter === option.value ? 'active' : ''}
           key={option.value}
-          onClick={() => setActive(option.value)}
+          onClick={() => handleFilter(option.value)}
         >
           {option.label}
         </FilterButton>
