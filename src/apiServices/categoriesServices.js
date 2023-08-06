@@ -20,7 +20,6 @@ export const getCategories = async ({ page, filter }) => {
     console.log(error);
     throw new Error('Could not get categories from the API');
   }
-  console.log(data);
   return { data, count };
 };
 
