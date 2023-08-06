@@ -95,16 +95,23 @@ const Pagination = ({ count }) => {
 
   return (
     <StyledPagination>
-      <P>
-        Showing <span>{(crrPage - 1) * pageSize + 1}</span> to{' '}
-        <span>{crrPage === pageCount ? count : crrPage * pageSize}</span> of{' '}
-        <span>{count}</span> results
-      </P>
+      {count ? (
+        <P>
+          Showing <span>{(crrPage - 1) * pageSize + 1}</span> to{' '}
+          <span>{crrPage === pageCount ? count : crrPage * pageSize}</span> of{' '}
+          <span>{count}</span> results
+        </P>
+      ) : (
+        <P>Showing 0 to 0 of 0 results</P>
+      )}
       <Buttons>
         <PaginationButton onClick={goPrev} disabled={crrPage === 1}>
           <HiChevronLeft /> <span>Previous</span>
         </PaginationButton>
-        <PaginationButton onClick={goNext} disabled={crrPage === pageCount}>
+        <PaginationButton
+          onClick={goNext}
+          disabled={crrPage === pageCount || !count}
+        >
           <span>Next</span>
           <HiChevronRight />
         </PaginationButton>
