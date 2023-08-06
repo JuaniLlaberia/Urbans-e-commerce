@@ -32,3 +32,15 @@ export const deleteTicket = async id => {
 
   if (error) throw new Error('Could not delete ticket');
 };
+
+export const updateTicket = async (id, newStatus) => {
+  const { data, error } = await supabase
+    .from('complain-tickets')
+    .update({ status: newStatus })
+    .eq('id', id)
+    .single();
+
+  if (error) throw new Error('Could not update the ticket');
+
+  return data;
+};

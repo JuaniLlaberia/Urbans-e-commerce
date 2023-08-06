@@ -18,8 +18,11 @@ const StyledTicketDetails = styled.div`
 
 const Text = styled.div`
   overflow-y: scroll;
+  padding-right: 20px;
   max-height: 300px;
+  text-align: justify;
   min-height: 100px;
+  width: 100%;
   color: var(--color-white-6);
 `;
 
@@ -33,8 +36,7 @@ const TicketDetailsModal = ({ ticket, onCloseModal, id }) => {
       <Box>
         <Box.Body>
           <Box.Item>
-            <HiOutlineArchiveBox />
-            {ticket.orderNum}
+            <HiOutlineArchiveBox />#{ticket.orderNum}
           </Box.Item>
           <Box.Item>
             <HiOutlineUser />
@@ -45,10 +47,13 @@ const TicketDetailsModal = ({ ticket, onCloseModal, id }) => {
             {ticket.email}
           </Box.Item>
         </Box.Body>
+      </Box>
+      <br />
+      <Box>
         <Box.Body>
-          <Text>
-            <p>{ticket.complain}</p>
-          </Text>
+          <Box.Item>
+            <Text>{ticket.complain}</Text>
+          </Box.Item>
         </Box.Body>
       </Box>
       <TicketBtns onCloseModal={onCloseModal} status={ticket.status} id={id} />

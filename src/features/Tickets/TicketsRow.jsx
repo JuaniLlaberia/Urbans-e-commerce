@@ -7,6 +7,7 @@ import { HiOutlineClipboard, HiOutlineTrash } from 'react-icons/hi2';
 import { RemoveText } from '../../components/RemoveText';
 import { useDeleteTicket } from './useDeleteTicket';
 import StatusTag from './StatusTag';
+import TicketDetailsModal from './TicketDetailsModal';
 
 const TicketsRow = ({ ticket }) => {
   const { deleteTicket, isDeleting } = useDeleteTicket();
@@ -31,7 +32,7 @@ const TicketsRow = ({ ticket }) => {
                 </ButtonIcon>
               </Modal.Open>
             </DropDownMenu.Item>
-            {status === 'Close' && (
+            {status === 'Closed' && (
               <DropDownMenu.Item>
                 <Modal.Open opens='deleteModal'>
                   <ButtonIcon size='sm'>
@@ -44,7 +45,7 @@ const TicketsRow = ({ ticket }) => {
         </DropDownMenu>
       </Table.Row>
       <Modal.Window windowName='detailsModal'>
-        {/* <TicketDetailsModal ticket={ticket} id={id} /> */}
+        <TicketDetailsModal ticket={ticket} id={id} />
       </Modal.Window>
       <Modal.Window windowName='deleteModal'>
         <RemoveText
