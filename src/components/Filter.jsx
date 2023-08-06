@@ -54,7 +54,7 @@ const Filter = ({ options }) => {
     searchParams.set('filter', isFilter);
     searchParams.set('page', 1);
     setSearchParams(searchParams);
-  }, [isFilter]);
+  }, [isFilter, searchParams, setSearchParams]);
 
   return (
     <StyledFilter>

@@ -3,7 +3,6 @@ import { createContext, useContext, useEffect, useState } from 'react';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  // const [theme, setTheme] = useState('light');
   const [theme, setTheme] = useState(() => {
     const themeType = JSON.parse(localStorage.getItem('STORE_THEME_COLOR'));
     return themeType || 'light';

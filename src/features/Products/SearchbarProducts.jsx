@@ -11,7 +11,7 @@ const SearchbarProducts = () => {
 
     searchParams.set('sku', query);
     setSearchParams(searchParams);
-  }, [query]);
+  }, [query, searchParams, setSearchParams]);
 
   return (
     <>

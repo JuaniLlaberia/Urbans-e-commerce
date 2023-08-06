@@ -8,7 +8,6 @@ import {
   HiOutlineShoppingBag,
   HiOutlineTag,
   HiOutlineUser,
-  HiOutlineUsers,
 } from 'react-icons/hi2';
 import NavButtonsMenu from './NavButtonsMenu';
 import AnimatedOpenBtn from './AnimatedOpenBtn';
@@ -122,7 +121,6 @@ const Sidebar = () => {
   return (
     <>
       <StyledSidebar className={isOpen ? 'open' : ''}>
-        {/* <h1>Logo</h1> */}
         <NavList>
           <Separator>HOME</Separator>
           <li onClick={closeOnClick}>

@@ -6,7 +6,6 @@ const Button = styled.button`
   font-weight: 600;
   border-radius: var(--raidius-sm);
   border: none;
-  /* box-shadow: var(--shadow-light); */
 
   transition: all 0.15s ease-in;
   cursor: pointer;

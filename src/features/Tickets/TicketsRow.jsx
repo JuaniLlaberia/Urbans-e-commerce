@@ -45,7 +45,6 @@ const TicketsRow = ({ ticket }) => {
       </Table.Row>
       <Modal.Window windowName='detailsModal'>
         {/* <TicketDetailsModal ticket={ticket} id={id} /> */}
-        <p>:D</p>
       </Modal.Window>
       <Modal.Window windowName='deleteModal'>
         <RemoveText

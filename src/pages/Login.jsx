@@ -19,6 +19,8 @@ const StyledContainer = styled.div`
   border-radius: var(--raidius-md);
   padding: 0.4rem 0.8rem;
   box-shadow: var(--shadow-light);
+  width: 25vw;
+  min-width: 300px;
 `;
 
 const Login = () => {
