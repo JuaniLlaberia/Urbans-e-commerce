@@ -1,6 +1,5 @@
-import Link from '../components/Link';
 import { styled } from 'styled-components';
-import { HiArrowLeft, HiOutlineExclamationTriangle } from 'react-icons/hi2';
+import { HiOutlineExclamationTriangle } from 'react-icons/hi2';
 import Button from '../components/Button';
 import Row from '../components/Row';
 import { useNavigate } from 'react-router-dom';
