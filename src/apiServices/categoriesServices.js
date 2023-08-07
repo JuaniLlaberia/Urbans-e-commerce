@@ -23,6 +23,17 @@ export const getCategories = async ({ page, filter }) => {
   return { data, count };
 };
 
+export const getSubCategories = async () => {
+  const { data, error } = await supabase
+    .from('categories')
+    .select('*')
+    .eq('type', 'Sub');
+
+  if (error) throw new Error('Could not get categories from the API');
+
+  return data;
+};
+
 export const getMainCategories = async () => {
   const { data, error } = await supabase
     .from('categories')
