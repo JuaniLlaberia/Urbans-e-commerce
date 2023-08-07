@@ -8,6 +8,10 @@ import Styles from './styles/Styles';
 import ProtectedRoute from './features/Authentication/ProtectedRoute';
 import { lazy, Suspense } from 'react';
 import FullScreenSpinner from './components/FullScreenSpinner';
+import StoreLayout from './pages/store/StoreLayout';
+import StoreProducts from './pages/store/StoreProducts';
+import Product from './pages/store/Product';
+import StoreOrder from './pages/store/StoreOrder';
 
 const Home = lazy(() => import('./pages/store/Home'));
 const Login = lazy(() => import('./pages/Login'));
@@ -39,7 +43,15 @@ function App() {
       <BrowserRouter>
         <Suspense fallback={<FullScreenSpinner />}>
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route element={<StoreLayout />}>
+              <Route path='/' element={<Home />} />
+              <Route
+                path='/products/:mainCategory'
+                element={<StoreProducts />}
+              />
+              <Route path='/product/details/:productId' element={<Product />} />
+              <Route path='/order/track' element={<StoreOrder />} />
+            </Route>
             <Route path='login' element={<Login />} />
             <Route path='*' element={<NotFound />} />
             <Route
