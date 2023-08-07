@@ -38,7 +38,7 @@ const ProductRow = ({ product, variant }) => {
         <RowText>{variant ? size : formatCurrency(price)}</RowText>
         <RowText>{mainColor}</RowText>
         <RowText>
-          {mainCategory.name}/{subCategory.name}
+          {mainCategory}/{subCategory}
         </RowText>
         <RowText>{quantity}</RowText>
         <DropDownMenu>

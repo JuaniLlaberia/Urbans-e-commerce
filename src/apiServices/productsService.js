@@ -2,11 +2,9 @@ import { pageSize } from '../utils/constants';
 import supabase from './supabase';
 
 export const getProducts = async ({ page, sku, order }) => {
-  let query = supabase
-    .from('products')
-    .select('*, mainCategory(name, id), subCategory(name, id)', {
-      count: 'exact',
-    });
+  let query = supabase.from('products').select('*', {
+    count: 'exact',
+  });
 
   if (sku) {
     query.textSearch('SKU', sku);
@@ -37,7 +35,7 @@ export const getProducts = async ({ page, sku, order }) => {
 export const getProduct = async id => {
   const { data, error } = await supabase
     .from('products')
-    .select('*, mainCategory(name), subCategory(name)')
+    .select('*')
     .eq('id', id)
     .single();
 
@@ -49,7 +47,7 @@ export const getProduct = async id => {
 export const getVariantsByName = async ({ productName, page, order }) => {
   let query = supabase
     .from('products')
-    .select('*, mainCategory(name), subCategory(name)', { count: 'exact' })
+    .select('*', { count: 'exact' })
     .eq('name', productName);
 
   if (page) {
@@ -72,6 +70,7 @@ export const getVariantsByName = async ({ productName, page, order }) => {
 };
 
 export const createProduct = async newProduct => {
+  console.log(newProduct);
   //Create image path
   const imgName = `${Math.random()}-${newProduct.img.name}`.replace('/', '');
   const imgPath = `https://geuzjkdzkblmryfdmtpi.supabase.co/storage/v1/object/public/products-img/${imgName}`;
@@ -86,7 +85,7 @@ export const createProduct = async newProduct => {
   //Upload image to the storage
   const { error: errorImg } = supabase.storage
     .from('products-img')
-    .upload(imgName, newProduct.img[0]);
+    .upload(imgName, newProduct.img);
 
   //If image failed => Delete product
   if (errorImg) {
@@ -168,4 +167,58 @@ export const deleteProduct = async (id, imgToRemove) => {
   if (error) throw new Error('Could not remove the image');
 
   return null;
+};
+
+// export const getProductsByCategory = async (mainCat, subCat) => {
+//   let query = supabase
+//     .from('products')
+//     .select('*', { count: 'exact' })
+//     .eq('mainCategory', mainCat);
+
+//   if (subCat) {
+//     query.eq('subCategory', subCat);
+//   }
+
+//   const { data, error, count } = await query;
+
+//   if (error) {
+//     console.log(error);
+//     throw new Error('Could not retrieve products');
+//   }
+
+//   return { data, count };
+// };
+
+export const getProductsByCategory = async (mainCat, subCat) => {
+  let query = supabase
+    .from('products')
+    .select('*', { count: 'exact' })
+    .eq('mainCategory', mainCat);
+
+  if (subCat) {
+    query = query.eq('subCategory', subCat);
+  }
+
+  const { data: products, error } = await query;
+
+  if (error) {
+    console.log(error);
+    throw new Error('Could not retrieve products');
+  }
+
+  // Use reduce to create the unique product list directly
+  const uniqueProductList = products.reduce((uniqueList, product) => {
+    const { name, mainColor } = product;
+    const productKey = `${name}-${mainColor}`;
+
+    if (
+      !uniqueList.some(item => `${item.name}-${item.mainColor}` === productKey)
+    ) {
+      uniqueList.push(product);
+    }
+
+    return uniqueList;
+  }, []);
+
+  return { data: uniqueProductList, count: uniqueProductList.length };
 };

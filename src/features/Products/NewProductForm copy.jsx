@@ -38,15 +38,17 @@ const NewProductForm = ({ onCloseModal, productToEdit = {} }) => {
     defaultValues: isEditing
       ? {
           ...editData,
-          mainCategory: editData?.mainCategory,
-          subCategory: editData?.subCategory,
+          mainCategory: editData?.mainCategory.id,
+          subCategory: editData?.subCategory.id,
         }
       : {},
   });
 
   //Getting the current main category
   const mainCatWatcher = watch('mainCategory') || mainCats?.at(0)?.name;
-  const currentMainCat = mainCats?.filter(cat => cat.name === mainCatWatcher);
+  const currentMainCat = mainCats?.filter(
+    cat => cat.id === Number(mainCatWatcher)
+  );
 
   //Sub categories => Only the ones that belong to the selected main category
   const subCats = categories?.filter(
@@ -182,7 +184,7 @@ const NewProductForm = ({ onCloseModal, productToEdit = {} }) => {
           >
             <Option value=''>Select Main Category</Option>
             {mainCats?.map(category => (
-              <Option key={category.name} value={category.name}>
+              <Option key={category.id} value={category.id}>
                 {category.name}
               </Option>
             ))}
@@ -202,7 +204,7 @@ const NewProductForm = ({ onCloseModal, productToEdit = {} }) => {
           >
             <Option value=''>Select Sub Category</Option>
             {subCats?.map(category => (
-              <Option key={category.name} value={category.name}>
+              <Option key={category.id} value={category.id}>
                 {category.name}
               </Option>
             ))}
