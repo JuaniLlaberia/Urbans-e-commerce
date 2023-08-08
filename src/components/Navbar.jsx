@@ -8,6 +8,7 @@ import { HiOutlineBars3 } from 'react-icons/hi2';
 const StyledNav = styled.nav`
   height: 50px;
   width: 100vw;
+  max-width: 100%;
   background-color: var(--color-white-2);
   color: var(--color-white-5);
   border-bottom: var(--border-sm);
@@ -40,7 +41,7 @@ const Navbar = () => {
   return (
     <StyledNav>
       <BugerContainer>
-        <HiOutlineBars3 onClick={open} />
+        <HiOutlineBars3 onClick={open} style={{ cursor: 'pointer' }} />
       </BugerContainer>
       <Logo />
       <NavbarCategories isOpen={isOpen} closeNav={close} />
