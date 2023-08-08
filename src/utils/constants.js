@@ -10,6 +10,7 @@ export const colors = [
   'Gray',
   'Green',
   'Brown',
+  'Multiple',
 ];
 
 export const sizes = ['XS', 'S', 'M', 'L', 'XL', '-'];

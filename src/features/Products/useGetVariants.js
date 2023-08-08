@@ -3,10 +3,12 @@ import { getVariantsByName } from '../../apiServices/productsService';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { pageSize } from '../../utils/constants';
 
-export const useGetVariants = () => {
+export const useGetVariants = name => {
   const queryClient = useQueryClient();
-  const { productName } = useParams();
+  const { productName: urlName } = useParams();
   const [searchParams] = useSearchParams();
+
+  const productName = name || urlName;
 
   const page = searchParams.get('page') ? Number(searchParams.get('page')) : 1;
 
