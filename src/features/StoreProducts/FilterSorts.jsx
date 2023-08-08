@@ -1,3 +1,5 @@
+import Row from '../../components/Row';
+
 export const FilterSorts = () => {
-  return <div>Filter and Sorts</div>;
+  return <Row>Filter and Sorts</Row>;
 };
