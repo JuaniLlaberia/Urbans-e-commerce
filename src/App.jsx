@@ -12,6 +12,7 @@ import StoreLayout from './pages/store/StoreLayout';
 import StoreProducts from './pages/store/StoreProducts';
 import Product from './pages/store/Product';
 import StoreOrder from './pages/store/StoreOrder';
+import SavedProducts from './pages/store/SavedProducts';
 
 const Home = lazy(() => import('./pages/store/Home'));
 const Login = lazy(() => import('./pages/Login'));
@@ -49,6 +50,7 @@ function App() {
                 path='/products/:mainCategory'
                 element={<StoreProducts />}
               />
+              <Route path='/products/saved' element={<SavedProducts />} />
               <Route path='/product/details/:productId' element={<Product />} />
               <Route path='/order/track' element={<StoreOrder />} />
             </Route>

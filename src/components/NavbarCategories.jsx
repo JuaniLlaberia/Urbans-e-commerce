@@ -18,6 +18,7 @@ const CategoriesList = styled.ul`
     top: 0;
     left: 0;
     padding: 3rem 2rem;
+    z-index: 10;
 
     transform: translateX(-850px);
     transition: all 0.4s ease;

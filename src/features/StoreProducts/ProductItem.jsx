@@ -1,6 +1,8 @@
 import { styled } from 'styled-components';
 import { formatCurrency } from '../../utils/formatCurrency';
 import Title from '../../components/Title';
+import { Link } from 'react-router-dom';
+import SaveBtn from './SaveBtn';
 
 const StyledItem = styled.li`
   background-color: var(--color-white-2);
@@ -15,6 +17,7 @@ const StyledItem = styled.li`
   }
 
   cursor: pointer;
+  position: relative;
 `;
 
 const Img = styled.img`
@@ -47,15 +50,36 @@ const Price = styled.p`
   color: var(--color-white-6);
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
+const BtnContainer = styled.div`
+  position: absolute;
+  top: 1%;
+  right: 2%;
+`;
+
 const ProductItem = ({ product }) => {
   return (
     <StyledItem>
-      <Img src={product.img} />
-      <Data>
-        <Title as='h5'>{product.name}</Title>
-        <Color>{product.mainColor}</Color>
-        <Price>{formatCurrency(product.price)}</Price>
-      </Data>
+      <BtnContainer>
+        <SaveBtn
+          id={product.id}
+          img={product.img}
+          name={product.name}
+          color={product.mainColor}
+          price={product.price}
+        />
+      </BtnContainer>
+      <StyledLink to={`/product/details/${product.id}`}>
+        <Img src={product.img} />
+        <Data>
+          <Title as='h5'>{product.name}</Title>
+          <Color>{product.mainColor}</Color>
+          <Price>{formatCurrency(product.price)}</Price>
+        </Data>
+      </StyledLink>
     </StyledItem>
   );
 };

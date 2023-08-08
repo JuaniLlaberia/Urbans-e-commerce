@@ -4,6 +4,7 @@ import {
   HiOutlineShoppingCart,
   HiOutlineMagnifyingGlass,
 } from 'react-icons/hi2';
+import { Link } from 'react-router-dom';
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -15,10 +16,16 @@ const ButtonsContainer = styled.div`
   }
 `;
 
+const StyledLink = styled(Link)`
+  color: var(--color-white-5);
+`;
+
 const NavbarButtons = () => {
   return (
     <ButtonsContainer>
-      <HiOutlineHeart />
+      <StyledLink to='/products/saved'>
+        <HiOutlineHeart />
+      </StyledLink>
       <HiOutlineShoppingCart />
       <HiOutlineMagnifyingGlass />
     </ButtonsContainer>
