@@ -14,6 +14,11 @@ const Title = styled.h1`
     css`
       font-weight: 600;
       font-size: 1.75rem;
+      & span {
+        font-size: 0.9rem;
+        color: var(--color-white-5);
+        opacity: 0.8;
+      }
     `}
   ${props =>
     props.as === 'h3' &&

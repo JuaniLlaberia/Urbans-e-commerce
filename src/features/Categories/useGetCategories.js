@@ -12,8 +12,6 @@ export const useGetCategories = (full = false) => {
     ? Number(searchParams.get('page'))
     : 1;
 
-  console.log(page);
-
   const filter = searchParams.get('filter') || 'All';
 
   const {

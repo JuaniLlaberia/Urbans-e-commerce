@@ -16,7 +16,7 @@ export const useDeleteOrder = () => {
     onSuccess: () => {
       toast.success('Removed successfully');
       queryClient.invalidateQueries({ queryKey: ['orders'] });
-      navigate('admin/orders');
+      navigate('/admin/orders');
     },
     onError: () => toast.error('Failed to remove'),
   });

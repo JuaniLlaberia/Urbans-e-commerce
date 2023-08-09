@@ -1,4 +1,3 @@
-import { styled } from 'styled-components';
 import OrderBy from '../../components/OrderBy';
 import Row from '../../components/Row';
 import Title from '../../components/Title';

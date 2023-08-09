@@ -10,13 +10,12 @@ const ProductDetailsTable = () => {
   if (isLoading) return <Spinner />;
 
   return (
-    <Table columns='1.3fr .9fr .9fr 1.3fr .5fr  0.4fr'>
+    <Table columns='1.3fr .9fr .9fr 1.3fr  0.4fr'>
       <Table.Header>
         <div>SKU</div>
-        <div>Size</div>
+        <div>price</div>
         <div>Color</div>
         <div>Category</div>
-        <div>Qty</div>
         <div></div>
       </Table.Header>
       <Table.Body

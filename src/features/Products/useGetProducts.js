@@ -3,11 +3,16 @@ import { getProducts } from '../../apiServices/productsService';
 import { useSearchParams } from 'react-router-dom';
 import { pageSize } from '../../utils/constants';
 
-export const useGetProducts = () => {
+export const useGetProducts = (full = false) => {
   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
 
-  const page = !searchParams.get('page') ? 1 : Number(searchParams.get('page'));
+  const page = full
+    ? ''
+    : searchParams.get('page')
+    ? Number(searchParams.get('page'))
+    : 1;
+
   const sku = !searchParams.get('sku') ? '' : searchParams.get('sku');
 
   const orderBy = searchParams.get('orderBy') || 'created_at-asc';

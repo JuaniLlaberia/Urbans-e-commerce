@@ -1,6 +1,5 @@
 import RowText from '../../components/RowText';
 import Table from '../../components/Table';
-import ButtonIcon from '../../components/ButtonIcon';
 import { HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi2';
 import { styled } from 'styled-components';
 import { useDeleteDiscount } from './useDeleteDiscount';

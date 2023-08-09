@@ -5,10 +5,10 @@ import {
   HiOutlineExclamationCircle,
   HiOutlineHashtag,
   HiOutlineHome,
+  HiOutlineServerStack,
   HiOutlineShoppingBag,
   HiOutlineTag,
   HiOutlineUser,
-  HiOutlineUsers,
 } from 'react-icons/hi2';
 import NavButtonsMenu from './NavButtonsMenu';
 import AnimatedOpenBtn from './AnimatedOpenBtn';
@@ -122,7 +122,6 @@ const Sidebar = () => {
   return (
     <>
       <StyledSidebar className={isOpen ? 'open' : ''}>
-        {/* <h1>Logo</h1> */}
         <NavList>
           <Separator>HOME</Separator>
           <li onClick={closeOnClick}>
@@ -136,6 +135,12 @@ const Sidebar = () => {
             <SidebarItem to='admin/products'>
               <HiOutlineShoppingBag />
               <span>Products</span>
+            </SidebarItem>
+          </li>
+          <li onClick={closeOnClick}>
+            <SidebarItem to='admin/stock'>
+              <HiOutlineServerStack />
+              <span>Stock</span>
             </SidebarItem>
           </li>
           <li onClick={closeOnClick}>

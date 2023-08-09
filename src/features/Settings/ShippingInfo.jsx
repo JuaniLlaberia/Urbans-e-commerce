@@ -90,7 +90,7 @@ const SalesInfo = () => {
             <Title as='h3'>Courriers</Title>
             <Modal>
               <Modal.Open opens='newCourrier'>
-                <Button type='regular' disabled={isRemoving}>
+                <Button variation='regular' disabled={isRemoving}>
                   Add
                 </Button>
               </Modal.Open>

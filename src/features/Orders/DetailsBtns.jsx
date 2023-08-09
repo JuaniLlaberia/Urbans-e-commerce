@@ -37,13 +37,15 @@ const DetailsBtns = ({ id, status }) => {
 
   return (
     <Row>
-      <Button type='outline' onClick={() => navigate('/admin/orders')}>
+      <Button variation='outline' onClick={() => navigate('/admin/orders')}>
         Back
       </Button>
       {(status === 'Cancel' || status === 'Delivered') && (
         <Modal>
           <Modal.Open opens='removeShip'>
-            <Button type='alert'>Remove #{String(id).padStart(4, '0')}</Button>
+            <Button variation='alert'>
+              Remove #{String(id).padStart(4, '0')}
+            </Button>
           </Modal.Open>
           <Modal.Window windowName='removeShip'>
             <RemoveText
@@ -57,7 +59,7 @@ const DetailsBtns = ({ id, status }) => {
       {status === 'Pending' && (
         <Modal>
           <Modal.Open opens='shipModal'>
-            <Button type='regular'>
+            <Button variation='regular'>
               Ship order #{String(id).padStart(4, '0')}
             </Button>
           </Modal.Open>

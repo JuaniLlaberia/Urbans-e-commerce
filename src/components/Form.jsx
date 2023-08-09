@@ -1,4 +1,4 @@
-import { css, styled } from 'styled-components';
+import { styled } from 'styled-components';
 
 const Form = styled.form`
   padding: 1rem 1.25rem;
@@ -8,7 +8,7 @@ const Form = styled.form`
   gap: 0.5rem;
   width: 100%;
 
-  min-width: 40vw;
+  /* min-width: 40vw; */
 `;
 
 export default Form;

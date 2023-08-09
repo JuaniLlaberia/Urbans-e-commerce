@@ -5,7 +5,6 @@ export const getCategories = async ({ page, filter }) => {
   let query = supabase.from('categories').select('*', { count: 'exact' });
 
   if (filter && filter !== 'All') {
-    console.log('filtering');
     query.eq('type', filter);
   }
 
@@ -21,8 +20,18 @@ export const getCategories = async ({ page, filter }) => {
     console.log(error);
     throw new Error('Could not get categories from the API');
   }
-  console.log(data);
   return { data, count };
+};
+
+export const getSubCategories = async () => {
+  const { data, error } = await supabase
+    .from('categories')
+    .select('*')
+    .eq('type', 'Sub');
+
+  if (error) throw new Error('Could not get categories from the API');
+
+  return data;
 };
 
 export const getMainCategories = async () => {

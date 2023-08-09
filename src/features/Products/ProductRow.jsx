@@ -4,6 +4,7 @@ import { formatCurrency } from '../../utils/formatCurrency';
 import {
   HiOutlineClipboard,
   HiOutlinePencil,
+  HiOutlineServerStack,
   HiOutlineShoppingCart,
   HiOutlineTrash,
 } from 'react-icons/hi2';
@@ -15,18 +16,8 @@ import { useNavigate } from 'react-router-dom';
 import DropDownMenu from '../../components/DropDownMenu';
 
 const ProductRow = ({ product, variant }) => {
-  const {
-    price,
-    SKU,
-    mainCategory,
-    subCategory,
-    id,
-    img,
-    mainColor,
-    quantity,
-    name,
-    size,
-  } = product;
+  const { price, SKU, mainCategory, subCategory, id, img, mainColor, name } =
+    product;
 
   const { deleteProduct, isLoading } = useDeleteProduct();
   const navigate = useNavigate();
@@ -35,12 +26,11 @@ const ProductRow = ({ product, variant }) => {
     <Modal>
       <Table.Row>
         <RowText>{SKU}</RowText>
-        <RowText>{variant ? size : formatCurrency(price)}</RowText>
+        <RowText>{formatCurrency(price)}</RowText>
         <RowText>{mainColor}</RowText>
         <RowText>
-          {mainCategory.name}/{subCategory.name}
+          {mainCategory}/{subCategory}
         </RowText>
-        <RowText>{quantity}</RowText>
         <DropDownMenu>
           <DropDownMenu.Opener id={id} />
           <DropDownMenu.Menu id={id}>
@@ -52,6 +42,11 @@ const ProductRow = ({ product, variant }) => {
                 <HiOutlineClipboard />
               </DropDownMenu.Item>
             )}
+            <DropDownMenu.Item
+              onClick={() => navigate(`/admin/stock?productId=${id}`)}
+            >
+              <HiOutlineServerStack />
+            </DropDownMenu.Item>
             <Modal.Open opens='editModal'>
               <DropDownMenu.Item>
                 <HiOutlinePencil />

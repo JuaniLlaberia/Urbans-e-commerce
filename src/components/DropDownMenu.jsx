@@ -91,7 +91,7 @@ const Menu = ({ children, id }) => {
 
     document.addEventListener('click', handleClick, true);
     return () => document.removeEventListener('click', handleClick, true);
-  }, []);
+  }, [close]);
 
   if (id !== openId) return null;
 

@@ -2,11 +2,9 @@ import { pageSize } from '../utils/constants';
 import supabase from './supabase';
 
 export const getProducts = async ({ page, sku, order }) => {
-  let query = supabase
-    .from('products')
-    .select('*, mainCategory(name, id), subCategory(name, id)', {
-      count: 'exact',
-    });
+  let query = supabase.from('products').select('*', {
+    count: 'exact',
+  });
 
   if (sku) {
     query.textSearch('SKU', sku);
@@ -37,7 +35,7 @@ export const getProducts = async ({ page, sku, order }) => {
 export const getProduct = async id => {
   const { data, error } = await supabase
     .from('products')
-    .select('*, mainCategory(name), subCategory(name)')
+    .select('*')
     .eq('id', id)
     .single();
 
@@ -46,10 +44,66 @@ export const getProduct = async id => {
   return data;
 };
 
+export const editStock = async (id, newData) => {
+  const { data, error } = await supabase
+    .from('products-size-stock')
+    .update(newData)
+    .eq('id', id);
+
+  if (error) {
+    console.log(error);
+    throw new Error('Could not update');
+  }
+
+  return data;
+};
+
+export const getStock = async ({ page, order, productId }) => {
+  let query = supabase
+    .from('products-size-stock')
+    .select('*, productId!inner(SKU, name, id)', { count: 'exact' });
+
+  if (productId) {
+    console.log(productId);
+    query.eq('productId.id', productId);
+  }
+
+  if (page) {
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
+    query.range(from, to);
+  }
+
+  if (order) {
+    query.order(order.order, {
+      ascending: order.direction === 'asc',
+    });
+  }
+
+  const { data, count, error } = await query;
+
+  if (error) {
+    console.log(error);
+    throw new Error('Could not get the products from the API');
+  }
+
+  return { data, count };
+};
+
+export const deleteStockItem = async id => {
+  const { error } = await supabase
+    .from('products-size-stock')
+    .delete()
+    .eq('id', id)
+    .single();
+
+  if (error) throw new Error('Could not remove the item');
+};
+
 export const getVariantsByName = async ({ productName, page, order }) => {
   let query = supabase
     .from('products')
-    .select('*, mainCategory(name), subCategory(name)', { count: 'exact' })
+    .select('*', { count: 'exact' })
     .eq('name', productName);
 
   if (page) {
@@ -86,7 +140,7 @@ export const createProduct = async newProduct => {
   //Upload image to the storage
   const { error: errorImg } = supabase.storage
     .from('products-img')
-    .upload(imgName, newProduct.img[0]);
+    .upload(imgName, newProduct.img);
 
   //If image failed => Delete product
   if (errorImg) {
@@ -97,6 +151,37 @@ export const createProduct = async newProduct => {
   }
 
   return data;
+};
+
+export const createVariant = async (productId, newVariant) => {
+  //Check if that variant already exist
+  const variantExist = await supabase
+    .from('products-size-stock')
+    .select('*')
+    .eq('productId', productId)
+    .eq('size', newVariant.size)
+    .single();
+
+  if (variantExist.data) {
+    //If it already exist we update it
+    const { data, error } = await supabase
+      .from('products-size-stock')
+      .update(newVariant)
+      .eq('id', variantExist.data.id);
+
+    if (error) console.log(error);
+
+    return data;
+  } else {
+    // If it doesnt exist we create a new one
+    const { data, error } = await supabase
+      .from('products-size-stock')
+      .insert([{ ...newVariant, productId }]);
+
+    if (error) console.log(error);
+
+    return data;
+  }
 };
 
 export const editProduct = async (id, editedProduct, oldImg) => {
@@ -168,4 +253,38 @@ export const deleteProduct = async (id, imgToRemove) => {
   if (error) throw new Error('Could not remove the image');
 
   return null;
+};
+
+export const getProductsByCategory = async (mainCat, subCat) => {
+  let query = supabase
+    .from('products')
+    .select('*', { count: 'exact' })
+    .eq('mainCategory', mainCat);
+
+  if (subCat) {
+    query = query.eq('subCategory', subCat);
+  }
+
+  const { data: products, error } = await query;
+
+  if (error) {
+    console.log(error);
+    throw new Error('Could not retrieve products');
+  }
+
+  // Use reduce to create the unique product list directly
+  const uniqueProductList = products.reduce((uniqueList, product) => {
+    const { name, mainColor } = product;
+    const productKey = `${name}-${mainColor}`;
+
+    if (
+      !uniqueList.some(item => `${item.name}-${item.mainColor}` === productKey)
+    ) {
+      uniqueList.push(product);
+    }
+
+    return uniqueList;
+  }, []);
+
+  return { data: uniqueProductList, count: uniqueProductList.length };
 };

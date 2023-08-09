@@ -4,11 +4,7 @@ import RowText from '../../components/RowText';
 import Modal from '../../components/Modal';
 import DropDownMenu from '../../components/DropDownMenu';
 import { RemoveText } from '../../components/RemoveText';
-import {
-  HiOutlineClipboard,
-  HiOutlinePencil,
-  HiOutlineTrash,
-} from 'react-icons/hi2';
+import { HiOutlineClipboard, HiOutlineTrash } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
 import { css, styled } from 'styled-components';
 import { useDeleteOrder } from './useDeleteOrder';

@@ -22,7 +22,6 @@ const DiscountTable = () => {
           <DiscountRow key={discount.id} discount={discount} />
         )}
       />
-      <Table.Footer></Table.Footer>
     </Table>
   );
 };

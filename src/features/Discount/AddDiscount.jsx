@@ -6,7 +6,7 @@ export const AddDiscount = () => {
   return (
     <Modal>
       <Modal.Open>
-        <Button type='regular'>New discount</Button>
+        <Button variation='regular'>New discount</Button>
       </Modal.Open>
       <Modal.Window>
         <DiscountForm />

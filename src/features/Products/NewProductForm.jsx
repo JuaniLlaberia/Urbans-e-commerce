@@ -12,7 +12,7 @@ import { useForm } from 'react-hook-form';
 import { useGetCategories } from '../Categories/useGetCategories';
 import { useCreateProduct } from './useCreateProduct';
 import Textarea from '../../components/Textarea';
-import { colors, sizes } from '../../utils/constants';
+import { colors } from '../../utils/constants';
 import { ImgInputStyle } from '../../components/ImgInputStyle';
 import DobleInput from '../../components/DobleInput';
 import { useEditProduct } from './useEditProduct';
@@ -38,17 +38,15 @@ const NewProductForm = ({ onCloseModal, productToEdit = {} }) => {
     defaultValues: isEditing
       ? {
           ...editData,
-          mainCategory: editData?.mainCategory.id,
-          subCategory: editData?.subCategory.id,
+          mainCategory: editData?.mainCategory,
+          subCategory: editData?.subCategory,
         }
       : {},
   });
 
   //Getting the current main category
   const mainCatWatcher = watch('mainCategory') || mainCats?.at(0)?.name;
-  const currentMainCat = mainCats?.filter(
-    cat => cat.id === Number(mainCatWatcher)
-  );
+  const currentMainCat = mainCats?.filter(cat => cat.name === mainCatWatcher);
 
   //Sub categories => Only the ones that belong to the selected main category
   const subCats = categories?.filter(
@@ -154,19 +152,25 @@ const NewProductForm = ({ onCloseModal, productToEdit = {} }) => {
           />
         </InputContainer>
         <InputContainer
-          label='Quantity'
-          error={errors?.quantity?.message}
-          id='quantity'
+          label='Main color'
+          error={errors?.mainColor?.message}
+          id='color'
           type='vertical'
         >
-          <Input
-            id='quantity'
+          <Select
+            id='color'
             disabled={isWorking}
-            type='number'
-            {...register('quantity', {
+            {...register('mainColor', {
               required: 'This field is required',
             })}
-          />
+          >
+            <Option value=''>Select a color</Option>
+            {colors?.map(color => (
+              <Option key={color} value={color}>
+                {color}
+              </Option>
+            ))}
+          </Select>
         </InputContainer>
       </DobleInput>
       <DobleInput>
@@ -184,7 +188,7 @@ const NewProductForm = ({ onCloseModal, productToEdit = {} }) => {
           >
             <Option value=''>Select Main Category</Option>
             {mainCats?.map(category => (
-              <Option key={category.id} value={category.id}>
+              <Option key={category.name} value={category.name}>
                 {category.name}
               </Option>
             ))}
@@ -204,52 +208,8 @@ const NewProductForm = ({ onCloseModal, productToEdit = {} }) => {
           >
             <Option value=''>Select Sub Category</Option>
             {subCats?.map(category => (
-              <Option key={category.id} value={category.id}>
+              <Option key={category.name} value={category.name}>
                 {category.name}
-              </Option>
-            ))}
-          </Select>
-        </InputContainer>
-      </DobleInput>
-      <DobleInput>
-        <InputContainer
-          label='Size'
-          error={errors?.size?.message}
-          id='size'
-          type='vertical'
-        >
-          <Select
-            id='size'
-            disabled={isWorking}
-            {...register('size', {
-              required: 'This field is required',
-            })}
-          >
-            <Option value=''>Select a size</Option>
-            {sizes?.map(size => (
-              <Option key={size} value={size}>
-                {size}
-              </Option>
-            ))}
-          </Select>
-        </InputContainer>
-        <InputContainer
-          label='Main color'
-          error={errors?.mainColor?.message}
-          id='color'
-          type='vertical'
-        >
-          <Select
-            id='color'
-            disabled={isWorking}
-            {...register('mainColor', {
-              required: 'This field is required',
-            })}
-          >
-            <Option value=''>Select a color</Option>
-            {colors?.map(color => (
-              <Option key={color} value={color}>
-                {color}
               </Option>
             ))}
           </Select>
@@ -287,10 +247,10 @@ const NewProductForm = ({ onCloseModal, productToEdit = {} }) => {
         />
       </InputContainer>
       <Row>
-        <Button type='outline' disabled={isWorking} onClick={onCloseModal}>
+        <Button variation='outline' disabled={isWorking} onClick={onCloseModal}>
           Cancel
         </Button>
-        <Button type='regular' disabled={isWorking}>
+        <Button variation='regular' disabled={isWorking}>
           {isWorking ? (
             <SpinnerBtn />
           ) : (

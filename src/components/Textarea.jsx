@@ -6,7 +6,6 @@ const Textarea = styled.textarea`
   padding: 0.5rem 0.4rem;
   box-shadow: var(--shadow-light);
   margin-bottom: 5px;
-  /* max-width: 500px; */
   resize: none;
   height: 75px;
 
