@@ -1,27 +1,27 @@
 import Pagination from '../../components/Pagination';
 import Spinner from '../../components/Spinner';
 import Table from '../../components/Table';
-import ProductRow from './ProductRow';
-import { useGetVariants } from './useGetVariants';
+import StockRow from './StockRow';
+import { useGetStock } from './useGetStock';
 
 const ProductDetailsTable = () => {
-  const { variants, isLoading, count } = useGetVariants();
+  const { stock, isLoading, count } = useGetStock();
 
   if (isLoading) return <Spinner />;
 
   return (
-    <Table columns='1.3fr .9fr .9fr 1.3fr  0.4fr'>
+    <Table columns='1.3fr .9fr .9fr 1.3fr 0.4fr'>
       <Table.Header>
         <div>SKU</div>
-        <div>price</div>
-        <div>Color</div>
-        <div>Category</div>
+        <div>Size</div>
+        <div>Qty</div>
+        <div>Name</div>
         <div></div>
       </Table.Header>
       <Table.Body
-        data={variants}
-        render={variant => (
-          <ProductRow key={variant.id} product={variant} variant={true} />
+        data={stock}
+        render={item => (
+          <StockRow key={item.id} product={item} variant={true} />
         )}
       />
       <Table.Footer>

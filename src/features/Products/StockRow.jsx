@@ -1,51 +1,36 @@
 import Table from '../../components/Table';
 import Modal from '../../components/Modal';
-import { formatCurrency } from '../../utils/formatCurrency';
 import {
-  HiOutlineClipboard,
   HiOutlinePencil,
-  HiOutlineServerStack,
   HiOutlineShoppingCart,
   HiOutlineTrash,
 } from 'react-icons/hi2';
-import { useDeleteProduct } from './useDeleteProduct';
 import { RemoveText } from '../../components/RemoveText';
 import RowText from '../../components/RowText';
-import NewProductForm from './NewProductForm';
+import NewVariantForm from './NewVariantForm';
 import { useNavigate } from 'react-router-dom';
 import DropDownMenu from '../../components/DropDownMenu';
+import { useDeleteStockItem } from './useDeleteStockItem';
 
-const ProductRow = ({ product, variant }) => {
-  const { price, SKU, mainCategory, subCategory, id, img, mainColor, name } =
-    product;
+const StockRow = ({ product }) => {
+  const { id, size, quantity, productId } = product;
 
-  const { deleteProduct, isLoading } = useDeleteProduct();
+  const { deleteStockItem, isDeleting } = useDeleteStockItem();
   const navigate = useNavigate();
 
   return (
     <Modal>
       <Table.Row>
-        <RowText>{SKU}</RowText>
-        <RowText>{formatCurrency(price)}</RowText>
-        <RowText>{mainColor}</RowText>
-        <RowText>
-          {mainCategory}/{subCategory}
-        </RowText>
+        <RowText>{productId?.SKU}</RowText>
+        <RowText>{size}</RowText>
+        <RowText>{quantity}</RowText>
+        <RowText>{productId?.name}</RowText>
+
         <DropDownMenu>
           <DropDownMenu.Opener id={id} />
           <DropDownMenu.Menu id={id}>
             <DropDownMenu.Item onClick={() => navigate(`/products`)}>
               <HiOutlineShoppingCart />
-            </DropDownMenu.Item>
-            {variant ? null : (
-              <DropDownMenu.Item onClick={() => navigate(`variants/${name}`)}>
-                <HiOutlineClipboard />
-              </DropDownMenu.Item>
-            )}
-            <DropDownMenu.Item
-              onClick={() => navigate(`/admin/stock?productId=${id}`)}
-            >
-              <HiOutlineServerStack />
             </DropDownMenu.Item>
             <Modal.Open opens='editModal'>
               <DropDownMenu.Item>
@@ -63,18 +48,18 @@ const ProductRow = ({ product, variant }) => {
 
       <Modal.Window windowName='deleteModal'>
         <RemoveText
-          onConfirm={() =>
-            deleteProduct({ id, imgToRemove: img.split('/').at(-1) })
-          }
-          resource={`${SKU} (No order can exist with this product to perform this operation)`}
-          isDeleting={isLoading}
+          onConfirm={() => deleteStockItem(id)}
+          resource={`${productId?.SKU} Size:${size}`}
+          isDeleting={isDeleting}
         />
       </Modal.Window>
       <Modal.Window windowName='editModal'>
-        <NewProductForm productToEdit={product} />
+        <NewVariantForm
+          variantToEdit={{ ...product, productId: product?.productId?.id }}
+        />
       </Modal.Window>
     </Modal>
   );
 };
 
-export default ProductRow;
+export default StockRow;

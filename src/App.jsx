@@ -27,6 +27,7 @@ const NewUser = lazy(() => import('./pages/dashboard/NewUser'));
 const Discounts = lazy(() => import('./pages/dashboard/Discounts'));
 const Tickets = lazy(() => import('./pages/dashboard/Tickets'));
 const Categories = lazy(() => import('./pages/dashboard/Categories'));
+const Stock = lazy(() => import('./pages/dashboard/Stock'));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -78,6 +79,7 @@ function App() {
               <Route path='/admin/new-user' element={<NewUser />} />
               <Route path='/admin/tickets' element={<Tickets />} />
               <Route path='/admin/my-store' element={<Settings />} />
+              <Route path='admin/stock' element={<Stock />} />
               <Route path='admin/products' element={<Products />} />
               <Route
                 path='admin/products/variants/:productName'

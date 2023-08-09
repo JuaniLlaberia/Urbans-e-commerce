@@ -5,6 +5,7 @@ import {
   HiOutlineExclamationCircle,
   HiOutlineHashtag,
   HiOutlineHome,
+  HiOutlineServerStack,
   HiOutlineShoppingBag,
   HiOutlineTag,
   HiOutlineUser,
@@ -134,6 +135,12 @@ const Sidebar = () => {
             <SidebarItem to='admin/products'>
               <HiOutlineShoppingBag />
               <span>Products</span>
+            </SidebarItem>
+          </li>
+          <li onClick={closeOnClick}>
+            <SidebarItem to='admin/stock'>
+              <HiOutlineServerStack />
+              <span>Stock</span>
             </SidebarItem>
           </li>
           <li onClick={closeOnClick}>
