@@ -26,6 +26,8 @@ const StyledLayout = styled.div`
   height: 100vh;
 `;
 
+//Testing git bug
+
 const AppLayout = () => {
   return (
     <StyledLayout>
