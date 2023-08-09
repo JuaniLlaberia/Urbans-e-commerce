@@ -4,6 +4,7 @@ import { HiArrowLeft } from 'react-icons/hi2';
 import Link from '../components/Link';
 import LoginForm from '../features/Authentication/LoginForm';
 import Title from '../components/Title';
+import Logo from '../components/Logo';
 
 const StyledLogin = styled.main`
   height: 100vh;
@@ -26,6 +27,8 @@ const StyledContainer = styled.div`
 const Login = () => {
   return (
     <StyledLogin>
+      <Logo />
+      <br />
       <StyledContainer>
         <Title as='h4'>Sign In</Title>
         <LoginForm />

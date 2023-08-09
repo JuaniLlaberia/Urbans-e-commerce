@@ -14,6 +14,8 @@ const Products = () => {
 
   if (isLoading) return <Spinner />;
 
+  console.log(products);
+
   return (
     <>
       <Title as='h2'>

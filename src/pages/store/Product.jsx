@@ -45,18 +45,17 @@ const StyledProduct = styled.div`
     row-gap: 1.5rem;
   }
   @media (max-width: 550px) {
-    padding: 0.5rem 1rem;
     display: flex;
+    align-items: center;
     flex-direction: column;
-    width: 80vw;
   }
 `;
 
 const Description = styled.p`
   padding: 0.5rem;
-  border: var(--border-sm);
-  border-radius: var(--raidius-md);
-  margin-top: 25px;
+  margin-top: 50px;
+  color: var(--color-white-5);
+  text-align: justify;
 `;
 
 const Code = styled.p`
@@ -69,7 +68,6 @@ const Code = styled.p`
 const Price = styled.p`
   font-size: 1.25rem;
   font-weight: 500;
-  /* margin-top: 40px; */
 `;
 
 const Img = styled.img`
@@ -89,13 +87,15 @@ const ImgContainer = styled.div`
   @media (max-width: 1300px) {
     width: 30vw;
   }
+  @media (max-width: 1000px) {
+    width: 70vw;
+  }
 `;
 
 const InfoContainer = styled.div`
   display: flex;
   width: 40vw;
   flex-direction: column;
-  /* min-width: 300px; */
   @media (max-width: 1000px) {
     width: 70vw;
   }
@@ -126,6 +126,11 @@ const VariationItem = styled(Link)`
   @media (max-width: 1000px) {
     padding: 0.6rem 1.5rem;
   }
+  &.out-stock {
+    cursor: not-allowed;
+    background-color: #928e8e;
+    color: #777676;
+  }
 `;
 
 const BtnContainer = styled.div`
@@ -133,6 +138,7 @@ const BtnContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
   gap: 0.4rem;
+  margin-top: 20px;
 
   @media (max-width: 1000px) {
     margin-top: 10px;
@@ -146,13 +152,18 @@ const BtnContainer = styled.div`
 const qtyArr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const Product = () => {
+  //Getting product
   const { product, isLoading } = useGetProduct();
 
+  //Getting variants (colors and sizes)
   const { variants, isLoading: isLoading2 } = useGetVariants(product?.name);
   const [selectedSize, setSelectedSize] = useState('');
 
   if (isLoading || isLoading2) return <Spinner />;
 
+  console.log(variants);
+
+  //Grabbing the diff sizes and diff colors to display
   const sizes = variants.filter(
     variant => variant.mainColor === product.mainColor
   );
@@ -202,9 +213,12 @@ const Product = () => {
           <VariationList>
             {sizes.map(size => (
               <VariationItem
+                // to={`/product/details/${size.id}`}
                 onClick={() => setSelectedSize(size.size)}
-                className={size.size === selectedSize ? 'active' : ''}
-                key={size.id}
+                className={`
+                 ${size.size === selectedSize ? 'active' : ''}
+                 ${size.quantity === 0 ? 'out-stock' : ''}
+                `}
               >
                 {size.size}
               </VariationItem>
@@ -235,7 +249,6 @@ const Product = () => {
           </Description>
         </InfoContainer>
       </StyledProduct>
-      {/* <p>RECOMMENDATIONS or MORE PRODUCTS OF THIS CATEGORY</p> */}
     </>
   );
 };
