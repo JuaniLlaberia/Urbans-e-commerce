@@ -14,15 +14,12 @@ const Products = () => {
 
   if (isLoading) return <Spinner />;
 
-  console.log(products);
-
   return (
     <>
       <Title as='h2'>
         {subCategory ? `${mainCategory}/${subCategory}` : `All ${mainCategory}`}
         <span> ({count} products)</span>
       </Title>
-
       <StyledProductsList>
         {products?.map(product => (
           <ProductItem key={product.id} product={product} />
