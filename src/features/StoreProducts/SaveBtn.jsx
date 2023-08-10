@@ -16,7 +16,7 @@ const StyledSaveBtn = styled.button`
   }
 `;
 
-const SaveBtn = ({ id, img, name, color, price }) => {
+const SaveBtn = ({ id, img, name, color, price, SKU }) => {
   const { handleSave, handleUnSave, savedProducts } = useSavedContext();
   let isSaved = savedProducts?.some(el => el.id === id);
 
@@ -27,7 +27,7 @@ const SaveBtn = ({ id, img, name, color, price }) => {
       </StyledSaveBtn>
     );
   return (
-    <StyledSaveBtn onClick={() => handleSave(id, img, name, color, price)}>
+    <StyledSaveBtn onClick={() => handleSave(id, img, name, color, price, SKU)}>
       <HiOutlineHeart />
     </StyledSaveBtn>
   );

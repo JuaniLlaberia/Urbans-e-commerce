@@ -1,29 +1,17 @@
 import StyledProductsList from './ProductList';
 import ProductItem from './ProductItem';
-import { HiOutlineHeart } from 'react-icons/hi2';
-import { styled } from 'styled-components';
-
-const StyledMsg = styled.p`
-  color: var(--color-white-5);
-
-  & svg {
-    color: #ff3737;
-    font-size: 1.25rem;
-  }
-`;
+import { useSavedContext } from '../../context/SavedContext';
+import Empty from '../../components/EmptyMsg';
 
 const SavedProductsList = () => {
-  const savedProducts =
-    JSON.parse(localStorage.getItem('SAVED_PRODUCTS')) || [];
-
-  console.log(savedProducts);
+  const { savedProducts } = useSavedContext();
 
   if (savedProducts.length < 1)
     return (
-      <StyledMsg>
-        You can save products that you like here for future orders. Just click
-        on the <HiOutlineHeart />.
-      </StyledMsg>
+      <Empty>
+        <h5>No products saved</h5>
+        <p>There are no products saved, you can add as many as you want</p>
+      </Empty>
     );
 
   return (
