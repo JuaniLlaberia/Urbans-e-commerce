@@ -26,7 +26,9 @@ const NavbarButtons = () => {
       <StyledLink to='/products/saved'>
         <HiOutlineHeart />
       </StyledLink>
-      <HiOutlineShoppingCart />
+      <StyledLink to='/cart'>
+        <HiOutlineShoppingCart />
+      </StyledLink>
       <HiOutlineMagnifyingGlass />
     </ButtonsContainer>
   );
