@@ -30,7 +30,7 @@ const Title = styled.h1`
     props.as === 'h4' &&
     css`
       font-weight: 600;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       text-align: center;
     `}
   ${props =>

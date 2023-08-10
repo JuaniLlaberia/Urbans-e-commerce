@@ -34,6 +34,11 @@ const Button = styled.button`
       padding: 0.8rem 2rem;
       font-size: 1rem;
       min-width: 10rem;
+      ${props =>
+        props.width === 'full-lg' &&
+        css`
+          width: 100%;
+        `}
     `}
   ${props =>
     props.variation === 'alert' &&
