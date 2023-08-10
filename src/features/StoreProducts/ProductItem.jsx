@@ -46,7 +46,7 @@ const Color = styled.p`
 
 const Price = styled.p`
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--color-white-6);
 `;
 
@@ -70,9 +70,10 @@ const ProductItem = ({ product }) => {
           name={product.name}
           color={product.mainColor}
           price={product.price}
+          SKU={product.SKU}
         />
       </BtnContainer>
-      <StyledLink to={`/product/details/${product.id}`}>
+      <StyledLink to={`/product/details/${product.SKU}`}>
         <Img src={product.img} />
         <Data>
           <Title as='h5'>{product.name}</Title>

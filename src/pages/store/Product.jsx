@@ -5,13 +5,17 @@ import Row from '../../components/Row';
 import Button from '../../components/Button';
 import Select from '../../components/Select';
 import Option from '../../components/Option';
-import { useGetProduct } from '../../features/Products/useGetProduct';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { useGetVariants } from '../../features/Products/useGetVariants';
 import { HiOutlineShoppingCart } from 'react-icons/hi2';
 import SaveBtn from '../../features/StoreProducts/SaveBtn';
-import { useState } from 'react';
+import { useGetProductBySku } from '../../features/Products/useGetProductBySku';
+import { useGetStockFromId } from '../../features/Products/useGetStockFromId';
+import { useRef } from 'react';
+import ProductLoadingSkeleton from '../../components/ProductLoadingSkeleton';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../features/Cart/cartSlice';
 
 const StyledTop = styled.section`
   padding: 1rem 8rem;
@@ -108,7 +112,7 @@ const VariationList = styled.ul`
   margin-bottom: 10px;
 `;
 
-const VariationItem = styled(Link)`
+const VariationItem = styled.button`
   background-color: #e9e9e9b3;
   padding: 0.4rem 1.2rem;
   border-radius: var(--raidius-sm);
@@ -128,8 +132,9 @@ const VariationItem = styled(Link)`
   }
   &.out-stock {
     cursor: not-allowed;
-    background-color: #928e8e;
-    color: #777676;
+    background-color: #adacac;
+    color: #cac7c7;
+    text-decoration: line-through;
   }
 `;
 
@@ -152,22 +157,59 @@ const BtnContainer = styled.div`
 const qtyArr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const Product = () => {
-  //Getting product
-  const { product, isLoading } = useGetProduct();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  //Getting product by SKU code
+  const { product, isLoading: isLoadingProducts } = useGetProductBySku();
 
-  //Getting variants (colors and sizes)
-  const { variants, isLoading: isLoading2 } = useGetVariants(product?.name);
-  const [selectedSize, setSelectedSize] = useState('');
-
-  if (isLoading || isLoading2) return <Spinner />;
-
-  console.log(variants);
-
-  //Grabbing the diff sizes and diff colors to display
-  const sizes = variants.filter(
-    variant => variant.mainColor === product.mainColor
+  //Getting all variants (different colors)
+  const { variants, isLoading: isLoadingVariants } = useGetVariants(
+    product?.name
   );
-  const colors = variants.filter(variant => variant.size === product.size);
+
+  const { stock, isLoading: isLoadingStock } = useGetStockFromId(product?.id);
+
+  const qtyRef = useRef();
+
+  if (isLoadingProducts || isLoadingVariants || isLoadingStock)
+    return <ProductLoadingSkeleton />;
+
+  const handleSize = size => {
+    searchParams.set('size', size);
+    setSearchParams(searchParams);
+  };
+
+  const selectedSize = searchParams.get('size');
+
+  const addCart = () => {
+    //Checking that there is a selected size
+    if (!selectedSize) return;
+
+    const size = stock.find(s => s.size === searchParams.get('size'));
+    const quantity = Number(qtyRef.current.value);
+
+    //Checking that the quantity requested is not higher than the available stock
+    if (quantity > size.quantity) return;
+
+    //Add to cart
+    const orderItem = {
+      img: product.img,
+      name: product.name,
+      price: product.price,
+      SKU: product.SKU,
+      color: product.mainColor,
+      productId: product.id,
+      quantity,
+      size: size.size,
+      stockId: size.id,
+    };
+
+    dispatch(addItem(orderItem));
+
+    //Navigate to cart
+    navigate('/cart');
+  };
 
   return (
     <>
@@ -197,42 +239,41 @@ const Product = () => {
           <Code>{product.SKU}</Code>
           <Title as='h5'>Select color</Title>
           <VariationList>
-            {colors.map(color => (
+            {variants.map(variant => (
               <VariationItem
-                to={`/product/details/${color.id}`}
-                className={
-                  color.mainColor === product.mainColor ? 'active' : ''
-                }
-                key={color.id}
+                as={Link}
+                to={`/product/details/${variant.SKU}`}
+                className={variant.id === product.id ? 'active' : ''}
+                key={variant.id}
               >
-                {color.mainColor}
+                {variant.mainColor}
               </VariationItem>
             ))}
           </VariationList>
           <Title as='h5'>Select size</Title>
           <VariationList>
-            {sizes.map(size => (
+            {stock.map(s => (
               <VariationItem
-                // to={`/product/details/${size.id}`}
-                onClick={() => setSelectedSize(size.size)}
+                onClick={() => handleSize(s.size)}
+                key={s.id}
                 className={`
-                 ${size.size === selectedSize ? 'active' : ''}
-                 ${size.quantity === 0 ? 'out-stock' : ''}
+                 ${s.size === searchParams.get('size') ? 'active' : ''}
+                 ${s.quantity === 0 ? 'out-stock' : ''}
                 `}
               >
-                {size.size}
+                {s.size}
               </VariationItem>
             ))}
           </VariationList>
           <BtnContainer>
-            <Select height='full'>
+            <Select height='full' ref={qtyRef}>
               {qtyArr.map(el => (
                 <Option key={el} value={el}>
                   {el}
                 </Option>
               ))}
             </Select>
-            <Button width='full' variation='big'>
+            <Button width='full' variation='big' onClick={addCart}>
               <HiOutlineShoppingCart /> Add to cart
             </Button>
             <SaveBtn
@@ -244,7 +285,6 @@ const Product = () => {
             />
           </BtnContainer>
           <Description style={{ width: '100%' }}>
-            <Title as='h5'>Description</Title>
             {product.description}
           </Description>
         </InfoContainer>

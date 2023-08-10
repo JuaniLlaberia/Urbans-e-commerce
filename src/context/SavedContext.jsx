@@ -12,8 +12,7 @@ export const SavedContextProvider = ({ children }) => {
     localStorage.setItem('SAVED_PRODUCTS', JSON.stringify(savedProducts));
   }, [savedProducts]);
 
-  const handleSave = (id, img, name, color, price) => {
-    console.log(img);
+  const handleSave = (id, img, name, color, price, SKU) => {
     setSavedProducts(prev => [
       ...prev,
       {
@@ -22,11 +21,12 @@ export const SavedContextProvider = ({ children }) => {
         name,
         color,
         price,
+        SKU,
       },
     ]);
   };
 
-  const handleUnSave = (id, img, name, color, price) => {
+  const handleUnSave = id => {
     const arrCopy = [...savedProducts];
     const productToRemove = arrCopy.findIndex(item => item.id === id);
     arrCopy.splice(productToRemove, 1);

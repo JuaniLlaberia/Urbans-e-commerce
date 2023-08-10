@@ -44,6 +44,21 @@ export const getProduct = async id => {
   return data;
 };
 
+export const getProductBySKU = async productSKU => {
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .eq('SKU', productSKU)
+    .single();
+
+  if (error) {
+    console.log(error);
+    throw new Error('Could not get the product from the API');
+  }
+
+  return data;
+};
+
 export const editStock = async (id, newData) => {
   const { data, error } = await supabase
     .from('products-size-stock')
@@ -64,7 +79,6 @@ export const getStock = async ({ page, order, productId }) => {
     .select('*, productId!inner(SKU, name, id)', { count: 'exact' });
 
   if (productId) {
-    console.log(productId);
     query.eq('productId.id', productId);
   }
 
@@ -88,6 +102,23 @@ export const getStock = async ({ page, order, productId }) => {
   }
 
   return { data, count };
+};
+
+export const getStockFromId = async id => {
+  if (!id) return [];
+
+  const { data, error } = await supabase
+    .from('products-size-stock')
+    .select('*, productId!inner(*)')
+    .eq('productId.id', id);
+  // .order('size', { ascending: false });
+
+  if (error) {
+    console.log(error);
+    throw new Error('Failed to fetch stock with given ID');
+  }
+
+  return data;
 };
 
 export const deleteStockItem = async id => {
