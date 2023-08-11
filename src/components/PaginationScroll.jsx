@@ -28,7 +28,13 @@ const PaginationScroll = ({ count }) => {
 
   const pageCount = Math.ceil(count / 12);
 
-  const handleShowMore = () => {
+  const handleShowPrev = () => {
+    const next = crrPage - 1;
+    searchParams.set('page', next);
+    setSearchParams(searchParams);
+  };
+
+  const handleShowNext = () => {
     const next = crrPage + 1;
     searchParams.set('page', next);
     setSearchParams(searchParams);
@@ -38,10 +44,10 @@ const PaginationScroll = ({ count }) => {
     <StylesPagination>
       {pageCount !== 1 && (
         <Row space='separate'>
-          <FilterBtn onClick={handleShowMore} disabled={crrPage === 1}>
+          <FilterBtn onClick={handleShowPrev} disabled={crrPage === 1}>
             Show prev
           </FilterBtn>
-          <FilterBtn onClick={handleShowMore} disabled={crrPage === pageCount}>
+          <FilterBtn onClick={handleShowNext} disabled={crrPage === pageCount}>
             Show next
           </FilterBtn>
         </Row>
