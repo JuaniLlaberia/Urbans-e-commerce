@@ -1,6 +1,6 @@
 import { useThemeContext } from '../context/ThemeContext';
-import logoLight from '../../public/logo-light.png';
-import logoDark from '../../public/logo-dark.png';
+import logoLight from '../logo-light.png';
+import logoDark from '../logo-dark.png';
 import { styled } from 'styled-components';
 
 const Img = styled.img`
