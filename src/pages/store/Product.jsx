@@ -1,5 +1,4 @@
 import { styled } from 'styled-components';
-import Spinner from '../../components/Spinner';
 import Title from '../../components/Title';
 import Row from '../../components/Row';
 import Button from '../../components/Button';
