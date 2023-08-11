@@ -286,7 +286,14 @@ export const deleteProduct = async (id, imgToRemove) => {
   return null;
 };
 
-export const getProductsByCategory = async (mainCat, subCat) => {
+export const getProductsByCategory = async (
+  mainCat,
+  subCat,
+  filterColor,
+  filterPrice,
+  sorting
+  // page,
+) => {
   let query = supabase
     .from('products')
     .select('*', { count: 'exact' })
@@ -296,26 +303,40 @@ export const getProductsByCategory = async (mainCat, subCat) => {
     query = query.eq('subCategory', subCat);
   }
 
-  const { data: products, error } = await query;
+  if (filterColor && filterColor !== 'All') {
+    console.log(filterColor);
+    query.eq('mainColor', filterColor);
+  }
+
+  if (filterPrice && filterPrice !== 'All') {
+    const [from, to] = filterPrice.split('-');
+    if (from && to) {
+      query.gte('price', from).lte('price', to);
+    } else {
+      query.gte('price', from);
+    }
+  }
+
+  if (sorting) {
+    const [value, direction] = sorting.split('-');
+    query.order(value, { ascending: direction === 'asc' });
+  }
+
+  // if (page) {
+  //   const from = page * pageSize;
+  //   const to = (page + 1) * pageSize - 1;
+  //   query.range(from, to);
+  // }
+
+  const { data: products, error, count } = await query;
 
   if (error) {
     console.log(error);
     throw new Error('Could not retrieve products');
   }
 
-  // Use reduce to create the unique product list directly
-  const uniqueProductList = products.reduce((uniqueList, product) => {
-    const { name, mainColor } = product;
-    const productKey = `${name}-${mainColor}`;
-
-    if (
-      !uniqueList.some(item => `${item.name}-${item.mainColor}` === productKey)
-    ) {
-      uniqueList.push(product);
-    }
-
-    return uniqueList;
-  }, []);
-
-  return { data: uniqueProductList, count: uniqueProductList.length };
+  return {
+    data: products,
+    count,
+  };
 };

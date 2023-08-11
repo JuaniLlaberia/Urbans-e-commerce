@@ -50,3 +50,26 @@ export const filtersOrders = [
     label: 'Delivered',
   },
 ];
+
+export const filterPriceRange = [
+  {
+    value: 'All',
+    label: 'No filter',
+  },
+  {
+    value: '0-15',
+    label: '$0 - $15',
+  },
+  {
+    value: '15-50',
+    label: '$15 - $50',
+  },
+  {
+    value: '50-100',
+    label: '$50 - $100',
+  },
+  {
+    value: '100',
+    label: 'Over $100',
+  },
+];

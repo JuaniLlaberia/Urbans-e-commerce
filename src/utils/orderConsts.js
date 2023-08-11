@@ -51,3 +51,18 @@ export const orderStock = [
     label: 'By Size (desc)',
   },
 ];
+
+export const orderProductsStore = [
+  {
+    value: 'created_at-asc',
+    label: 'Newest',
+  },
+  {
+    value: 'price-asc',
+    label: 'Price: Low to High',
+  },
+  {
+    value: 'price-desc',
+    label: 'Price: High to Low',
+  },
+];
