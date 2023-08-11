@@ -1,12 +1,12 @@
 import Title from '../../components/Title';
 import Top from '../../components/Top';
-import Spinner from '../../components/Spinner';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { useGetProductsByCategory } from '../Products/useGetProductsByCategory';
 import ProductItem from './ProductItem';
 import StyledProductsList from './ProductList';
-// import PaginationScroll from '../../components/PaginationScroll';
+import PaginationScroll from '../../components/PaginationScroll';
 import { FilterSorts } from './FilterSorts';
+import ProductListSkeleton from './ProductListSkeleton';
 
 const Products = () => {
   const { mainCategory } = useParams();
@@ -14,8 +14,6 @@ const Products = () => {
   const { products, count, isLoading } = useGetProductsByCategory();
 
   const subCategory = searchParams.get('subCat');
-
-  if (isLoading) return <Spinner />;
 
   return (
     <>
@@ -28,12 +26,16 @@ const Products = () => {
         </Title>
         <FilterSorts />
       </Top>
-      <StyledProductsList>
-        {products?.map(product => (
-          <ProductItem key={product.id} product={product} />
-        ))}
-      </StyledProductsList>
-      {/* <PaginationScroll count={count} /> */}
+      {isLoading ? (
+        <ProductListSkeleton />
+      ) : (
+        <StyledProductsList>
+          {products?.map(product => (
+            <ProductItem key={product.id} product={product} />
+          ))}
+        </StyledProductsList>
+      )}
+      <PaginationScroll count={count} />
     </>
   );
 };

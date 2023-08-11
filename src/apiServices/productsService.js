@@ -291,8 +291,8 @@ export const getProductsByCategory = async (
   subCat,
   filterColor,
   filterPrice,
-  sorting
-  // page,
+  sorting,
+  page
 ) => {
   let query = supabase
     .from('products')
@@ -322,11 +322,11 @@ export const getProductsByCategory = async (
     query.order(value, { ascending: direction === 'asc' });
   }
 
-  // if (page) {
-  //   const from = page * pageSize;
-  //   const to = (page + 1) * pageSize - 1;
-  //   query.range(from, to);
-  // }
+  if (page) {
+    const from = (page - 1) * 12;
+    const to = from + 12 - 1;
+    query.range(from, to);
+  }
 
   const { data: products, error, count } = await query;
 
