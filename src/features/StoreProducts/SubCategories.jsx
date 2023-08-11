@@ -67,11 +67,13 @@ export const SubCategories = () => {
 
   const handleClick = category => {
     searchParams.set('subCat', category);
+    searchParams.set('page', 1);
     setSearchParams(searchParams);
   };
 
   const removeSubCat = () => {
     searchParams.set('subCat', '');
+    searchParams.set('page', 1);
     setSearchParams(searchParams);
   };
 

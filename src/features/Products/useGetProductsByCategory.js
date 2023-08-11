@@ -21,8 +21,8 @@ export const useGetProductsByCategory = () => {
         subCategory,
         filterColor,
         filterPrice,
-        sorting
-        // page,
+        sorting,
+        page
       ),
     queryKey: [
       `product-category-${mainCategory}`,
@@ -31,7 +31,7 @@ export const useGetProductsByCategory = () => {
       filterColor,
       filterPrice,
       sorting,
-      // page,
+      page,
     ],
     keepPreviousData: true,
   });

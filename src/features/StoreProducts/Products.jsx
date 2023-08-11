@@ -5,7 +5,7 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import { useGetProductsByCategory } from '../Products/useGetProductsByCategory';
 import ProductItem from './ProductItem';
 import StyledProductsList from './ProductList';
-// import PaginationScroll from '../../components/PaginationScroll';
+import PaginationScroll from '../../components/PaginationScroll';
 import { FilterSorts } from './FilterSorts';
 
 const Products = () => {
@@ -33,7 +33,7 @@ const Products = () => {
           <ProductItem key={product.id} product={product} />
         ))}
       </StyledProductsList>
-      {/* <PaginationScroll count={count} /> */}
+      <PaginationScroll count={count} />
     </>
   );
 };

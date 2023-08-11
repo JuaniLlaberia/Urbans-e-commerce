@@ -24,6 +24,10 @@ const FilterButton = styled.button`
     @media (max-width: 500px) {
     width: 100%;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 `;
 
 export default FilterButton;
