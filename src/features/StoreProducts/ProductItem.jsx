@@ -7,13 +7,16 @@ import SaveBtn from './SaveBtn';
 const StyledItem = styled.li`
   background-color: var(--color-white-2);
   box-shadow: var(--shadow-light);
-  width: 13vw;
+  width: 14vw;
   min-width: 180px;
+  @media (max-width: 970px) {
+    width: 25vw;
+  }
   @media (max-width: 670px) {
-    width: 35vw;
+    width: 40vw;
   }
   @media (max-width: 490px) {
-    width: 70vw;
+    width: 75vw;
   }
 
   cursor: pointer;
@@ -21,16 +24,20 @@ const StyledItem = styled.li`
 `;
 
 const Img = styled.img`
-  width: 13vw;
+  width: 14vw;
   min-width: 180px;
-  min-height: 225px;
-  border-bottom: var(--border-sm);
+  height: 40vh;
+  object-fit: cover;
 
+  border-bottom: var(--border-sm);
+  @media (max-width: 970px) {
+    width: 25vw;
+  }
   @media (max-width: 670px) {
-    width: 35vw;
+    width: 40vw;
   }
   @media (max-width: 490px) {
-    width: 70vw;
+    width: 75vw;
   }
 `;
 
