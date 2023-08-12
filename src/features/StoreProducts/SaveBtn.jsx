@@ -1,7 +1,6 @@
 import { HiHeart, HiOutlineHeart } from 'react-icons/hi2';
 import { styled } from 'styled-components';
 import { useSavedContext } from '../../context/SavedContext';
-import { useEffect } from 'react';
 
 const StyledSaveBtn = styled.button`
   background: transparent;
@@ -10,6 +9,13 @@ const StyledSaveBtn = styled.button`
   color: #746f6fd1;
   cursor: pointer;
   transition: all 0.3s ease;
+  background-color: white;
+  border-radius: 200px;
+  width: 30px;
+  padding: 0.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     transform: scale(1.05);
