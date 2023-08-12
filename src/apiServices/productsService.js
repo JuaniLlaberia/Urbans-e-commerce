@@ -1,5 +1,6 @@
 import { pageSize } from '../utils/constants';
 import supabase from './supabase';
+import Compressor from 'compressorjs';
 
 export const getProducts = async ({ page, sku, order }) => {
   let query = supabase.from('products').select('*', {
@@ -168,18 +169,22 @@ export const createProduct = async newProduct => {
 
   if (error) throw new Error('Could not create new product. Api failed');
 
-  //Upload image to the storage
-  const { error: errorImg } = supabase.storage
-    .from('products-img')
-    .upload(imgName, newProduct.img);
+  //COMPRESSING IMAGES BUT NOT LOWERING QUALITY
+  new Compressor(newProduct.img, {
+    quality: 0.9,
+    maxWidth: 600,
 
-  //If image failed => Delete product
-  if (errorImg) {
-    await supabase.from('products').delete().eq('id', data.id);
-    throw new Error(
-      'The image could not be uploaded, so the product was not created'
-    );
-  }
+    success(compressedImage) {
+      supabase.storage.from('products-img').upload(imgName, compressedImage);
+    },
+    error(err) {
+      console.log(err.message);
+      supabase.from('products').delete().eq('id', data.id);
+      throw new Error(
+        'The image could not be uploaded, so the product was not created'
+      );
+    },
+  });
 
   return data;
 };
@@ -242,21 +247,25 @@ export const editProduct = async (id, editedProduct, oldImg) => {
   if (!hasOldImg) return data;
 
   //3. Upload new image
-  const { error: errorImg } = await supabase.storage
-    .from('products-img')
-    .upload(newImgName, editedProduct.img);
+  //COMPRESSING IMAGES BUT NOT LOWERING QUALITY
+  new Compressor(editedProduct.img, {
+    quality: 0.92,
+    maxWidth: 600,
 
-  //3.1 If image failed, put again the old one and return.
-  if (errorImg) {
-    console.log(errorImg);
-    const { data } = await supabase
-      .from('products')
-      .update({ ...productToUpload, img: oldImg })
-      .eq('id', id)
-      .single();
+    success(compressedImage) {
+      supabase.storage.from('products-img').upload(newImgName, compressedImage);
+    },
+    error(err) {
+      console.log(err.message);
+      //If error putting the old image back
+      supabase
+        .from('products')
+        .update({ ...productToUpload, img: oldImg })
+        .eq('id', id)
+        .single();
+    },
+  });
 
-    return data;
-  }
   //4. Delete old image
   const { error: errorRemove } = await supabase.storage
     .from('products-img')
