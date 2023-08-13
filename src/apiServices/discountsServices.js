@@ -47,3 +47,14 @@ export const deleteDiscount = async id => {
 
   return data;
 };
+
+export const getValidDiscounts = async () => {
+  const { data, error } = await supabase
+    .from('discounts')
+    .select('*')
+    .gte('validUntil', new Date().toISOString());
+
+  if (error) throw new Error('Error fetching discounts from API.');
+
+  return data;
+};

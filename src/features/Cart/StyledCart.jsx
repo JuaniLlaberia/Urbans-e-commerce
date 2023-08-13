@@ -5,6 +5,7 @@ import Button from '../../components/Button';
 import Empty from '../../components/EmptyMsg';
 import { useSelector } from 'react-redux';
 import { getCartLength } from './cartSlice';
+import DiscountBox from './DiscountBox';
 
 const Cart = styled.section`
   display: flex;
@@ -24,6 +25,7 @@ const StyledCart = () => {
         <Cart>
           <CartList />
           <div>
+            {/* <DiscountBox /> */}
             <CartSummary />
             <br />
             <Button variation='big' width='full-lg'>

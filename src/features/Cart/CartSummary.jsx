@@ -11,8 +11,6 @@ const StyledCartSummary = styled.aside`
   box-shadow: var(--shadow-light);
   padding: 1rem 0.8rem;
 
-  max-height: 120px;
-
   @media (max-width: 650px) {
     width: 100%;
     margin-top: 25px;
