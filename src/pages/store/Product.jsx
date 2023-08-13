@@ -38,6 +38,7 @@ const StyledProduct = styled.div`
   padding: 0.5rem 8rem;
   grid-template-columns: 1fr 2fr;
   column-gap: 1.5rem;
+  place-items: center;
 
   @media (max-width: 1300px) {
     padding: 0.5rem 4rem;
@@ -75,6 +76,9 @@ const Price = styled.p`
 
 const Img = styled.img`
   width: 22vw;
+  min-height: 400px;
+  object-fit: cover;
+  object-position: center;
   @media (max-width: 1300px) {
     width: 28vw;
   }
