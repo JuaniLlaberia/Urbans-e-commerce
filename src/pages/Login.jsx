@@ -27,8 +27,6 @@ const StyledContainer = styled.div`
 const Login = () => {
   return (
     <StyledLogin>
-      <Logo />
-      <br />
       <StyledContainer>
         <Title as='h4'>Sign In</Title>
         <LoginForm />
