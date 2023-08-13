@@ -33,10 +33,14 @@ const CategoryItem = styled.li`
   & a {
     text-decoration: none;
     color: var(--color-white-6);
-    font-weight: 600;
+    font-weight: 400;
   }
   @media (max-width: 850px) {
     font-size: 2rem;
+
+    & a {
+      font-weight: 600;
+    }
   }
 `;
 
