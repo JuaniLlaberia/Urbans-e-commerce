@@ -13,6 +13,7 @@ import StoreProducts from './pages/store/StoreProducts';
 import Product from './pages/store/Product';
 import StoreOrder from './pages/store/StoreOrder';
 import SavedProducts from './pages/store/SavedProducts';
+import ScrollRestoration from './components/ScrollRestoration';
 
 const Home = lazy(() => import('./pages/store/Home'));
 const Login = lazy(() => import('./pages/Login'));
@@ -44,6 +45,7 @@ function App() {
       <ReactQueryDevtools />
       <Styles />
       <BrowserRouter>
+        <ScrollRestoration />
         <Suspense fallback={<FullScreenSpinner />}>
           <Routes>
             <Route element={<StoreLayout />}>
