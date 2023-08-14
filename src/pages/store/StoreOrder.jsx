@@ -1,7 +1,11 @@
-import React from 'react';
+import OrderDetails from '../../features/Orders/OrderDetails';
 
 const StoreOrder = () => {
-  return <div>StoreOrder</div>;
+  return (
+    <>
+      <OrderDetails isCustomer={false} />
+    </>
+  );
 };
 
 export default StoreOrder;

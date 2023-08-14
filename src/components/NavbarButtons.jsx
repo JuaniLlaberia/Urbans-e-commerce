@@ -7,6 +7,8 @@ import {
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getCartLength } from '../features/Cart/cartSlice';
+import Modal from './Modal';
+import TrackOrder from '../features/Orders/TrackOrder';
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -49,7 +51,14 @@ const NavbarButtons = () => {
         <HiOutlineShoppingCart />
         {cartLength > 0 && <StyledNumber>{cartLength}</StyledNumber>}
       </StyledLink>
-      <HiOutlineMagnifyingGlass />
+      <Modal>
+        <Modal.Open opens='order-searchbar'>
+          <HiOutlineMagnifyingGlass />
+        </Modal.Open>
+        <Modal.Window windowName='order-searchbar'>
+          <TrackOrder />
+        </Modal.Window>
+      </Modal>
     </ButtonsContainer>
   );
 };
