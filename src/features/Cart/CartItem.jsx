@@ -19,7 +19,10 @@ const StyledCartItem = styled.li`
 const Img = styled.img`
   width: 7vw;
   min-width: 80px;
+  min-height: 120px;
   max-width: 110px;
+  object-fit: cover;
+  object-position: center;
 `;
 
 const QTY = styled.p`

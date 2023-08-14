@@ -44,3 +44,16 @@ export const updateTicket = async (id, newStatus) => {
 
   return data;
 };
+
+export const createTicket = async newTicket => {
+  const { data, error } = await supabase
+    .from('complain-tickets')
+    .insert([newTicket]);
+
+  if (error) {
+    console.log(error);
+    throw new Error('Could not create ticket');
+  }
+
+  return data;
+};

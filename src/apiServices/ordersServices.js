@@ -29,7 +29,7 @@ export const getOrders = async ({ page, filter, orderNum }) => {
 export const getOrder = async id => {
   const { data, error } = await supabase
     .from('orders')
-    .select('*, customerId(fullName, email, country, address)')
+    .select('*')
     .eq('id', id)
     .single();
 
@@ -41,10 +41,13 @@ export const getOrder = async id => {
 export const getOrderProducts = async id => {
   const { data, error } = await supabase
     .from('order-items')
-    .select('*, product(img, SKU, size, price)')
+    .select('*, product(img, SKU, price), size(size)')
     .eq('orderId', id);
 
-  if (error) throw new Error('Could not fetch products for this order');
+  if (error) {
+    console.log(error);
+    throw new Error('Could not fetch products for this order');
+  }
 
   return data;
 };
@@ -84,4 +87,12 @@ export const shipOrder = async (id, courrier) => {
   }
 
   return shippedOrder;
+};
+
+export const getAllItems = async () => {
+  const { data, error } = await supabase.from('order-items').select('*');
+
+  if (error) console.log(error);
+
+  return data;
 };

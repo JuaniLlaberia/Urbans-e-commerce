@@ -40,9 +40,11 @@ const PaginationScroll = ({ count }) => {
     setSearchParams(searchParams);
   };
 
+  console.log(pageCount);
+
   return (
     <StylesPagination>
-      {pageCount !== 1 && (
+      {pageCount !== 1 && pageCount !== 0 && (
         <Row space='separate'>
           <FilterBtn onClick={handleShowPrev} disabled={crrPage === 1}>
             Show prev
@@ -52,11 +54,13 @@ const PaginationScroll = ({ count }) => {
           </FilterBtn>
         </Row>
       )}
-      <Text>
-        Viewing {(crrPage - 1) * 12 + 1} to{' '}
-        {crrPage === pageCount ? count : crrPage * 12} of {count} products
-        available.
-      </Text>
+      {pageCount !== 0 && (
+        <Text>
+          Viewing {(crrPage - 1) * 12 + 1} to{' '}
+          {crrPage === pageCount ? count : crrPage * 12} of {count} products
+          available.
+        </Text>
+      )}
     </StylesPagination>
   );
 };

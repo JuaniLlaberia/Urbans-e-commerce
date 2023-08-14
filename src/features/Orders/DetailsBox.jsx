@@ -27,13 +27,25 @@ const Boxes = styled.section`
   display: grid;
   column-gap: 2rem;
   row-gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
-const DetailsBox = ({ id, children }) => {
+const DetailsBox = ({ id, children, isCustomer }) => {
   const { order, isLoading: isLoading1 } = useGetOrder(id);
   const { shippingCosts, isLoading: isLoading2 } = useGetShippingPrices();
 
   if (isLoading1 || isLoading2) return <Spinner />;
+
+  if (!order)
+    return (
+      <p style={{ textAlign: 'justify' }}>
+        No order found with ID: <span>{id}</span>. Please try again and ensure
+        that you type the correct number. (Do not include the #)
+      </p>
+    );
 
   const {
     shipmentAddress: address,
@@ -41,14 +53,16 @@ const DetailsBox = ({ id, children }) => {
     status,
     isPaid,
     totalPrice,
-    customerId,
+    customerName,
+    customerEmail,
+    country,
   } = order;
 
   return (
     <>
       <StyledDetails>
         <Top>
-          <Title as='h2'>Order #{String(id).padStart(4, '0')}</Title>
+          <Title as='h2'>Order #{id}</Title>
           <div style={{ display: 'flex', gap: '.4rem' }}>
             <StatusTag type={shipmentType}>
               {shipmentType === 'Express' ? (
@@ -69,16 +83,16 @@ const DetailsBox = ({ id, children }) => {
             <Box.Head>Order information</Box.Head>
             <Box.Body>
               <Box.Item>
-                <HiOutlineUser /> <span>{customerId.fullName}</span>
+                <HiOutlineUser /> <span>{customerName}</span>
               </Box.Item>
               <Box.Item>
                 <HiOutlineHome /> <span>{address}</span>
               </Box.Item>
               <Box.Item>
-                <HiOutlineEnvelope /> <span>{customerId.email}</span>
+                <HiOutlineEnvelope /> <span>{customerEmail}</span>
               </Box.Item>
               <Box.Item>
-                <HiOutlineFlag /> <span>{customerId.country}</span>
+                <HiOutlineFlag /> <span>{country}</span>
               </Box.Item>
               <Box.Item>
                 <HiOutlineBanknotes />
@@ -122,7 +136,7 @@ const DetailsBox = ({ id, children }) => {
         </Boxes>
       </StyledDetails>
       {children}
-      <DetailsBtns id={id} status={status} />
+      {isCustomer && <DetailsBtns id={id} status={status} />}
     </>
   );
 };

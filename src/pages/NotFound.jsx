@@ -21,7 +21,7 @@ const NotFoundBox = styled.section`
   min-width: 300px;
 
   & p {
-    color: var(--color-white-4);
+    color: var(--color-white-5);
     display: flex;
     gap: 0.4rem;
     text-align: justify;

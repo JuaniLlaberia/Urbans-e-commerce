@@ -2,7 +2,6 @@ import { Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
-
 import NotFound from './pages/NotFound';
 import Styles from './styles/Styles';
 import ProtectedRoute from './features/Authentication/ProtectedRoute';
@@ -13,6 +12,8 @@ import StoreProducts from './pages/store/StoreProducts';
 import Product from './pages/store/Product';
 import StoreOrder from './pages/store/StoreOrder';
 import SavedProducts from './pages/store/SavedProducts';
+import ScrollRestoration from './components/ScrollRestoration';
+import Complains from './pages/store/Complains';
 
 const Home = lazy(() => import('./pages/store/Home'));
 const Login = lazy(() => import('./pages/Login'));
@@ -44,6 +45,7 @@ function App() {
       <ReactQueryDevtools />
       <Styles />
       <BrowserRouter>
+        <ScrollRestoration />
         <Suspense fallback={<FullScreenSpinner />}>
           <Routes>
             <Route element={<StoreLayout />}>
@@ -58,7 +60,8 @@ function App() {
                 element={<Product />}
               />
               <Route path='/cart' element={<Cart />} />
-              <Route path='/order/track' element={<StoreOrder />} />
+              <Route path='/complains/new' element={<Complains />} />
+              <Route path='/order/track/:orderId' element={<StoreOrder />} />
             </Route>
             <Route path='login' element={<Login />} />
             <Route path='*' element={<NotFound />} />

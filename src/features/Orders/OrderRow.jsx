@@ -78,7 +78,7 @@ export const OrderRow = ({ order }) => {
   return (
     <Modal>
       <Table.Row>
-        <RowText>#{String(id).padStart(4, '0')}</RowText>
+        <RowText>#{id}</RowText>
         <RowText>{shipmentAddress}</RowText>
         <RowText>
           <ShipmentTag type={shipmentType}>{shipmentType}</ShipmentTag>
