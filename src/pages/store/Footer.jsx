@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import Accordion from '../../components/AccordionText';
+import ContactInfo from '../../components/ContactInfo';
 
 const StyledFooter = styled.footer`
   background-color: var(--color-white-2);
@@ -17,12 +18,14 @@ const FooterList = styled.ul`
 
   & li a {
     text-decoration: none;
-    color: var(--color-white-6);
+    color: var(--color-white-5);
+    opacity: 0.85;
   }
 
   & li a:hover {
     text-decoration: underline;
     color: var(--color-white-5);
+    opacity: 1;
   }
 `;
 
@@ -63,36 +66,23 @@ const Footer = () => {
   return (
     <StyledFooter>
       <Accordion>
-        <Accordion.Opener title='Store' opens='products' />
-        <Accordion.Body id='products'>
-          <FooterList>
-            <li>
-              <Link to='/'>Home</Link>
-            </li>
-            <li>
-              <Link to='/products/saved'>Saved</Link>
-            </li>
-            <li>
-              <Link to='/cart'>Checkout</Link>
-            </li>
-            <li>
-              <Link to='/orders'>Orders</Link>
-            </li>
-          </FooterList>
-        </Accordion.Body>
-      </Accordion>
-      <Accordion>
         <Accordion.Opener title='Help' opens='help' />
         <Accordion.Body id='help'>
           <FooterList>
             <li>
-              <Link to='/'>Contact Us</Link>
+              <Link to='/orders'>Tack my orders</Link>
+            </li>
+            <li>
+              <Link to='/products/saved'>Saved products</Link>
+            </li>
+            <li>
+              <Link to='/cart'>My cart</Link>
             </li>
             <li>
               <Link to='/'>FaQ</Link>
             </li>
             <li>
-              <Link to='/'>Problems</Link>
+              <Link to='/complains/new'>Problem with order</Link>
             </li>
           </FooterList>
         </Accordion.Body>
@@ -110,6 +100,7 @@ const Footer = () => {
           </p>
         </Accordion.Body>
       </Accordion>
+      <ContactInfo />
       <CopyRow>
         <CopyRight>
           Copyright @Juanillaberia {new Date().getFullYear()}

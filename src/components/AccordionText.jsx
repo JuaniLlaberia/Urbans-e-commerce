@@ -23,6 +23,7 @@ const StyledOpener = styled.div`
 const StyledBody = styled.div`
   height: 0;
   overflow: hidden;
+  color: var(--color-white-5);
 
   transition: all 0.4s ease;
   &.open {
