@@ -20,7 +20,7 @@ const StyledContent = styled.div`
   gap: 0.4rem;
 
   & p {
-    color: var(--color-white-4);
+    color: var(--color-white-5);
   }
 
   & p span {
@@ -36,7 +36,7 @@ const Img = styled.img`
 `;
 
 const ProductItem = ({ product }) => {
-  const { product: productInfo, quantity } = product;
+  const { product: productInfo, quantity, size } = product;
 
   return (
     <StyledItem>
@@ -45,14 +45,16 @@ const ProductItem = ({ product }) => {
         <StyledContent>
           <Title as='h5'>{productInfo.SKU}</Title>
           <p>
-            Size: <span>{productInfo.size}</span>
+            Size: <span>{size.size}</span>
           </p>
           <p>
             QTY: <span>{quantity}</span>
           </p>
         </StyledContent>
       </div>
-      <RowText>{formatCurrency(productInfo.price * quantity)}</RowText>
+      <p style={{ color: 'var(--color-white-5)' }}>
+        {formatCurrency(productInfo.price * quantity)}
+      </p>
     </StyledItem>
   );
 };

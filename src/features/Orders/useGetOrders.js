@@ -3,11 +3,16 @@ import { getOrders } from '../../apiServices/ordersServices';
 import { useSearchParams } from 'react-router-dom';
 import { pageSize } from '../../utils/constants';
 
-export const useGetOrders = () => {
+export const useGetOrders = (full = false) => {
   const [searchParams] = useSearchParams();
   const queryClient = useQueryClient();
 
-  const page = !searchParams.get('page') ? 1 : Number(searchParams.get('page'));
+  const page = full
+    ? ''
+    : searchParams.get('page')
+    ? Number(searchParams.get('page'))
+    : 1;
+
   const filter = searchParams.get('filter') || '';
   const orderNum = searchParams.get('orderNum')
     ? Number(searchParams.get('orderNum'))
