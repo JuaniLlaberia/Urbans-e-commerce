@@ -1,5 +1,11 @@
+import ShippingBanner from '../../features/HomePage/ShippingBanner';
+
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <>
+      <ShippingBanner />
+    </>
+  );
 };
 
 export default Home;

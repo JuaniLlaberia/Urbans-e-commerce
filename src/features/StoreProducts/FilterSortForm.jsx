@@ -1,14 +1,50 @@
-import Select from '../../components/Select';
 import Title from '../../components/Title';
-import Option from '../../components/Option';
 import Form from '../../components/Form';
-import InputContainer from '../../components/InputContainer';
+import FieldSet from '../../components/FieldSet';
+import AccordionText from '../../components/AccordionText';
 import FilterButton from './FilterBtn';
 import { orderProductsStore } from '../../utils/orderConsts';
 import { colors } from '../../utils/constants';
 import { filterPriceRange } from '../../utils/filterConsts';
 import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
+import { styled } from 'styled-components';
+
+const Input = styled.input`
+  accent-color: var(--icons-color);
+  width: 18px;
+  transform: scale(1.25);
+  cursor: pointer;
+`;
+
+const Label = styled.label`
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 0.4rem 0.3rem;
+
+  &:has(> input:checked) {
+    background-color: var(--color-white-3);
+  }
+`;
+
+const ColorTag = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 1000px;
+  border: var(--border-sm);
+  cursor: pointer;
+`;
+
+const ColorsGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 0.5rem;
+  column-gap: 0.5rem;
+`;
 
 const FilterSortForm = ({ close }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -48,34 +84,76 @@ const FilterSortForm = ({ close }) => {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Title as='h3'>Filter & Sort</Title>
-      <InputContainer label='Sort By' type='vertical'>
-        <Select {...register('sort')}>
-          {orderProductsStore.map(item => (
-            <Option key={item.value} value={item.value}>
-              {item.label}
-            </Option>
-          ))}
-        </Select>
-      </InputContainer>
-      <InputContainer label='Color' type='vertical'>
-        <Select {...register('color')}>
-          <Option value='All'> No filter </Option>
-          {colors.map(color => (
-            <Option key={color} value={color}>
-              {color}
-            </Option>
-          ))}
-        </Select>
-      </InputContainer>
-      <InputContainer label='Price' type='vertical'>
-        <Select {...register('priceRange')}>
-          {filterPriceRange.map(price => (
-            <Option key={price.label} value={price.value}>
-              {price.label}
-            </Option>
-          ))}
-        </Select>
-      </InputContainer>
+      <AccordionText>
+        <AccordionText.Opener opens='sort' title='Sort By' />
+        <AccordionText.Body id='sort'>
+          <FieldSet id='sort'>
+            {orderProductsStore.map(item => (
+              <label htmlFor={item.label} key={item.value}>
+                <Input
+                  id={item.label}
+                  type='radio'
+                  value={item.value}
+                  name='sort'
+                  {...register('sort')}
+                />{' '}
+                {item.label}
+              </label>
+            ))}
+          </FieldSet>
+        </AccordionText.Body>
+      </AccordionText>
+      <AccordionText>
+        <AccordionText.Opener opens='color' title='Color' />
+        <AccordionText.Body id='color'>
+          <ColorsGrid>
+            <Label>
+              <Input
+                type='radio'
+                value='All'
+                name='color'
+                style={{ display: 'none' }}
+                {...register('color')}
+              />{' '}
+              All
+            </Label>
+            {colors.map(color => (
+              <Label htmlFor={color} key={color}>
+                <Input
+                  id={color}
+                  type='radio'
+                  value={color}
+                  name='color'
+                  style={{ display: 'none' }}
+                  {...register('color')}
+                />{' '}
+                <ColorTag style={{ backgroundColor: color }}></ColorTag>
+                <p style={{ fontSize: '.7rem' }}>{color}</p>
+              </Label>
+            ))}
+          </ColorsGrid>
+        </AccordionText.Body>
+      </AccordionText>
+      <AccordionText>
+        <AccordionText.Opener opens='priceRange' title='Price Range' />
+        <AccordionText.Body id='priceRange'>
+          <FieldSet id='priceRange'>
+            {filterPriceRange.map(price => (
+              <label htmlFor={price.label} key={price.value}>
+                <Input
+                  {...register('priceRange')}
+                  id={price.label}
+                  type='radio'
+                  value={price.value}
+                  name='priceRange'
+                />{' '}
+                {price.label}
+              </label>
+            ))}
+          </FieldSet>
+        </AccordionText.Body>
+      </AccordionText>
+
       <br />
       <FilterButton width='full'>Apply</FilterButton>
     </Form>

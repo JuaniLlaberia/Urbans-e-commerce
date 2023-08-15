@@ -29,7 +29,9 @@ const StockRow = ({ product }) => {
         <DropDownMenu>
           <DropDownMenu.Opener id={id} />
           <DropDownMenu.Menu id={id}>
-            <DropDownMenu.Item onClick={() => navigate(`/products`)}>
+            <DropDownMenu.Item
+              onClick={() => navigate(`/product/details/${productId.SKU}`)}
+            >
               <HiOutlineShoppingCart />
             </DropDownMenu.Item>
             <Modal.Open opens='editModal'>

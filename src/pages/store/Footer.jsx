@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import Accordion from '../../components/AccordionText';
 import ContactInfo from '../../components/ContactInfo';
+import { useGetMainCategories } from '../../features/Categories/useGetMainCategories';
+import Spinner from '../../components/Spinner';
 
 const StyledFooter = styled.footer`
   background-color: var(--color-white-2);
@@ -63,8 +65,24 @@ const CopyRight = styled.p`
 `;
 
 const Footer = () => {
+  const { mainCategories, isLoading } = useGetMainCategories();
+
+  if (isLoading) return <Spinner />;
+
   return (
     <StyledFooter>
+      <Accordion>
+        <Accordion.Opener title='Collections' opens='collections' />
+        <Accordion.Body id='collections'>
+          <FooterList>
+            {mainCategories?.map(category => (
+              <li>
+                <Link to={`/products/${category.name}`}>{category.name}</Link>
+              </li>
+            ))}
+          </FooterList>
+        </Accordion.Body>
+      </Accordion>
       <Accordion>
         <Accordion.Opener title='Help' opens='help' />
         <Accordion.Body id='help'>

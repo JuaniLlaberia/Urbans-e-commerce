@@ -54,7 +54,7 @@ export const filtersOrders = [
 export const filterPriceRange = [
   {
     value: 'All',
-    label: 'No filter',
+    label: 'All',
   },
   {
     value: '0-15',

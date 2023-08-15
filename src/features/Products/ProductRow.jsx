@@ -34,7 +34,9 @@ const ProductRow = ({ product, variant }) => {
         <DropDownMenu>
           <DropDownMenu.Opener id={id} />
           <DropDownMenu.Menu id={id}>
-            <DropDownMenu.Item onClick={() => navigate(`/products`)}>
+            <DropDownMenu.Item
+              onClick={() => navigate(`/product/details/${SKU}`)}
+            >
               <HiOutlineShoppingCart />
             </DropDownMenu.Item>
             {variant ? null : (
