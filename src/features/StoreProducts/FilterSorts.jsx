@@ -6,7 +6,7 @@ import Overlay from '../../components/Overlay';
 
 const StyledFilter = styled.aside`
   background-color: var(--color-white-2);
-  padding: 2.5rem 1rem;
+  padding: 2.5rem 0rem;
   border-right: var(--border-sm);
 
   transform: translateX(-300px);
@@ -15,6 +15,24 @@ const StyledFilter = styled.aside`
   top: 0;
   left: 0;
   width: 300px;
+
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-white-4);
+    border-radius: 1000px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--color-white-4);
+  }
 
   transition: all 0.3s ease-in-out;
 

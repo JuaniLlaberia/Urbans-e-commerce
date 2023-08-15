@@ -12,7 +12,6 @@ const StyledOpener = styled.div`
   justify-content: space-between;
   padding: 0.8rem 1.5rem;
   color: var(--color-white-5);
-  border-bottom: var(--border-sm);
   cursor: pointer;
   & h6 {
     font-size: 0.9rem;
@@ -57,7 +56,10 @@ const Opener = ({ title, opens }) => {
           <p>-</p>
         </StyledOpener>
       ) : (
-        <StyledOpener onClick={() => openAccordion(opens)}>
+        <StyledOpener
+          onClick={() => openAccordion(opens)}
+          style={{ borderBottom: 'var(--border-sm)' }}
+        >
           <h6>{title}</h6>
           <p>+</p>
         </StyledOpener>
