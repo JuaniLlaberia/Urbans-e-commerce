@@ -11,7 +11,7 @@ import { HiOutlineShoppingCart } from 'react-icons/hi2';
 import SaveBtn from '../../features/StoreProducts/SaveBtn';
 import { useGetProductBySku } from '../../features/Products/useGetProductBySku';
 import { useGetStockFromId } from '../../features/Products/useGetStockFromId';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import ProductLoadingSkeleton from '../../components/ProductLoadingSkeleton';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../../features/Cart/cartSlice';
@@ -157,9 +157,14 @@ const BtnContainer = styled.div`
   }
 `;
 
-const qtyArr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const StockMsg = styled.p`
+  color: #f84747;
+`;
+
+const qtyArr = [1, 2, 3, 4, 5];
 
 const Product = () => {
+  const [stockMsg, setStockMsg] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -187,13 +192,19 @@ const Product = () => {
 
   const addCart = () => {
     //Checking that there is a selected size
-    if (!selectedSize) return;
+    if (!selectedSize) {
+      setStockMsg('Must select a size');
+      return;
+    }
 
     const size = stock.find(s => s.size === searchParams.get('size'));
     const quantity = Number(qtyRef.current.value);
 
     //Checking that the quantity requested is not higher than the available stock
-    if (quantity > size.quantity) return;
+    if (quantity > size.quantity) {
+      setStockMsg('Not enough stock');
+      return;
+    }
 
     //Add to cart
     const orderItem = {
@@ -257,6 +268,7 @@ const Product = () => {
           <VariationList>
             {stock.map(s => (
               <VariationItem
+                disabled={s.quantity === 0}
                 onClick={() => handleSize(s.size)}
                 key={s.id}
                 className={`
@@ -268,6 +280,7 @@ const Product = () => {
               </VariationItem>
             ))}
           </VariationList>
+          <StockMsg>{stockMsg}</StockMsg>
           <BtnContainer>
             <Select height='full' ref={qtyRef}>
               {qtyArr.map(el => (

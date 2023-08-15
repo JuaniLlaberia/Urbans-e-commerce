@@ -81,8 +81,6 @@ const InfoBox = styled.div`
   gap: 0.6rem;
 `;
 
-const qtyArr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 const CartItem = ({ product }) => {
   const dispatch = useDispatch();
   const { img, name, price, SKU, quantity, size, stockId, productId, color } =
@@ -100,21 +98,7 @@ const CartItem = ({ product }) => {
           </InfoText>
         </div>
       </InfoBox>
-      <QTY>
-        QTY:{' '}
-        <Select
-          defaultValue={quantity}
-          onChange={e =>
-            dispatch(editQuantity({ SKU, size, quantity: e.target.value }))
-          }
-        >
-          {qtyArr.map(item => (
-            <Option key={item} value={item}>
-              {item}
-            </Option>
-          ))}
-        </Select>
-      </QTY>
+      <QTY>QTY: {quantity}</QTY>
       <DeleteBtn onClick={() => dispatch(removeItem(stockId))}>
         <HiOutlineTrash />
       </DeleteBtn>
