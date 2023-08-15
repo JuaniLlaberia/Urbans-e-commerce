@@ -1,12 +1,11 @@
 import { useGetMainCategories } from '../features/Categories/useGetMainCategories';
 import SpinnerBtn from '../components/SpinnerBtn';
-import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { HiOutlineXMark } from 'react-icons/hi2';
+import DropDownOptions from './DropDownOptions';
 
 const CategoriesList = styled.ul`
   display: flex;
-  gap: 1rem;
   list-style: none;
 
   @media (max-width: 850px) {
@@ -25,21 +24,6 @@ const CategoriesList = styled.ul`
 
     &.open {
       transform: translateX(0);
-    }
-  }
-`;
-
-const CategoryItem = styled.li`
-  & a {
-    text-decoration: none;
-    color: var(--color-white-6);
-    font-weight: 400;
-  }
-  @media (max-width: 850px) {
-    font-size: 2rem;
-
-    & a {
-      font-weight: 600;
     }
   }
 `;
@@ -66,11 +50,11 @@ const NavbarCategories = ({ isOpen, closeNav }) => {
   return (
     <CategoriesList className={isOpen && 'open'}>
       {mainCategories?.map(category => (
-        <CategoryItem key={category.id} onClick={closeNav}>
-          <Link to={`/products/${category.name}`}>
-            {category.name.toUpperCase()}
-          </Link>
-        </CategoryItem>
+        <DropDownOptions
+          key={category.id}
+          onClick={closeNav}
+          mainCategory={category.name}
+        />
       ))}
       <XContainer>
         <HiOutlineXMark onClick={closeNav} />
