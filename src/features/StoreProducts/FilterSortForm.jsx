@@ -7,8 +7,10 @@ import { orderProductsStore } from '../../utils/orderConsts';
 import { colors } from '../../utils/constants';
 import { filterPriceRange } from '../../utils/filterConsts';
 import { useForm } from 'react-hook-form';
-import { useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { styled } from 'styled-components';
+import { useGetSubCategories } from '../Categories/useGetSubCategories';
+import SpinnerBtn from '../../components/SpinnerBtn';
 
 const Input = styled.input`
   accent-color: var(--icons-color);
@@ -48,11 +50,14 @@ const ColorsGrid = styled.div`
 
 const FilterSortForm = ({ close }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { mainCategory } = useParams();
+  const { subCategories, isLoading } = useGetSubCategories();
 
   //We get the current applied filters, so we can share and save the URL with filters applied
   const crrSort = searchParams.get('sortBy') || 'created_at-asc';
   const crrColor = searchParams.get('filterColor') || 'All';
   const crrPrice = searchParams.get('filterPrice') || 'All';
+  const crrSub = searchParams.get('subCar') || '';
 
   const { register, handleSubmit } = useForm({
     //Setting default values
@@ -60,8 +65,15 @@ const FilterSortForm = ({ close }) => {
       sort: crrSort,
       color: crrColor,
       priceRange: crrPrice,
+      sub: crrSub,
     },
   });
+
+  if (isLoading) return <SpinnerBtn />;
+
+  const crrSubCategories = subCategories.filter(
+    cat => cat.family === mainCategory
+  );
 
   //Setting the filters
   const onSubmit = data => {
@@ -77,6 +89,9 @@ const FilterSortForm = ({ close }) => {
       searchParams.set('filterPrice', data.priceRange);
       setSearchParams(searchParams);
     }
+
+    searchParams.set('subCat', data.sub);
+    setSearchParams(searchParams);
 
     close();
   };
@@ -101,6 +116,35 @@ const FilterSortForm = ({ close }) => {
               </label>
             ))}
           </FieldSet>
+        </AccordionText.Body>
+      </AccordionText>
+      <AccordionText>
+        <AccordionText.Opener title='Product Type' opens='sub-classes' />
+        <AccordionText.Body id='sub-classes'>
+          <ColorsGrid>
+            <Label>
+              <Input
+                type='radio'
+                style={{ display: 'none' }}
+                value=''
+                name='sub-cat'
+                {...register('sub')}
+              />
+              All
+            </Label>
+            {crrSubCategories?.map(cat => (
+              <Label key={cat.id}>
+                <Input
+                  type='radio'
+                  style={{ display: 'none' }}
+                  name='sub-cat'
+                  value={cat.name}
+                  {...register('sub')}
+                />
+                {cat.name}
+              </Label>
+            ))}
+          </ColorsGrid>
         </AccordionText.Body>
       </AccordionText>
       <AccordionText>
