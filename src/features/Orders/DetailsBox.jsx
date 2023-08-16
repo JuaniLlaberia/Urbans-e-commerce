@@ -33,7 +33,7 @@ const Boxes = styled.section`
   }
 `;
 
-const DetailsBox = ({ id, children, isCustomer }) => {
+const DetailsBox = ({ id, children, isCustomer = true }) => {
   const { order, isLoading: isLoading1 } = useGetOrder(id);
   const { shippingCosts, isLoading: isLoading2 } = useGetShippingPrices();
 
@@ -97,7 +97,7 @@ const DetailsBox = ({ id, children, isCustomer }) => {
               <Box.Item>
                 <HiOutlineBanknotes />
                 <span>Payment status:</span>{' '}
-                <span>{isPaid ? 'Approved' : 'Declined'}</span>
+                <span>{isPaid ? 'Approved' : 'Pending'}</span>
               </Box.Item>
             </Box.Body>
           </Box>
