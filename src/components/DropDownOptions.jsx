@@ -73,7 +73,7 @@ const DropDownOptions = ({ mainCategory, onClick }) => {
         {crrSubCategories.map(category => (
           <CategoryItem
             key={category.id}
-            to={`/products/Mens?subCat=${category.name}`}
+            to={`/products/${mainCategory}?subCat=${category.name}`}
           >
             {category.name}
           </CategoryItem>

@@ -15,7 +15,7 @@ const StyledNav = styled.nav`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 0.5rem 2.5rem;
+  padding: 0.5rem 6rem;
 
   @media (max-width: 850px) {
     justify-content: space-between;
