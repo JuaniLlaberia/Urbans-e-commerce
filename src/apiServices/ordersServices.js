@@ -90,7 +90,9 @@ export const shipOrder = async (id, courrier) => {
 };
 
 export const getAllItems = async () => {
-  const { data, error } = await supabase.from('order-items').select('*');
+  const { data, error } = await supabase
+    .from('order-items')
+    .select('*, product(*), size(*)');
 
   if (error) console.log(error);
 

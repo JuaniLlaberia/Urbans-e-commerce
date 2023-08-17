@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import { css, styled } from 'styled-components';
 import { formatCurrency } from '../../utils/formatCurrency';
 import Title from '../../components/Title';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,8 @@ const StyledItem = styled.li`
   background-color: var(--color-white-2);
   box-shadow: var(--shadow-light);
   width: 14vw;
-  min-width: 180px;
+  /* min-width: 180px; */ //CHECK THIS
+
   @media (max-width: 970px) {
     width: 25vw;
   }
@@ -25,7 +26,7 @@ const StyledItem = styled.li`
 
 const Img = styled.img`
   width: 14vw;
-  min-width: 180px;
+  /* min-width: 180px; */
   height: 40vh;
   object-fit: cover;
 

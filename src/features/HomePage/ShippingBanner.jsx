@@ -7,6 +7,7 @@ const StyledShippingBanner = styled.div`
   left: 0;
   height: 40px;
   width: 100vw;
+  max-width: 100%;
   background-color: var(--color-white-3);
   border-bottom: var(--border-sm);
   display: flex;
@@ -33,7 +34,7 @@ const ShippingBanner = () => {
         <span>
           <HiOutlineTruck />
         </span>
-        Free regular shipping over $95
+        Free regular shipping over $70
       </StlyedText>
     </StyledShippingBanner>
   );

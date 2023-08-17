@@ -40,8 +40,6 @@ const PaginationScroll = ({ count }) => {
     setSearchParams(searchParams);
   };
 
-  console.log(pageCount);
-
   return (
     <StylesPagination>
       {pageCount !== 1 && pageCount !== 0 && (

@@ -301,7 +301,8 @@ export const getProductsByCategory = async (
   filterColor,
   filterPrice,
   sorting,
-  page
+  page,
+  limit
 ) => {
   let query = supabase
     .from('products')
@@ -332,8 +333,8 @@ export const getProductsByCategory = async (
   }
 
   if (page) {
-    const from = (page - 1) * 12;
-    const to = from + 12 - 1;
+    const from = (page - 1) * limit;
+    const to = from + limit - 1;
     query.range(from, to);
   }
 

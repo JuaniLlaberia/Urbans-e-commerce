@@ -76,7 +76,7 @@ const Footer = () => {
         <Accordion.Body id='collections'>
           <FooterList>
             {mainCategories?.map(category => (
-              <li>
+              <li key={category.id}>
                 <Link to={`/products/${category.name}`}>{category.name}</Link>
               </li>
             ))}

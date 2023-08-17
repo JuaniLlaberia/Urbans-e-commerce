@@ -3,7 +3,7 @@ import { getStock } from '../../apiServices/productsService';
 import { useSearchParams } from 'react-router-dom';
 import { pageSize } from '../../utils/constants';
 
-export const useGetStock = () => {
+export const useGetStock = (full = false) => {
   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
 
@@ -11,7 +11,11 @@ export const useGetStock = () => {
     ? Number(searchParams.get('productId'))
     : '';
 
-  const page = searchParams.get('page') ? Number(searchParams.get('page')) : 1;
+  const page = full
+    ? ''
+    : searchParams.get('page')
+    ? Number(searchParams.get('page'))
+    : 1;
 
   const orderBy = searchParams.get('orderBy') || 'created_at-asc';
 

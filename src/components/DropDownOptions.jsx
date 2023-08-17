@@ -19,14 +19,16 @@ const StyledDropDown = styled.div`
   }
   &:hover ul.dropdown-content {
     width: 100vw;
+    max-width: 100%;
     place-items: center;
     list-style: none;
     padding: 1rem 6rem;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 
     background-color: var(--color-white-2);
-    border-bottom: var(--border-md);
+    border-bottom: var(--border-lg);
 
     @media (max-width: 850px) {
       display: none;
@@ -69,7 +71,10 @@ const DropDownOptions = ({ mainCategory, onClick }) => {
       </CategoryItem>
       <ul className='dropdown-content'>
         {crrSubCategories.map(category => (
-          <CategoryItem to={`/products/Mens?subCat=${category.name}`}>
+          <CategoryItem
+            key={category.id}
+            to={`/products/${mainCategory}?subCat=${category.name}`}
+          >
             {category.name}
           </CategoryItem>
         ))}

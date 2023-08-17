@@ -298,6 +298,7 @@ const Product = () => {
               img={product.img}
               price={product.price}
               color={product.mainColor}
+              SKU={product.SKU}
             />
           </BtnContainer>
           <Description style={{ width: '100%' }}>
