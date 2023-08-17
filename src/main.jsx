@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import store from './store.js';
 import { PersistGate } from 'redux-persist/integration/react';
 import persistStore from 'redux-persist/es/persistStore';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorBoundryPage from './pages/ErrorBoundryPage.jsx';
 
 const persistor = persistStore(store);
 
@@ -16,7 +18,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <PersistGate loading={null} persistor={persistor}>
         <ThemeProvider>
           <SavedContextProvider>
-            <App />
+            <ErrorBoundary FallbackComponent={ErrorBoundryPage}>
+              <App />
+            </ErrorBoundary>
           </SavedContextProvider>
         </ThemeProvider>
       </PersistGate>
