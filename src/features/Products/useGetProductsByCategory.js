@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getProductsByCategory } from '../../apiServices/productsService';
 import { useParams, useSearchParams } from 'react-router-dom';
 
-export const useGetProductsByCategory = () => {
+export const useGetProductsByCategory = (mainCat, limit = 12) => {
   const [searchParams] = useSearchParams();
   const { mainCategory } = useParams();
 
@@ -17,21 +17,23 @@ export const useGetProductsByCategory = () => {
   const { data: { data: products, count } = {}, isLoading } = useQuery({
     queryFn: () =>
       getProductsByCategory(
-        mainCategory,
+        mainCategory || mainCat,
         subCategory,
         filterColor,
         filterPrice,
         sorting,
-        page
+        page,
+        limit
       ),
     queryKey: [
       `product-category-${mainCategory}`,
-      mainCategory,
+      mainCategory || mainCat,
       subCategory,
       filterColor,
       filterPrice,
       sorting,
       page,
+      limit,
     ],
     keepPreviousData: true,
   });
