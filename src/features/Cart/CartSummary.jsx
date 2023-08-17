@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import { getCartLength, getTotalCartPrice } from './cartSlice';
 import Title from '../../components/Title';
 import { formatCurrency } from '../../utils/formatCurrency';
+import FreeShippingBar from './FreeShippingBar';
 
 const StyledCartSummary = styled.aside`
   background-color: var(--color-white-2);
@@ -20,6 +21,7 @@ const StyledCartSummary = styled.aside`
 const SummaryDiv = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-top: 5px;
 
   &:last-child {
     margin-top: 20px;
@@ -34,10 +36,17 @@ const CartSummary = () => {
   return (
     <StyledCartSummary>
       <Title as='h4'>SUMMARY</Title>
+      <FreeShippingBar price={price} max={70} />
       <SummaryDiv>
         <p>{length} products</p>
         <p>{formatCurrency(price)}</p>
       </SummaryDiv>
+      {price >= 70 && (
+        <SummaryDiv>
+          <p>Shipping(Regular)</p>
+          <p>{formatCurrency(0)}</p>
+        </SummaryDiv>
+      )}
       <SummaryDiv>
         <p>Subtotal</p>
         <p>{formatCurrency(price)}</p>
