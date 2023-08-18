@@ -1,7 +1,6 @@
 import { styled } from 'styled-components';
 import Title from '../../components/Title';
 import { formatCurrency } from '../../utils/formatCurrency';
-import RowText from '../../components/RowText';
 
 const StyledItem = styled.li`
   background-color: var(--color-white-2);

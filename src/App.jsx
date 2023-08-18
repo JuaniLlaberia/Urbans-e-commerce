@@ -30,6 +30,7 @@ const Tickets = lazy(() => import('./pages/dashboard/Tickets'));
 const Categories = lazy(() => import('./pages/dashboard/Categories'));
 const Stock = lazy(() => import('./pages/dashboard/Stock'));
 const Cart = lazy(() => import('./pages/store/Cart'));
+const Checkout = lazy(() => import('./pages/store/Checkout'));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -60,6 +61,7 @@ function App() {
                 element={<Product />}
               />
               <Route path='/cart' element={<Cart />} />
+              <Route path='/checkout' element={<Checkout />} />
               <Route path='/complains/new' element={<Complains />} />
               <Route path='/order/track/:orderId' element={<StoreOrder />} />
             </Route>

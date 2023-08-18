@@ -5,7 +5,7 @@ import Button from '../../components/Button';
 import Empty from '../../components/EmptyMsg';
 import { useSelector } from 'react-redux';
 import { getCartLength } from './cartSlice';
-import DiscountBox from './DiscountBox';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = styled.section`
   display: flex;
@@ -19,16 +19,21 @@ const Cart = styled.section`
 
 const StyledCart = () => {
   const cartLength = useSelector(getCartLength);
+  const navigate = useNavigate();
+
   return (
     <>
       {cartLength ? (
         <Cart>
           <CartList />
           <div>
-            {/* <DiscountBox /> */}
             <CartSummary />
             <br />
-            <Button variation='big' width='full-lg'>
+            <Button
+              variation='big'
+              width='full-lg'
+              onClick={() => navigate('/checkout')}
+            >
               CHECKOUT
             </Button>
           </div>

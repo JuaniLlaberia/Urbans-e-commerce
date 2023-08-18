@@ -37,10 +37,13 @@ const cartSlice = createSlice({
 
       state.cart.at(item).quantity = Number(action.payload.quantity);
     },
+    resetCart(state) {
+      state.cart = [];
+    },
   },
 });
 
-export const { addItem, removeItem, editQuantity, setDiscount } =
+export const { addItem, removeItem, editQuantity, setDiscount, resetCart } =
   cartSlice.actions;
 
 export default cartSlice.reducer;

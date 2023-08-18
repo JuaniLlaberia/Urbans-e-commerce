@@ -1,4 +1,3 @@
-import Spinner from '../../components/Spinner';
 import { useGetOrderProducts } from './useGetOrderProducts';
 import Title from '../../components/Title';
 import ProductItem from './ProductItem';
@@ -14,10 +13,34 @@ const StyledList = styled.ul`
   list-style: none;
 `;
 
+const LoadingSkeleton = styled.div`
+  background-color: #9c9797;
+  border-radius: var(--raidius-md);
+  height: 125px;
+  margin-bottom: 10px;
+
+  animation: skeleton-loading 1s linear infinite alternate;
+
+  @keyframes skeleton-loading {
+    0% {
+      background-color: #e0e0e0;
+    }
+    100% {
+      background-color: hsl(0, 0%, 72.54901960784314%);
+    }
+  }
+`;
+
 const OrderProductsTable = ({ id }) => {
   const { orderProducts, isLoading } = useGetOrderProducts(id);
 
-  if (isLoading) return <Spinner />;
+  if (isLoading)
+    return (
+      <>
+        <LoadingSkeleton />
+        <LoadingSkeleton />
+      </>
+    );
 
   return (
     <>
