@@ -243,7 +243,7 @@ const Product = () => {
       </StyledTop>
       <StyledProduct>
         <ImgContainer>
-          <Img src={product.img} />
+          <Img src={product.img} alt={`Product ${product.name}`} />
         </ImgContainer>
         <InfoContainer>
           <Row space='separate'>

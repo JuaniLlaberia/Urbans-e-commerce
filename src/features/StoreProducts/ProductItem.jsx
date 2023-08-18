@@ -82,7 +82,7 @@ const ProductItem = ({ product }) => {
         />
       </BtnContainer>
       <StyledLink to={`/product/details/${product.SKU}`}>
-        <Img src={product.img} />
+        <Img src={product.img} alt={product.name} />
         <Data>
           <Title as='h5'>{product.name}</Title>
           <Color>{product.mainColor}</Color>

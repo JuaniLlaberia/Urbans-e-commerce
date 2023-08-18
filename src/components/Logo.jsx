@@ -16,6 +16,7 @@ const Logo = () => {
   return (
     <Img
       onClick={() => navigate('/')}
+      alt='Logo'
       src={theme === 'light' ? logoDark : logoLight}
     />
   );
