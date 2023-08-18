@@ -23,7 +23,9 @@ const ProductsSummary = ({
       </Table.Header>
       <Table.Body
         data={cartProducts}
-        render={product => <CheckoutRow key={product.id} product={product} />}
+        render={product => (
+          <CheckoutRow key={product.stockId} product={product} />
+        )}
       />
       <Table.Footer as='div'>
         <PriceSummary>
