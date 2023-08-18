@@ -3,7 +3,7 @@ import CheckoutInfo from './CheckoutInfo';
 
 const StyledCheckout = styled.section`
   box-shadow: var(--shadow-light);
-  margin-top: 50px;
+  margin-top: 10px;
   border-radius: var(--raidius-sm);
   width: 60vw;
   min-width: 300px;
@@ -17,6 +17,7 @@ export const CheckoutForm = () => {
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'column',
+        paddingBottom: '2.5rem',
       }}
     >
       <StyledCheckout>
