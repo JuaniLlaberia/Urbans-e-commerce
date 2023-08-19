@@ -1,17 +1,19 @@
 import { styled } from 'styled-components';
+import banner from '../../brick-wallpaper.jpg';
 
-const StyledBanner = styled.section`
+const StyledBanner = styled.img`
   height: 500px;
-  background-color: rebeccapurple;
   width: 100vw;
   max-width: 100%;
   position: absolute;
   top: 40px;
   left: 0;
+  background-position: center;
+  object-fit: cover;
 `;
 
 const MainBanner = () => {
-  return <StyledBanner>BIG IMAGE</StyledBanner>;
+  return <StyledBanner src={banner} />;
 };
 
 export default MainBanner;
