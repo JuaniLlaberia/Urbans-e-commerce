@@ -7,7 +7,6 @@ import Title from '../../components/Title';
 import CheckoutBtns from './CheckoutBtns';
 import ProductsSummary from './ProductsSummary';
 import { useGetShippingPrices } from '../Settings/useGetShippingPrices';
-import Spinner from '../../components/Spinner';
 import Select from '../../components/Select';
 import Option from '../../components/Option';
 import { formatCurrency } from '../../utils/formatCurrency';
