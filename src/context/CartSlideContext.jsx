@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from 'react';
 const CartSlideContext = createContext();
 
 export const CartSlideProvider = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const openOnClick = () => setIsOpen(true);
   const closeOnClick = () => setIsOpen(false);
 

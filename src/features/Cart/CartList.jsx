@@ -11,6 +11,10 @@ const StyledCartList = styled.ul`
     props.width === 'slide' &&
     css`
       width: auto;
+      height: 60vh;
+      @media (max-width: 450px) {
+        max-height: 500px;
+      }
     `}
 
   margin-bottom: 20px;
