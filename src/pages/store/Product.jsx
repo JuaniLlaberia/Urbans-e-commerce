@@ -4,7 +4,7 @@ import Row from '../../components/Row';
 import Button from '../../components/Button';
 import Select from '../../components/Select';
 import Option from '../../components/Option';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { useGetVariants } from '../../features/Products/useGetVariants';
 import { HiOutlineShoppingCart } from 'react-icons/hi2';
@@ -15,6 +15,7 @@ import { useRef, useState } from 'react';
 import ProductLoadingSkeleton from '../../components/ProductLoadingSkeleton';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../../features/Cart/cartSlice';
+import { useCartSlideContext } from '../../context/CartSlideContext';
 
 const StyledTop = styled.section`
   padding: 1rem 8rem;
@@ -164,10 +165,11 @@ const StockMsg = styled.p`
 const qtyArr = [1, 2, 3, 4, 5];
 
 const Product = () => {
+  const { openOnClick } = useCartSlideContext();
   const [stockMsg, setStockMsg] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   //Getting product by SKU code
   const { product, isLoading: isLoadingProducts } = useGetProductBySku();
 
@@ -221,8 +223,8 @@ const Product = () => {
 
     dispatch(addItem(orderItem));
 
-    //Navigate to cart
-    navigate('/cart');
+    //Open cart slide
+    openOnClick();
   };
 
   return (
