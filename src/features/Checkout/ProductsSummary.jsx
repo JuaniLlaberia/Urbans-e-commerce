@@ -10,6 +10,7 @@ const PriceSummary = styled.p`
 `;
 
 const ProductsSummary = ({
+  // discount,
   totalPrice,
   cartProducts,
   shippingCosts,
@@ -23,7 +24,9 @@ const ProductsSummary = ({
       </Table.Header>
       <Table.Body
         data={cartProducts}
-        render={product => <CheckoutRow key={product.id} product={product} />}
+        render={product => (
+          <CheckoutRow key={product.stockId} product={product} />
+        )}
       />
       <Table.Footer as='div'>
         <PriceSummary>
@@ -36,6 +39,14 @@ const ProductsSummary = ({
           <span>{formatCurrency(shippingCosts)}</span>
         </PriceSummary>
       </Table.Footer>
+      {/* {discount.code ? (
+        <Table.Footer as='div'>
+          <PriceSummary>
+            <span>Discount({discount.code})</span>{' '}
+            <span>{formatCurrency((totalPrice * discount.amount) / 100)}</span>
+          </PriceSummary>
+        </Table.Footer>
+      ) : null} */}
       <Table.Footer>
         <PriceSummary>
           <span>Total</span>{' '}

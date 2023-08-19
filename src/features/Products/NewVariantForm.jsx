@@ -16,7 +16,6 @@ import { useCreateVariant } from './useCreateVariant';
 import { useEditStock } from './useEditStock';
 
 const NewProductForm = ({ onCloseModal, variantToEdit = {} }) => {
-  console.log(variantToEdit);
   const { id: editId, ...editData } = variantToEdit;
   const isEditing = Boolean(editId);
 
@@ -84,9 +83,9 @@ const NewProductForm = ({ onCloseModal, variantToEdit = {} }) => {
       >
         <Input
           list='product'
+          type='number'
           {...register('productId', {
             required: 'This field is required',
-            validate: 1 !== 1 ? false : 'Must input the product ID',
           })}
         />
 

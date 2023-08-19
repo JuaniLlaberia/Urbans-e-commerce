@@ -3,9 +3,7 @@ import { formatCurrency } from '../../utils/formatCurrency';
 import { HiOutlineTrash } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { editQuantity, removeItem } from './cartSlice';
-import Select from '../../components/Select';
-import Option from '../../components/Option';
+import { removeItem } from './cartSlice';
 
 const StyledCartItem = styled.li`
   background-color: var(--color-white-1);
@@ -83,8 +81,7 @@ const InfoBox = styled.div`
 
 const CartItem = ({ product }) => {
   const dispatch = useDispatch();
-  const { img, name, price, SKU, quantity, size, stockId, productId, color } =
-    product;
+  const { img, name, price, SKU, quantity, size, stockId, color } = product;
 
   return (
     <StyledCartItem>

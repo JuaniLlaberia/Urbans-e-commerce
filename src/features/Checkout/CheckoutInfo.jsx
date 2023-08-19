@@ -7,7 +7,6 @@ import Title from '../../components/Title';
 import CheckoutBtns from './CheckoutBtns';
 import ProductsSummary from './ProductsSummary';
 import { useGetShippingPrices } from '../Settings/useGetShippingPrices';
-import Spinner from '../../components/Spinner';
 import Select from '../../components/Select';
 import Option from '../../components/Option';
 import { formatCurrency } from '../../utils/formatCurrency';
@@ -17,6 +16,8 @@ import { getCart } from '../Cart/cartSlice';
 import { useCreateOrder } from './useCreateOrder';
 import LoadingPage from './LoadingPage';
 import { styled } from 'styled-components';
+// import { Discount } from './Discount';
+// import { useGetValidDiscounts } from '../Discount/useGetValidDiscounts';
 
 const CheckoutSkeleton = styled.section`
   border-radius: var(--raidius-sm);
@@ -39,8 +40,10 @@ const CheckoutSkeleton = styled.section`
 `;
 
 const CheckoutInfo = () => {
-  const [shippingType, setShippingType] = useState('Regular');
   const { shippingCosts, isLoading } = useGetShippingPrices();
+  // const { discounts, isLoading: isLoadingDiscounts } = useGetValidDiscounts();
+  const [shippingType, setShippingType] = useState('Regular');
+  // const [discount, setDiscount] = useState('');
   const { createOrder, isCreating } = useCreateOrder();
   const cartProducts = useSelector(getCart);
 
@@ -63,6 +66,17 @@ const CheckoutInfo = () => {
       : shippingType === 'Express'
       ? shippingCosts.expressPrice
       : shippingCosts.regularPrice;
+
+  // const validateDiscount = e => {
+  //   e.preventDefault();
+  //   if (!discount) return;
+
+  //   const validDiscount = discounts.find(dis => dis.code === discount);
+  //   setDiscount({
+  //     amount: validDiscount?.amount || '',
+  //     code: validDiscount?.code || '',
+  //   });
+  // };
 
   const onSubmit = data => {
     const { email, fullName, address, postalCode, apartment, country, city } =
@@ -190,8 +204,13 @@ const CheckoutInfo = () => {
           </Option>
         </Select>
       </InputContainer>
-
+      {/* <Discount
+      discount={discount}
+      setDiscount={setDiscount}
+      validateDiscount={validateDiscount}
+      /> */}
       <ProductsSummary
+        // discount={discount}
         shippingType={shippingType}
         shippingCosts={priceShipment}
         cartProducts={cartProducts}

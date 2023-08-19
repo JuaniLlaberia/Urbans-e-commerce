@@ -58,6 +58,13 @@ const DetailsBox = ({ id, children, isCustomer = true }) => {
     country,
   } = order;
 
+  const shipmentPrice =
+    shipmentType === 'Regular' && totalPrice > 70
+      ? 0
+      : shipmentType === 'Express'
+      ? shippingCosts.expressPrice
+      : shippingCosts.regularPrice;
+
   return (
     <>
       <StyledDetails>
@@ -106,25 +113,14 @@ const DetailsBox = ({ id, children, isCustomer = true }) => {
             <Box.Body>
               <Box.Item space='between'>
                 <span>Products price</span>
-                <span>
-                  {formatCurrency(
-                    totalPrice -
-                      (shipmentType === 'Regular'
-                        ? shippingCosts.regularPrice
-                        : shippingCosts.expressPrice)
-                  )}
-                </span>
+                <span>{formatCurrency(totalPrice - shipmentPrice)}</span>
               </Box.Item>
               <Box.Item space='between'>
                 <span>
                   Shipment ({shipmentType === 'Regular' ? 'Regular' : 'Express'}
                   )
                 </span>
-                <span>
-                  {shipmentType === 'Regular'
-                    ? formatCurrency(shippingCosts.regularPrice)
-                    : formatCurrency(shippingCosts.expressPrice)}
-                </span>
+                <span>{formatCurrency(shipmentPrice)}</span>
               </Box.Item>
               <br />
               <Box.Item space='between'>
