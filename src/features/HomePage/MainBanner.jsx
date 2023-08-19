@@ -1,5 +1,4 @@
 import { styled } from 'styled-components';
-import banner from '../../brick-wallpaper.jpg';
 
 const StyledBanner = styled.img`
   height: 500px;
@@ -13,7 +12,9 @@ const StyledBanner = styled.img`
 `;
 
 const MainBanner = () => {
-  return <StyledBanner src={banner} />;
+  return (
+    <StyledBanner src='https://geuzjkdzkblmryfdmtpi.supabase.co/storage/v1/object/public/products-img/brick-wallpaper.jpg' />
+  );
 };
 
 export default MainBanner;

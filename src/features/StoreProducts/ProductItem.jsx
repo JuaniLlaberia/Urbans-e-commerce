@@ -1,4 +1,4 @@
-import { css, styled } from 'styled-components';
+import { styled } from 'styled-components';
 import { formatCurrency } from '../../utils/formatCurrency';
 import Title from '../../components/Title';
 import { Link } from 'react-router-dom';
