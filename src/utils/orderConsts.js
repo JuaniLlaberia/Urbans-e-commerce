@@ -8,14 +8,6 @@ export const orderProducts = [
     label: 'By Date (desc)',
   },
   {
-    value: 'quantity-asc',
-    label: 'By Quantity (asc)',
-  },
-  {
-    value: 'quantity-desc',
-    label: 'By Quantity (desc)',
-  },
-  {
     value: 'price-asc',
     label: 'By Price (asc)',
   },

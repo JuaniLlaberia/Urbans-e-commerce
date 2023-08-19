@@ -2,12 +2,12 @@ import Option from './Option';
 import Select from './Select';
 import { useSearchParams } from 'react-router-dom';
 
-const OrderBy = ({ options }) => {
+const OrderBy = ({ options, variable = 'orderBy' }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const orderBy = searchParams.get('orderBy') || '';
+  const orderBy = searchParams.get(variable) || '';
 
   const handleChange = e => {
-    searchParams.set('orderBy', e.target.value);
+    searchParams.set(variable, e.target.value);
     setSearchParams(searchParams);
   };
 

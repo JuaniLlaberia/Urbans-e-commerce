@@ -13,7 +13,7 @@ const Stock = () => {
         <Title as='h2'>Stock</Title>
       </Top>
       <Row>
-        <OrderBy options={orderStock} />
+        <OrderBy options={orderStock} variable='orderStock' />
         <AddStock />
       </Row>
       <StockTable />
