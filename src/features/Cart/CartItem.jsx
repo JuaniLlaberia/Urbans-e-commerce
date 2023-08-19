@@ -4,6 +4,7 @@ import { HiOutlineTrash } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { removeItem } from './cartSlice';
+
 const StyledCartItem = styled.li`
   background-color: var(--color-white-1);
   padding: 0.8rem 1rem;
