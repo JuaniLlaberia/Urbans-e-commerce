@@ -2,13 +2,12 @@ import { styled } from 'styled-components';
 import { formatCurrency } from '../../utils/formatCurrency';
 import Title from '../../components/Title';
 import { Link } from 'react-router-dom';
-import SaveBtn from './SaveBtn';
+import SaveBtn from '../StoreProducts/SaveBtn';
 
 const StyledItem = styled.li`
-  background-color: var(--color-white-2);
+  background-color: var(--color-white-1);
   box-shadow: var(--shadow-light);
   width: 14vw;
-  min-width: 180px;
 
   @media (max-width: 970px) {
     width: 25vw;
@@ -26,7 +25,6 @@ const StyledItem = styled.li`
 
 const Img = styled.img`
   width: 14vw;
-  min-width: 180px;
   height: 40vh;
   object-fit: cover;
 
@@ -68,7 +66,7 @@ const BtnContainer = styled.div`
   right: 2%;
 `;
 
-const ProductItem = ({ product }) => {
+const HorizontalProductItem = ({ product }) => {
   return (
     <StyledItem>
       <BtnContainer>
@@ -84,7 +82,7 @@ const ProductItem = ({ product }) => {
       <StyledLink to={`/product/details/${product.SKU}`}>
         <picture>
           <source type='image/webp' />
-          <Img src={product.img} alt={product.name} loading='lazy' />
+          <Img src={product.img} alt={product.name} />
         </picture>
         <Data>
           <Title as='h5'>{product.name}</Title>
@@ -96,4 +94,4 @@ const ProductItem = ({ product }) => {
   );
 };
 
-export default ProductItem;
+export default HorizontalProductItem;
