@@ -247,10 +247,15 @@ const NewProductForm = ({ onCloseModal, productToEdit = {} }) => {
         />
       </InputContainer>
       <Row>
-        <Button variation='outline' disabled={isWorking} onClick={onCloseModal}>
+        <Button
+          aria-label='close'
+          variation='outline'
+          disabled={isWorking}
+          onClick={onCloseModal}
+        >
           Cancel
         </Button>
-        <Button variation='regular' disabled={isWorking}>
+        <Button aria-label='open' variation='regular' disabled={isWorking}>
           {isWorking ? (
             <SpinnerBtn />
           ) : (

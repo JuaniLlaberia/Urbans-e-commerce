@@ -37,13 +37,17 @@ const DetailsBtns = ({ id, status }) => {
 
   return (
     <Row>
-      <Button variation='outline' onClick={() => navigate('/admin/orders')}>
+      <Button
+        variation='outline'
+        aria-label='navigate back'
+        onClick={() => navigate('/admin/orders')}
+      >
         Back
       </Button>
       {(status === 'Cancel' || status === 'Delivered') && (
         <Modal>
           <Modal.Open opens='removeShip'>
-            <Button variation='alert'>
+            <Button variation='alert' aria-label='open'>
               Remove #{String(id).padStart(4, '0')}
             </Button>
           </Modal.Open>
@@ -59,7 +63,7 @@ const DetailsBtns = ({ id, status }) => {
       {status === 'Pending' && (
         <Modal>
           <Modal.Open opens='shipModal'>
-            <Button variation='regular'>
+            <Button variation='regular' aria-label='open'>
               Ship order #{String(id).padStart(4, '0')}
             </Button>
           </Modal.Open>

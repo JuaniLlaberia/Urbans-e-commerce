@@ -17,7 +17,7 @@ export const useGetStock = (full = false) => {
     ? Number(searchParams.get('page'))
     : 1;
 
-  const orderBy = searchParams.get('orderBy') || 'created_at-asc';
+  const orderBy = searchParams.get('orderStock') || 'created_at-asc';
 
   const [order, direction] = orderBy?.split('-');
 

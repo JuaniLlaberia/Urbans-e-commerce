@@ -59,7 +59,7 @@ const NewCourrierForm = ({ courriers, onCloseModal }) => {
         />
       </InputContainer>
       <Row>
-        <Button variation='regular' disabled={isCreating}>
+        <Button variation='regular' disabled={isCreating} aria-label='submit'>
           {isCreating ? <SpinnerBtn /> : 'Add'}
         </Button>
       </Row>

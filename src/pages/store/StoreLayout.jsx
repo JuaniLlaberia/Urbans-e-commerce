@@ -10,10 +10,6 @@ const Main = styled.main`
   min-height: 85vh;
   position: relative;
   overflow-x: hidden;
-
-  @media (max-width: 850px) {
-    padding: 0.6rem 2.5rem;
-  }
 `;
 
 const StoreLayout = () => {

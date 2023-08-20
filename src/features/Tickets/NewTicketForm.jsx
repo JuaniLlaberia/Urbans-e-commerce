@@ -107,10 +107,20 @@ const NewTicketForm = () => {
           />
         </InputContainer>
         <Row>
-          <Button variation='outline' disabled={isCreating} type='reset'>
+          <Button
+            variation='outline'
+            disabled={isCreating}
+            type='reset'
+            aria-label='reset'
+          >
             Cancel
           </Button>
-          <Button disabled={isCreating} variation='regular' width='full'>
+          <Button
+            disabled={isCreating}
+            variation='regular'
+            width='full'
+            aria-label='submit'
+          >
             {isCreating ? <SpinnerBtn /> : 'Submit'}
           </Button>
         </Row>

@@ -50,7 +50,9 @@ export const FilterSorts = () => {
 
   return (
     <>
-      <FilterButton onClick={openOnClick}>FILTER & SORT</FilterButton>
+      <FilterButton aria-label='open' onClick={openOnClick}>
+        FILTER & SORT
+      </FilterButton>
       <StyledFilter className={isOpen ? 'open' : ''}>
         <FilterSortForm close={closeOnClick} />
       </StyledFilter>

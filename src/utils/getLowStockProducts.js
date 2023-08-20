@@ -8,6 +8,7 @@ export const getLowStockProducts = stock => {
       });
     }
   });
+  lowStockProducts.sort((a, b) => a.qty - b.qty);
 
-  return lowStockProducts;
+  return lowStockProducts.slice(0, 5);
 };

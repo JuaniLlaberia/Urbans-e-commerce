@@ -27,7 +27,7 @@ const TicketsRow = ({ ticket }) => {
           <DropDownMenu.Menu id='ticketsRowMenu'>
             <DropDownMenu.Item>
               <Modal.Open opens='detailsModal'>
-                <ButtonIcon size='sm'>
+                <ButtonIcon size='sm' aria-label='open'>
                   <HiOutlineClipboard />
                 </ButtonIcon>
               </Modal.Open>
@@ -35,7 +35,7 @@ const TicketsRow = ({ ticket }) => {
             {status === 'Closed' && (
               <DropDownMenu.Item>
                 <Modal.Open opens='deleteModal'>
-                  <ButtonIcon size='sm'>
+                  <ButtonIcon size='sm' aria-label='open'>
                     <HiOutlineTrash />
                   </ButtonIcon>
                 </Modal.Open>

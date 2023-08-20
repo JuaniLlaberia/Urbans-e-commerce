@@ -72,7 +72,11 @@ const StyledButton = styled.button`
 
 const AnimatedOpenBtn = ({ isOpen, onClick }) => {
   return (
-    <StyledButton className={isOpen ? 'open' : ''} onClick={onClick}>
+    <StyledButton
+      aria-label=''
+      className={isOpen ? 'open' : ''}
+      onClick={onClick}
+    >
       <span></span>
       <span></span>
       <span></span>

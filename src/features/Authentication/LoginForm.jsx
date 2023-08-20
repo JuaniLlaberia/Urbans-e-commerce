@@ -48,7 +48,12 @@ const LoginForm = () => {
         />
       </InputContainer>
       <Row>
-        <Button width='full' variation='regular' disabled={isLogging}>
+        <Button
+          aria-label='login'
+          width='full'
+          variation='regular'
+          disabled={isLogging}
+        >
           {isLogging ? <SpinnerBtn /> : 'Login'}
         </Button>
       </Row>

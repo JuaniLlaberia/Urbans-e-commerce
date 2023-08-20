@@ -31,10 +31,15 @@ export const RemoveText = ({
         irreversible)
       </StyledMsg>
       <Row>
-        <Button variation='outline' onClick={onCloseModal}>
+        <Button variation='outline' aria-label='cancel' onClick={onCloseModal}>
           Cancel
         </Button>
-        <Button variation='alert' onClick={onConfirm} disabled={isDeleting}>
+        <Button
+          variation='alert'
+          aria-label='delete'
+          onClick={onConfirm}
+          disabled={isDeleting}
+        >
           {isDeleting ? <SpinnerBtn /> : 'Confirm'}
         </Button>
       </Row>

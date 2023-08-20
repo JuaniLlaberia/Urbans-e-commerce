@@ -114,13 +114,14 @@ const DiscountForm = ({ onCloseModal, discountToEdit = {} }) => {
       </DobleInput>
       <Row>
         <Button
+          aria-label='close'
           variation='outline'
           onClick={onCloseModal}
           disabled={isCreating}
         >
           Cancel
         </Button>
-        <Button variation='regular'>
+        <Button variation='regular' aria-label='submit'>
           {isLoading ? (
             <SpinnerBtn />
           ) : (

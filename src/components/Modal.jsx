@@ -74,7 +74,7 @@ const Window = ({ children, windowName }) => {
   return createPortal(
     <>
       <StyledWindow>
-        <button className='close-btn' onClick={close}>
+        <button className='close-btn' onClick={close} aria-label='close'>
           <HiXMark />
         </button>
         <div>{cloneElement(children, { onCloseModal: close })}</div>
