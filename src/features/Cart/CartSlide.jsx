@@ -50,6 +50,7 @@ export const CartSlide = () => {
         <CartList width='slide' />
         <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
           <FilterButton
+            aria-label='navigate'
             width='full'
             type='second'
             onClick={() => {
@@ -65,6 +66,7 @@ export const CartSlide = () => {
               closeOnClick();
               navigate('/checkout');
             }}
+            aria-label='navigate'
           >
             CHECKOUT
           </FilterButton>

@@ -96,7 +96,10 @@ const CartItem = ({ product }) => {
         </div>
       </InfoBox>
       <QTY>QTY: {quantity}</QTY>
-      <DeleteBtn onClick={() => dispatch(removeItem(stockId))}>
+      <DeleteBtn
+        aria-label='delete'
+        onClick={() => dispatch(removeItem(stockId))}
+      >
         <HiOutlineTrash />
       </DeleteBtn>
     </StyledCartItem>

@@ -28,12 +28,15 @@ const SaveBtn = ({ id, img, name, color, price, SKU }) => {
 
   if (isSaved)
     return (
-      <StyledSaveBtn onClick={() => handleUnSave(id)}>
+      <StyledSaveBtn aria-label='un-save' onClick={() => handleUnSave(id)}>
         <HiHeart style={{ color: '#f54444' }} />
       </StyledSaveBtn>
     );
   return (
-    <StyledSaveBtn onClick={() => handleSave(id, img, name, color, price, SKU)}>
+    <StyledSaveBtn
+      aria-label='save'
+      onClick={() => handleSave(id, img, name, color, price, SKU)}
+    >
       <HiOutlineHeart />
     </StyledSaveBtn>
   );

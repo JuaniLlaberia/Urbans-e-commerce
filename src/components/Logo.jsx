@@ -6,7 +6,6 @@ import logoLight from '../light-logo.png';
 import { useNavigate } from 'react-router-dom';
 
 const Img = styled.img`
-  width: 80px;
   cursor: pointer;
 `;
 
@@ -15,6 +14,7 @@ const Logo = () => {
   const navigate = useNavigate();
   return (
     <Img
+      width='95px'
       onClick={() => navigate('/')}
       alt='Logo'
       src={theme === 'light' ? logoDark : logoLight}

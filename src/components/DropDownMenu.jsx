@@ -65,6 +65,7 @@ const Opener = ({ id }) => {
   return (
     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
       <StyledOpener
+        aria-label='Open'
         onClick={() => {
           open(id);
         }}
@@ -108,7 +109,7 @@ const Item = ({ children, onClick }) => {
 
   return (
     <li style={{ listStyle: 'none' }}>
-      <StyledItem onClick={handleClick}>
+      <StyledItem onClick={handleClick} aria-label='Show content'>
         <span>{children}</span>
       </StyledItem>
     </li>

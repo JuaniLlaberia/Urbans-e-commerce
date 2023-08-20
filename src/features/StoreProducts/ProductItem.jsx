@@ -26,7 +26,7 @@ const StyledItem = styled.li`
 
 const Img = styled.img`
   width: 14vw;
-  /* min-width: 180px; */
+  min-width: 180px;
   height: 40vh;
   object-fit: cover;
 
@@ -82,7 +82,10 @@ const ProductItem = ({ product }) => {
         />
       </BtnContainer>
       <StyledLink to={`/product/details/${product.SKU}`}>
-        <Img src={product.img} alt={product.name} />
+        <picture>
+          <source type='image/webp' />
+          <Img src={product.img} alt={product.name} loading='lazy' />
+        </picture>
         <Data>
           <Title as='h5'>{product.name}</Title>
           <Color>{product.mainColor}</Color>

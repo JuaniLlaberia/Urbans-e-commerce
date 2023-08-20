@@ -1,19 +1,26 @@
 import { styled } from 'styled-components';
 
-const StyledBanner = styled.img`
-  height: 500px;
+const StyledBanner = styled.section`
   width: 100vw;
   max-width: 100%;
+  height: 500px;
   position: absolute;
   top: 40px;
   left: 0;
-  background-position: center;
-  object-fit: cover;
+  background-color: var(--color-white-5);
+`;
+
+const Title = styled.h1`
+  font-size: 2rem;
+  padding: 1.5rem 2rem;
+  color: var(--color-white-2);
 `;
 
 const MainBanner = () => {
   return (
-    <StyledBanner src='https://geuzjkdzkblmryfdmtpi.supabase.co/storage/v1/object/public/products-img/brick-wallpaper.jpg' />
+    <StyledBanner>
+      <Title>We're Urban's Clothing</Title>
+    </StyledBanner>
   );
 };
 

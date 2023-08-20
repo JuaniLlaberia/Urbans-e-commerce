@@ -85,10 +85,15 @@ const SignUpForm = () => {
           />
         </InputContainer>
         <Row>
-          <Button variation='outline' type='reset'>
+          <Button variation='outline' aria-label='cancel' type='reset'>
             Cancel
           </Button>
-          <Button variation='regular' width='full' disabled={isLoading}>
+          <Button
+            variation='regular'
+            aria-label='create new account'
+            width='full'
+            disabled={isLoading}
+          >
             {isLoading ? <SpinnerBtn /> : 'Create account'}
           </Button>
         </Row>

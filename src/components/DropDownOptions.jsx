@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import { useGetSubCategories } from '../features/Categories/useGetSubCategories';
 import SpinnerBtn from './SpinnerBtn';
 
-const StyledDropDown = styled.div`
+const StyledDropDown = styled.li`
   display: inline-block;
   padding: 0 0.8rem;
 

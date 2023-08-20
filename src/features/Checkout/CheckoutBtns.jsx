@@ -4,7 +4,9 @@ import Row from '../../components/Row';
 const CheckoutBtns = () => {
   return (
     <Row>
-      <Button variation='regular'>Go to payment</Button>
+      <Button variation='regular' aria-label='navigate'>
+        Go to payment
+      </Button>
     </Row>
   );
 };

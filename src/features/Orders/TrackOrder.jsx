@@ -31,10 +31,12 @@ const TrackOrder = ({ onCloseModal }) => {
         />
       </InputContainer>
       <Row>
-        <Button variation='outline' onClick={onCloseModal}>
+        <Button variation='outline' aria-label='close' onClick={onCloseModal}>
           Cancel
         </Button>
-        <Button variation='regular'>Search</Button>
+        <Button variation='regular' aria-label='submit'>
+          Search
+        </Button>
       </Row>
     </Form>
   );

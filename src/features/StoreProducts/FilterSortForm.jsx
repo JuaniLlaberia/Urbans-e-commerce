@@ -199,7 +199,9 @@ const FilterSortForm = ({ close }) => {
       </AccordionText>
 
       <br />
-      <FilterButton width='full'>Apply</FilterButton>
+      <FilterButton width='full' aria-label='submit'>
+        Apply
+      </FilterButton>
     </Form>
   );
 };

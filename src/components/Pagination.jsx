@@ -105,10 +105,15 @@ const Pagination = ({ count }) => {
         <P>Showing 0 to 0 of 0 results</P>
       )}
       <Buttons>
-        <PaginationButton onClick={goPrev} disabled={crrPage === 1}>
+        <PaginationButton
+          aria-label='previous page'
+          onClick={goPrev}
+          disabled={crrPage === 1}
+        >
           <HiChevronLeft /> <span>Previous</span>
         </PaginationButton>
         <PaginationButton
+          aria-label='next page'
           onClick={goNext}
           disabled={crrPage === pageCount || !count}
         >

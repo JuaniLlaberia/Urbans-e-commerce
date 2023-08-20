@@ -30,6 +30,7 @@ const StyledCart = () => {
             <CartSummary />
             <br />
             <Button
+              aria-label='navigate'
               variation='big'
               width='full-lg'
               onClick={() => navigate('/checkout')}

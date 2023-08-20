@@ -58,6 +58,7 @@ const Filter = ({ options }) => {
     <StyledFilter>
       {options?.map(option => (
         <FilterButton
+          aria-label='filter'
           className={filter === option.value ? 'active' : ''}
           key={option.value}
           onClick={() => handleFilter(option.value)}

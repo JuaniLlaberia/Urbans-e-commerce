@@ -103,10 +103,10 @@ const NewCategoryForm = ({ onCloseModal }) => {
         </InputContainer>
       )}
       <Row>
-        <Button variation='outline' onClick={onCloseModal}>
+        <Button variation='outline' onClick={onCloseModal} aria-label='cancel'>
           Cancel
         </Button>
-        <Button variation='regular'>
+        <Button variation='regular' aria-label='create'>
           {isCreating ? <SpinnerBtn /> : 'Add category'}
         </Button>
       </Row>

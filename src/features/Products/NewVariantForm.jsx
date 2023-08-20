@@ -83,7 +83,6 @@ const NewProductForm = ({ onCloseModal, variantToEdit = {} }) => {
       >
         <Input
           list='product'
-          type='number'
           {...register('productId', {
             required: 'This field is required',
           })}
@@ -136,10 +135,15 @@ const NewProductForm = ({ onCloseModal, variantToEdit = {} }) => {
         </InputContainer>
       </DobleInput>
       <Row>
-        <Button variation='outline' disabled={isWorking} onClick={onCloseModal}>
+        <Button
+          aria-label='close'
+          variation='outline'
+          disabled={isWorking}
+          onClick={onCloseModal}
+        >
           Cancel
         </Button>
-        <Button variation='regular' disabled={isWorking}>
+        <Button aria-label='submit' variation='regular' disabled={isWorking}>
           {isWorking ? <SpinnerBtn /> : isEditing ? 'Edit item' : 'Add item'}
         </Button>
       </Row>

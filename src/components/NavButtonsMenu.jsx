@@ -25,16 +25,27 @@ const NavButtonsMenu = () => {
   return (
     <StyledMenu>
       <ButtonIcon
+        aria-label='Change page'
         size='regular'
         onClick={() => navigate('admin/my-store')}
         disabled={isLoggingOut}
       >
         <HiOutlineBuildingStorefront />
       </ButtonIcon>
-      <ButtonIcon size='regular' onClick={toggleTheme} disabled={isLoggingOut}>
+      <ButtonIcon
+        aria-label='Change theme'
+        size='regular'
+        onClick={toggleTheme}
+        disabled={isLoggingOut}
+      >
         {theme === 'dark' ? <HiOutlineSun /> : <HiOutlineMoon />}
       </ButtonIcon>
-      <ButtonIcon size='regular' onClick={logout} disabled={isLoggingOut}>
+      <ButtonIcon
+        aria-label='Logout'
+        size='regular'
+        onClick={logout}
+        disabled={isLoggingOut}
+      >
         <HiOutlineArrowRightOnRectangle />
       </ButtonIcon>
     </StyledMenu>
