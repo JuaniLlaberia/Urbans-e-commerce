@@ -186,6 +186,7 @@ const Product = () => {
     return <ProductLoadingSkeleton />;
 
   const handleSize = size => {
+    setStockMsg('');
     searchParams.set('size', size);
     setSearchParams(searchParams);
   };

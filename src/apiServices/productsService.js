@@ -112,7 +112,6 @@ export const getStockFromId = async id => {
     .from('products-size-stock')
     .select('*, productId!inner(*)')
     .eq('productId.id', id);
-  // .order('size', { ascending: false });
 
   if (error) {
     console.log(error);
@@ -249,7 +248,7 @@ export const editProduct = async (id, editedProduct, oldImg) => {
   //3. Upload new image
   //COMPRESSING IMAGES BUT NOT LOWERING QUALITY
   new Compressor(editedProduct.img, {
-    quality: 0.92,
+    quality: 0.9,
     maxWidth: 600,
 
     success(compressedImage) {
