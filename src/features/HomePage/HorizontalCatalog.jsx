@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
-import ProductItem from '../StoreProducts/ProductItem';
 import { useGetProductsByCategory } from '../Products/useGetProductsByCategory';
 import ProductListSkeletonHorizontal from './SkeletonLoaderHorizontal';
+import HorizontalProductItem from './HorizontalProductItem';
 
 const StyledHorizontalCatalog = styled.ul`
   list-style: none;
@@ -40,7 +40,7 @@ export const HorizontalCatalog = ({ category }) => {
     <>
       <StyledHorizontalCatalog>
         {previewProducts.map(product => (
-          <ProductItem product={product} key={product.id} />
+          <HorizontalProductItem product={product} key={product.id} />
         ))}
       </StyledHorizontalCatalog>
     </>
